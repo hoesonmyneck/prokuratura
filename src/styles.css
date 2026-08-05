@@ -1,0 +1,885 @@
+/* ============================================================
+   Roboto — самохостинг, без обращений к CDN: сайт должен
+   работать в закрытом контуре.
+   ============================================================ */
+
+@font-face {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/roboto-cyrillic-400.woff2') format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/roboto-latin-400.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304,
+    U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/fonts/roboto-cyrillic-500.woff2') format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/fonts/roboto-latin-500.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304,
+    U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/roboto-cyrillic-700.woff2') format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/roboto-latin-700.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304,
+    U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* ============================================================
+   Токены — палитра и тени Google Material
+   ============================================================ */
+
+:root {
+  --blue: #1a73e8;
+  --blue-hover: #174ea6;
+  --blue-tint: #e8f0fe;
+  --red: #d93025;
+  --green: #188038;
+  --yellow: #f9ab00;
+
+  --text: #202124;
+  --text-2: #5f6368;
+  --text-3: #80868b;
+  --divider: #e8eaed;
+  --border: #dadce0;
+  --surface: #ffffff;
+  --surface-2: #f8f9fa;
+  --hover: rgba(60, 64, 67, 0.08);
+
+  --el-1: 0 1px 2px 0 rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+  --el-2: 0 1px 3px 0 rgba(60, 64, 67, 0.3), 0 4px 8px 3px rgba(60, 64, 67, 0.15);
+  --el-3: 0 4px 4px 0 rgba(60, 64, 67, 0.3), 0 8px 12px 6px rgba(60, 64, 67, 0.15);
+
+  --panel-width: 384px;
+  --ease: cubic-bezier(0.2, 0, 0, 1);
+  /* Высота видимой части нижней шторки; переопределяется в медиазапросах
+     и читается из JS (PanelShell). */
+  --peek: 188px;
+  --sheet-h: min(86dvh, 720px);
+
+  font-family: Roboto, 'Segoe UI', system-ui, -apple-system, Arial, sans-serif;
+  font-size: 14px;
+  color: var(--text);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+/* На телефонах адресная строка съезжает — 100% высоты врёт, dvh нет. */
+#root {
+  height: 100dvh;
+  overflow: hidden;
+}
+
+body {
+  background: var(--surface);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+button {
+  font-family: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+}
+
+.app {
+  display: grid;
+  grid-template-columns: var(--panel-width) 1fr;
+  height: 100%;
+}
+
+.map-wrap {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+}
+
+.map {
+  height: 100%;
+  width: 100%;
+}
+
+/* ============================================================
+   Левая панель
+   ============================================================ */
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  background: var(--surface);
+  box-shadow: 0 0 6px rgba(32, 33, 36, 0.28);
+  z-index: 3;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+
+.sidebar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}
+
+/* Шапка в духе строки поиска Google Maps — но это не поиск, а тождество объекта,
+   поэтому без поля ввода: иконка, название, сводка. */
+.sidebar__header {
+  padding: 14px 16px 16px;
+}
+
+.identity {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px 10px 12px;
+  background: var(--surface);
+  border-radius: 24px;
+  box-shadow: var(--el-1);
+}
+
+.identity__icon {
+  width: 28px;
+  height: 28px;
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--blue-tint);
+  color: var(--blue);
+}
+
+.identity__icon svg {
+  width: 17px;
+  height: 17px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.identity__text {
+  min-width: 0;
+}
+
+.identity__eyebrow {
+  display: block;
+  font-size: 11px;
+  line-height: 1.2;
+  color: var(--text-2);
+}
+
+.identity__title {
+  display: block;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.25;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sidebar__summary {
+  margin-top: 14px;
+  padding: 0 4px;
+  font-size: 13px;
+  color: var(--text-2);
+}
+
+.section {
+  padding: 16px;
+  border-top: 1px solid var(--divider);
+}
+
+.section__title {
+  margin: 0 0 14px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text);
+}
+
+/* ============================================================
+   Участки трассы
+   ============================================================ */
+
+/* Полоса пропорций: ширина каждого куска — его доля в 1 574 км.
+   Читается быстрее таблицы и показывает то, чего в цифрах не видно. */
+.route-bar {
+  display: flex;
+  gap: 2px;
+  height: 6px;
+  margin-bottom: 14px;
+}
+
+.route-bar__part {
+  border-radius: 3px;
+  transition: opacity 0.15s var(--ease);
+}
+
+.segments {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.segment {
+  display: grid;
+  grid-template-columns: 10px 1fr;
+  align-items: start;
+  gap: 12px;
+  padding: 7px 0;
+}
+
+.segment__dot {
+  width: 10px;
+  height: 10px;
+  margin-top: 4px;
+  border-radius: 50%;
+}
+
+.segment__name {
+  display: block;
+  font-size: 14px;
+  line-height: 1.35;
+}
+
+.segment__meta {
+  display: block;
+  margin-top: 1px;
+  font-size: 12px;
+  color: var(--text-2);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ============================================================
+   Кадастр
+   ============================================================ */
+
+.stat {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.stat__value {
+  font-size: 26px;
+  font-weight: 400;
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+}
+
+.stat__unit {
+  font-size: 14px;
+  color: var(--text-2);
+}
+
+.stat__sub {
+  margin-bottom: 14px;
+  font-size: 13px;
+  color: var(--text-2);
+  font-variant-numeric: tabular-nums;
+}
+
+.stat--muted .stat__value {
+  color: var(--text-3);
+}
+
+.rows {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 10px 1fr auto;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 0;
+  font-size: 13px;
+}
+
+.row--plain {
+  grid-template-columns: 1fr auto;
+  color: var(--text-2);
+}
+
+.row__swatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+}
+
+.row__value {
+  color: var(--text-2);
+  font-variant-numeric: tabular-nums;
+}
+
+.rows--districts {
+  margin-top: 4px;
+  padding-top: 12px;
+  border-top: 1px solid var(--divider);
+}
+
+.notice {
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: #fce8e6;
+  color: #c5221f;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+/* ============================================================
+   Кнопки на карте
+   ============================================================ */
+
+.mapctl {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.mapctl__group {
+  background: var(--surface);
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+}
+
+.mapctl__btn {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: #666;
+  cursor: pointer;
+  transition: background 0.15s var(--ease), color 0.15s var(--ease);
+}
+
+.mapctl__btn + .mapctl__btn {
+  border-top: 1px solid var(--divider);
+}
+
+.mapctl__btn:hover {
+  background: var(--surface-2);
+  color: var(--text);
+}
+
+.mapctl__btn:active {
+  background: var(--hover);
+}
+
+.mapctl__btn.is-active {
+  color: var(--blue);
+}
+
+.mapctl__btn svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.mapctl__panel {
+  position: absolute;
+  top: 0;
+  right: calc(100% + 10px);
+  width: 244px;
+  padding: 14px 16px 16px;
+  background: var(--surface);
+  border-radius: 8px;
+  box-shadow: var(--el-2);
+  transform-origin: top right;
+  animation: panel-in 0.18s var(--ease);
+}
+
+@keyframes panel-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateX(6px);
+  }
+}
+
+.mapctl__panel-title {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-2);
+  margin-bottom: 8px;
+}
+
+.mapctl__panel-title--spaced {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid var(--divider);
+}
+
+.switch {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 -8px;
+  padding: 7px 8px;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.15s var(--ease);
+}
+
+.switch:hover {
+  background: var(--surface-2);
+}
+
+.switch input {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  accent-color: var(--blue);
+  cursor: pointer;
+}
+
+.basemaps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+
+.basemaps__btn {
+  padding: 7px 4px;
+  font-size: 12.5px;
+  color: var(--text-2);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s var(--ease), color 0.15s var(--ease),
+    border-color 0.15s var(--ease);
+}
+
+.basemaps__btn:hover {
+  background: var(--surface-2);
+  color: var(--text);
+}
+
+.basemaps__btn.is-active {
+  color: var(--blue);
+  background: var(--blue-tint);
+  border-color: transparent;
+  font-weight: 500;
+}
+
+/* ============================================================
+   Маркеры населённых пунктов
+   ============================================================ */
+
+.city-marker {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
+}
+
+.city-marker__ring {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: #fff;
+  border: 4px solid var(--yellow);
+  box-shadow: 0 1px 3px rgba(60, 64, 67, 0.5);
+}
+
+.city-marker--major {
+  width: 26px;
+  height: 26px;
+  z-index: 2;
+}
+
+.city-marker--major .city-marker__ring {
+  border-width: 5px;
+}
+
+.city-marker__label {
+  position: absolute;
+  white-space: nowrap;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text);
+  background: var(--surface);
+  padding: 3px 8px;
+  border-radius: 6px;
+  box-shadow: var(--el-1);
+}
+
+.city-marker--major .city-marker__label {
+  font-size: 13px;
+}
+
+.city-marker--label-top .city-marker__label {
+  bottom: calc(100% + 7px);
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.city-marker--label-bottom .city-marker__label {
+  top: calc(100% + 7px);
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.city-marker--label-left .city-marker__label {
+  right: calc(100% + 9px);
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.city-marker--label-right .city-marker__label {
+  left: calc(100% + 9px);
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.city-marker--ref {
+  width: 12px;
+  height: 12px;
+  z-index: 0;
+}
+
+.city-marker--ref .city-marker__ring {
+  background: var(--text-2);
+  border: 2.5px solid #fff;
+}
+
+.city-marker--ref .city-marker__label {
+  color: var(--text-2);
+  font-weight: 400;
+  font-size: 11.5px;
+}
+
+/* ============================================================
+   Карточка объекта
+   ============================================================ */
+
+.maplibregl-popup-content {
+  padding: 16px 18px 16px 16px;
+  border-radius: 8px;
+  box-shadow: var(--el-2);
+  font-family: inherit;
+  color: var(--text);
+}
+
+.maplibregl-popup-close-button {
+  width: 28px;
+  height: 28px;
+  top: 4px;
+  right: 4px;
+  border-radius: 50%;
+  font-size: 17px;
+  color: var(--text-2);
+  transition: background 0.15s var(--ease);
+}
+
+.maplibregl-popup-close-button:hover {
+  background: var(--surface-2);
+  color: var(--text);
+}
+
+.popup__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+  font-size: 12px;
+  color: var(--text-2);
+}
+
+.popup__badge::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  background: var(--badge-color, var(--text-3));
+}
+
+.popup__title {
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.3;
+  margin-bottom: 12px;
+  padding-right: 22px;
+}
+
+.popup__table {
+  border-collapse: collapse;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.popup__table th {
+  text-align: left;
+  font-weight: 400;
+  color: var(--text-2);
+  padding: 3px 14px 3px 0;
+  vertical-align: top;
+  white-space: nowrap;
+}
+
+.popup__table td {
+  padding: 3px 0;
+  vertical-align: top;
+}
+
+/* ============================================================
+   Контролы MapLibre
+   ============================================================ */
+
+.maplibregl-ctrl-scale {
+  border-color: var(--text-2);
+  border-width: 0 1.5px 1.5px;
+  color: var(--text-2);
+  background: rgba(255, 255, 255, 0.75);
+  font-size: 11px;
+}
+
+/* Свёрнутая атрибуция: виден только «i», текст — по нажатию. */
+.maplibregl-ctrl-attrib {
+  font-size: 11px;
+}
+
+.maplibregl-ctrl-attrib.maplibregl-compact:not(.maplibregl-compact-show) {
+  background: transparent;
+  box-shadow: none;
+}
+
+.maplibregl-ctrl-attrib.maplibregl-compact:not(.maplibregl-compact-show)
+  .maplibregl-ctrl-attrib-inner {
+  display: none;
+}
+
+.maplibregl-ctrl-attrib-button {
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  box-shadow: 0 1px 3px rgba(60, 64, 67, 0.3);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ============================================================
+   Телефон: карта на весь экран, данные — в нижней шторке
+   ============================================================ */
+
+@media (max-width: 900px) {
+  .app {
+    grid-template-columns: 1fr;
+  }
+
+  .sheet {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 6;
+    display: flex;
+    flex-direction: column;
+    height: var(--sheet-h);
+    background: var(--surface);
+    border-radius: 16px 16px 0 0;
+    box-shadow: 0 -1px 3px rgba(60, 64, 67, 0.2), 0 -6px 16px rgba(60, 64, 67, 0.18);
+    /* До замера высоты в JS свёрнутое положение задаёт CSS — без мигания. */
+    transform: translateY(calc(var(--sheet-h) - var(--peek)));
+    transition: transform 0.32s var(--ease);
+    touch-action: none;
+    overscroll-behavior: contain;
+  }
+
+  .sheet.is-expanded {
+    transform: translateY(0);
+  }
+
+  /* Во время перетаскивания шторка должна идти ровно за пальцем. */
+  .sheet.is-dragging {
+    transition: none;
+  }
+
+  .sheet__handle {
+    flex: 0 0 auto;
+    display: grid;
+    place-items: center;
+    width: 100%;
+    height: 28px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    cursor: grab;
+    touch-action: none;
+  }
+
+  .sheet__handle:active {
+    cursor: grabbing;
+  }
+
+  .sheet__grip {
+    width: 36px;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--border);
+    transition: background 0.15s var(--ease);
+  }
+
+  .sheet__handle:hover .sheet__grip {
+    background: var(--text-3);
+  }
+
+  .sheet__body {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: max(16px, env(safe-area-inset-bottom));
+    touch-action: pan-y;
+  }
+
+  .sheet:not(.is-expanded) .sheet__body {
+    overflow: hidden;
+  }
+
+  .sidebar__header {
+    padding-top: 2px;
+  }
+
+  /* Кнопки карты уходят выше свёрнутой шторки. */
+  .mapctl {
+    top: auto;
+    /* Запас, чтобы нижняя кнопка не наезжала на копирайт подложки. */
+    bottom: calc(var(--peek) + 40px);
+  }
+
+  .mapctl__panel {
+    top: auto;
+    bottom: 0;
+    right: calc(100% + 8px);
+    width: min(240px, calc(100vw - 76px));
+    transform-origin: bottom right;
+  }
+
+  .maplibregl-ctrl-bottom-left,
+  .maplibregl-ctrl-bottom-right {
+    bottom: var(--peek);
+  }
+
+  .maplibregl-popup-content {
+    max-width: calc(100vw - 32px);
+  }
+
+  .city-marker__label {
+    font-size: 11.5px;
+    padding: 2px 6px;
+  }
+}
+
+/* Телефон в альбомной ориентации: экран низкий, шторке нельзя занимать пол-окна. */
+@media (max-width: 900px) and (max-height: 520px) {
+  :root {
+    --peek: 96px;
+    --sheet-h: 90dvh;
+  }
+
+  .sheet__handle {
+    height: 22px;
+  }
+
+  .mapctl {
+    bottom: calc(var(--peek) + 34px);
+    gap: 8px;
+  }
+
+  .mapctl__btn {
+    width: 36px;
+    height: 36px;
+  }
+
+  .sidebar__summary {
+    margin-top: 10px;
+  }
+}
+
+@media (max-width: 560px) {
+  .stat__value {
+    font-size: 24px;
+  }
+
+  .section {
+    padding: 14px;
+  }
+
+  .sidebar__header {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+}
