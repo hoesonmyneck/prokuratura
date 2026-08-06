@@ -121,7 +121,9 @@ const EMPTY: CadastreCollection = { type: 'FeatureCollection', features: [] };
 export const emptyCadastre = EMPTY;
 
 export async function loadCadastre(): Promise<CadastreCollection> {
-  const res = await fetch(`${import.meta.env.BASE_URL}cadastre.geojson`);
+  // Метка сборки в адресе: файл кешируется на сутки под неизменным именем,
+  // и без неё после деплоя ещё сутки отдавались бы прежние участки.
+  const res = await fetch(`${import.meta.env.BASE_URL}cadastre.geojson?v=${__BUILD_ID__}`);
   if (!res.ok) throw new Error(`Не удалось загрузить кадастр: HTTP ${res.status}`);
   return (await res.json()) as CadastreCollection;
 }

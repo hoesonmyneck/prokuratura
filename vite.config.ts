@@ -1,3 +1,4 @@
+import { execSync } from 'node:child_process';
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { defineConfig, type Connect, type Plugin } from 'vite';
@@ -106,7 +107,26 @@ function progressDevApi(): Plugin {
   };
 }
 
+/**
+ * Метка сборки для адреса кадастра.
+ *
+ * `cadastre.geojson` лежит в public/ под неизменным именем и кешируется
+ * на сутки (см. vercel.json). После деплоя браузеры и CDN продолжали отдавать
+ * старый файл — на проде висели прежние участки. Имя файла менять нельзя
+ * (его собирает скрипт выгрузки), поэтому меняем адрес: `?v=<метка>`.
+ * Длинный кеш сохраняется, но новая сборка обнуляет его сразу.
+ */
+function buildId(): string {
+  try {
+    return execSync('git rev-parse --short HEAD', { encoding: 'utf8' }).trim();
+  } catch {
+    // Не репозиторий или нет git — сойдёт и время сборки.
+    return Date.now().toString(36);
+  }
+}
+
 export default defineConfig({
+  define: { __BUILD_ID__: JSON.stringify(buildId()) },
   plugins: [react(), progressDevApi()],
   server: {
     port: 5173,
