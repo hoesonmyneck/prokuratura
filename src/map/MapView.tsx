@@ -5,7 +5,8 @@ import 'maplibre-gl/dist/maplibre-gl.css';
 import { BASEMAPS, MAX_ZOOM, MIN_ZOOM, PROJECT_BOUNDS, ROAD_BOUNDS, basemapStyle, type BasemapId } from '../config/map';
 import MapControls from './MapControls';
 import { readPeek, useIsMobile } from '../components/PanelShell';
-import { cities, roadSegments, type RoadSegmentProps } from '../data/road';
+import { cities } from '../data/road';
+import { roadWithProgress, type RoadPartProps, type RoadProgress } from '../data/progress';
 import {
   CADASTRE_CATEGORIES,
   OTHER_CATEGORY_COLOR,
@@ -14,6 +15,7 @@ import {
   type CadastreCollection,
   type CadastreProps,
 } from '../data/cadastre';
+import { districtBounds, regionBounds } from '../data/boundaries';
 
 export interface MapViewProps {
   basemap: BasemapId;
@@ -21,13 +23,49 @@ export interface MapViewProps {
   showRoad: boolean;
   showCadastre: boolean;
   showCities: boolean;
-  onToggle: (key: 'showRoad' | 'showCadastre' | 'showCities') => void;
+  showRegions: boolean;
+  showDistricts: boolean;
+  onToggle: (
+    key: 'showRoad' | 'showCadastre' | 'showCities' | 'showRegions' | 'showDistricts',
+  ) => void;
   /** Участки ЕГКН; null — пока грузятся. */
   cadastre: CadastreCollection | null;
+  /** Ход строительства: построенные километры по каждому участку. */
+  progress: RoadProgress;
 }
 
 const SOURCE_ROAD = 'road';
 const SOURCE_CADASTRE = 'cadastre';
+const SOURCE_REGIONS = 'regions';
+const SOURCE_REGION_LABELS = 'region-labels';
+const SOURCE_DISTRICTS = 'districts';
+const SOURCE_DISTRICT_LABELS = 'district-labels';
+
+/** Цвет подписи района — нейтральный тёмный: уровень ниже областного. */
+const DISTRICT_INK = '#3c4043';
+
+const emptyRoad: GeoJSON.FeatureCollection<GeoJSON.LineString, RoadPartProps> = {
+  type: 'FeatureCollection',
+  features: [],
+};
+
+/** Подписи — отдельный точечный источник: якорь лежит на трассе, а не в центре контура. */
+function labelPoints<P extends { name: string; labelAt: GeoJSON.Position }>(
+  fc: GeoJSON.FeatureCollection<GeoJSON.MultiPolygon, P>,
+  color: (props: P) => string,
+): GeoJSON.FeatureCollection<GeoJSON.Point, { name: string; color: string }> {
+  return {
+    type: 'FeatureCollection',
+    features: fc.features.map((f) => ({
+      type: 'Feature',
+      properties: { name: f.properties.name, color: color(f.properties) },
+      geometry: { type: 'Point', coordinates: f.properties.labelAt },
+    })),
+  };
+}
+
+const regionLabels = labelPoints(regionBounds, (p) => p.color);
+const districtLabels = labelPoints(districtBounds, () => DISTRICT_INK);
 
 function escapeHtml(value: string | number): string {
   return String(value).replace(
@@ -64,7 +102,11 @@ function cadastrePopupHtml(p: CadastreProps): string {
     </div>`;
 }
 
-function roadPopupHtml(p: RoadSegmentProps): string {
+function roadPopupHtml(p: RoadPartProps): string {
+  // doneKm приходит из свойств объекта, а они у MapLibre всегда строки-или-числа
+  // в зависимости от источника — приводим явно.
+  const doneKm = Number(p.doneKm) || 0;
+  const pct = p.lengthKm ? Math.round((doneKm / p.lengthKm) * 100) : 0;
   return `
     <div class="popup">
       <div class="popup__badge" style="--badge-color:${p.color}">Участок трассы</div>
@@ -72,6 +114,7 @@ function roadPopupHtml(p: RoadSegmentProps): string {
       <table class="popup__table">
         <tr><th>Протяжённость</th><td>${p.lengthKm.toLocaleString('ru-RU')} км</td></tr>
         <tr><th>Категория</th><td>${escapeHtml(p.category)}</td></tr>
+        <tr><th>Построено</th><td>${doneKm.toLocaleString('ru-RU')} км (${pct} %)</td></tr>
       </table>
     </div>`;
 }
@@ -92,8 +135,28 @@ function addProjectLayers(map: MapLibreMap): boolean {
   }
   categoryColor.push(OTHER_CATEGORY_COLOR);
 
+  map.addSource(SOURCE_REGIONS, { type: 'geojson', data: regionBounds });
+  map.addSource(SOURCE_REGION_LABELS, { type: 'geojson', data: regionLabels });
+  map.addSource(SOURCE_DISTRICTS, { type: 'geojson', data: districtBounds });
+  map.addSource(SOURCE_DISTRICT_LABELS, { type: 'geojson', data: districtLabels });
   map.addSource(SOURCE_CADASTRE, { type: 'geojson', data: emptyCadastre, generateId: false });
-  map.addSource(SOURCE_ROAD, { type: 'geojson', data: roadSegments });
+  // Пустая коллекция на старте: настоящую подкладывает эффект по `progress`,
+  // так же как кадастр. Иначе смена подложки вернула бы устаревшие данные.
+  map.addSource(SOURCE_ROAD, { type: 'geojson', data: emptyRoad });
+
+  // Заливка областей идёт первой — она одна лежит под кадастром. Нарочно почти
+  // прозрачная: её задача показать, где кончается одна область и начинается
+  // другая, а не перекрасить карту. Сами границы добавляются ниже по коду,
+  // поверх участков, — под 17 тысячами полигонов линию было бы не видно.
+  map.addLayer({
+    id: 'region-fill',
+    type: 'fill',
+    source: SOURCE_REGIONS,
+    paint: {
+      'fill-color': ['get', 'color'],
+      'fill-opacity': ['interpolate', ['linear'], ['zoom'], 5, 0.14, 10, 0.06],
+    },
+  });
 
   map.addLayer({
     id: 'cadastre-fill',
@@ -116,6 +179,48 @@ function addProjectLayers(map: MapLibreMap): boolean {
     },
   });
 
+  // Районы — уровень ниже областного, поэтому линия тоньше, сплошная и
+  // нейтрального цвета. Светлая подложка под ней нужна ровно затем же, зачем
+  // «обочина» у дороги: без неё тёмная нитка тонет в спутниковом снимке.
+  map.addLayer({
+    id: 'district-casing',
+    type: 'line',
+    source: SOURCE_DISTRICTS,
+    layout: { 'line-cap': 'round', 'line-join': 'round' },
+    paint: {
+      'line-color': '#ffffff',
+      'line-opacity': 0.6,
+      'line-width': ['interpolate', ['linear'], ['zoom'], 5, 2.6, 12, 4.5],
+    },
+  });
+
+  map.addLayer({
+    id: 'district-line',
+    type: 'line',
+    source: SOURCE_DISTRICTS,
+    layout: { 'line-cap': 'round', 'line-join': 'round' },
+    paint: {
+      'line-color': DISTRICT_INK,
+      'line-opacity': 0.7,
+      'line-width': ['interpolate', ['linear'], ['zoom'], 5, 0.9, 12, 1.6],
+    },
+  });
+
+  // Граница области — поверх районной: где они совпадают, должна побеждать
+  // старшая. Пунктир отличает административную границу от всего остального.
+  map.addLayer({
+    id: 'region-line',
+    type: 'line',
+    source: SOURCE_REGIONS,
+    layout: { 'line-cap': 'round', 'line-join': 'round' },
+    paint: {
+      'line-color': ['get', 'color'],
+      'line-width': ['interpolate', ['linear'], ['zoom'], 5, 1.4, 9, 2.4, 14, 3.2],
+      'line-opacity': 0.85,
+      'line-dasharray': [3, 2],
+    },
+  });
+
   // Дорога рисуется в два слоя: широкая светлая «обочина» + цветная ось,
   // так линия читается и на спутнике, и на светлой подложке.
   map.addLayer({
@@ -130,14 +235,33 @@ function addProjectLayers(map: MapLibreMap): boolean {
     },
   });
 
+  // Ход строительства кодируется не цветом, а рисунком линии: цвет уже занят
+  // технической категорией участка, и второй смысл на него не навесить.
+  // Пунктир и полупрозрачность — «ещё не построено», сплошная линия в полную
+  // силу — «построено». Это обычная картографическая условность.
   map.addLayer({
-    id: 'road-line',
+    id: 'road-pending',
     type: 'line',
     source: SOURCE_ROAD,
+    filter: ['==', ['get', 'part'], 'pending'],
+    layout: { 'line-cap': 'butt', 'line-join': 'round' },
+    paint: {
+      'line-color': ['get', 'color'],
+      'line-opacity': 0.4,
+      'line-dasharray': [2, 1.6],
+      'line-width': ['interpolate', ['linear'], ['zoom'], 4, 2.5, 8, 6, 14, 14],
+    },
+  });
+
+  map.addLayer({
+    id: 'road-done',
+    type: 'line',
+    source: SOURCE_ROAD,
+    filter: ['==', ['get', 'part'], 'done'],
     layout: { 'line-cap': 'round', 'line-join': 'round' },
     paint: {
       'line-color': ['get', 'color'],
-      'line-width': ['interpolate', ['linear'], ['zoom'], 4, 2.5, 8, 6, 14, 14],
+      'line-width': ['interpolate', ['linear'], ['zoom'], 4, 3.5, 8, 8, 14, 18],
     },
   });
 
@@ -146,6 +270,50 @@ function addProjectLayers(map: MapLibreMap): boolean {
     type: 'line',
     source: SOURCE_ROAD,
     paint: { 'line-color': '#000000', 'line-opacity': 0, 'line-width': 20 },
+  });
+
+  // Названия районов ниже по приоритету: мельче, и появляются только с зума 6 —
+  // на общем плане двенадцать подписей рядом с областными превратились бы в кашу.
+  // Ниже областных по коду, поэтому при столкновении MapLibre скроет районную.
+  map.addLayer({
+    id: 'district-label',
+    type: 'symbol',
+    source: SOURCE_DISTRICT_LABELS,
+    minzoom: 6,
+    layout: {
+      'text-field': ['get', 'name'],
+      'text-font': ['Noto Sans Regular'],
+      'text-size': ['interpolate', ['linear'], ['zoom'], 6, 11, 10, 13],
+      'text-offset': [0, 1.4],
+      'text-allow-overlap': false,
+      'text-padding': 6,
+    },
+    paint: {
+      'text-color': ['get', 'color'],
+      'text-halo-color': '#ffffff',
+      'text-halo-width': 1.6,
+    },
+  });
+
+  // Названия областей — последними, поверх всего. Сдвига нет: точка подписи уже
+  // выбрана в самом пустом месте области (см. `emptySpotAnchor` в выгрузке).
+  map.addLayer({
+    id: 'region-label',
+    type: 'symbol',
+    source: SOURCE_REGION_LABELS,
+    layout: {
+      'text-field': ['get', 'name'],
+      'text-font': ['Noto Sans Bold'],
+      'text-size': ['interpolate', ['linear'], ['zoom'], 5, 12, 9, 15],
+      'text-allow-overlap': false,
+      'text-padding': 8,
+    },
+    paint: {
+      'text-color': ['get', 'color'],
+      // Обводка нужна на спутнике: без неё тёмный текст тонет в снимке.
+      'text-halo-color': '#ffffff',
+      'text-halo-width': 1.8,
+    },
   });
 
   return true;
@@ -157,8 +325,11 @@ export default function MapView({
   showRoad,
   showCadastre,
   showCities,
+  showRegions,
+  showDistricts,
   onToggle,
   cadastre,
+  progress,
 }: MapViewProps) {
   const isMobile = useIsMobile();
   const containerRef = useRef<HTMLDivElement>(null);
@@ -168,6 +339,8 @@ export default function MapView({
   /** Держим последние данные под рукой: смена подложки пересоздаёт источник. */
   const cadastreRef = useRef<CadastreCollection | null>(cadastre);
   cadastreRef.current = cadastre;
+  const roadRef = useRef<RoadProgress>(progress);
+  roadRef.current = progress;
   /** Подложка, с которой карта уже создана — чтобы не звать setStyle на первом рендере. */
   const basemapRef = useRef<BasemapId>(basemap);
 
@@ -230,8 +403,10 @@ export default function MapView({
       // Слои пересоздаются после каждой смены подложки — вместе с ними
       // возвращаем и уже загруженный кадастр, иначе источник останется пустым.
       if (!addProjectLayers(map)) return;
-      const src = map.getSource(SOURCE_CADASTRE) as maplibregl.GeoJSONSource | undefined;
-      if (src && cadastreRef.current) src.setData(cadastreRef.current);
+      const cad = map.getSource(SOURCE_CADASTRE) as maplibregl.GeoJSONSource | undefined;
+      if (cad && cadastreRef.current) cad.setData(cadastreRef.current);
+      const road = map.getSource(SOURCE_ROAD) as maplibregl.GeoJSONSource | undefined;
+      if (road) road.setData(roadWithProgress(roadRef.current));
     };
     map.on('load', ensureLayers);
     map.on('styledata', ensureLayers);
@@ -287,7 +462,7 @@ export default function MapView({
       const hits = map.queryRenderedFeatures(e.point, { layers: ['road-hit', 'cadastre-fill'] });
       const road = hits.find((f) => f.layer.id === 'road-hit');
       if (road) {
-        popup.setLngLat(e.lngLat).setHTML(roadPopupHtml(road.properties as RoadSegmentProps)).addTo(map);
+        popup.setLngLat(e.lngLat).setHTML(roadPopupHtml(road.properties as RoadPartProps)).addTo(map);
         return;
       }
       const parcel = hits.find((f) => f.layer.id === 'cadastre-fill');
@@ -328,10 +503,17 @@ export default function MapView({
         if (map.getLayer(id)) map.setLayoutProperty(id, 'visibility', visible ? 'visible' : 'none');
       };
       set('road-casing', showRoad);
-      set('road-line', showRoad);
+      set('road-pending', showRoad);
+      set('road-done', showRoad);
       set('road-hit', showRoad);
       set('cadastre-fill', showCadastre);
       set('cadastre-outline', showCadastre);
+      set('region-fill', showRegions);
+      set('region-line', showRegions);
+      set('region-label', showRegions);
+      set('district-casing', showDistricts);
+      set('district-line', showDistricts);
+      set('district-label', showDistricts);
       markersRef.current.forEach((m) => {
         m.getElement().style.display = showCities ? '' : 'none';
       });
@@ -341,7 +523,19 @@ export default function MapView({
     return () => {
       map.off('styledata', apply);
     };
-  }, [showRoad, showCadastre, showCities]);
+  }, [showRoad, showCadastre, showCities, showRegions, showDistricts]);
+
+  // Ход строительства меняется прямо в панели — пересобираем геометрию трассы.
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map) return;
+    const apply = () => {
+      const src = map.getSource(SOURCE_ROAD) as maplibregl.GeoJSONSource | undefined;
+      if (src) src.setData(roadWithProgress(progress));
+    };
+    if (map.getSource(SOURCE_ROAD)) apply();
+    else map.once('styledata', apply);
+  }, [progress]);
 
   // Кадастр приезжает по сети — подкладываем в источник, как только пришёл.
   useEffect(() => {
@@ -364,6 +558,8 @@ export default function MapView({
         showRoad={showRoad}
         showCadastre={showCadastre}
         showCities={showCities}
+        showRegions={showRegions}
+        showDistricts={showDistricts}
         onToggle={onToggle}
         onZoomIn={() => mapRef.current?.zoomIn()}
         onZoomOut={() => mapRef.current?.zoomOut()}

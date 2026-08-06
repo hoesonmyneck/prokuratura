@@ -55,16 +55,32 @@ export function categoryTitle(id: string | null): string {
   return CADASTRE_CATEGORIES.find((c) => c.id === id)?.title ?? 'Прочие категории';
 }
 
+export interface DistrictStat {
+  district: string;
+  count: number;
+}
+
+export interface RegionStat {
+  region: string;
+  count: number;
+  districts: DistrictStat[];
+}
+
 export interface CadastreStats {
   total: number;
   areaHa: number;
   byCategory: Record<string, number>;
-  byDistrict: Array<{ district: string; count: number }>;
+  /** Области с вложенными районами, всё отсортировано по числу участков. */
+  byRegion: RegionStat[];
+  /** Всего районов с участками в полосе — по всем областям. */
+  districtCount: number;
 }
 
 export function computeStats(fc: CadastreCollection): CadastreStats {
   const byCategory: Record<string, number> = {};
-  const districts = new Map<string, number>();
+  // Область → район → число участков. Состав считаем по самим данным: часть
+  // районов из справочника в полосу не попадает, их в списке быть не должно.
+  const regions = new Map<string, Map<string, number>>();
   let areaM2 = 0;
 
   for (const f of fc.features) {
@@ -72,17 +88,31 @@ export function computeStats(fc: CadastreCollection): CadastreStats {
       ? (f.properties.categoryId as string)
       : 'other';
     byCategory[key] = (byCategory[key] ?? 0) + 1;
-    districts.set(f.properties.district, (districts.get(f.properties.district) ?? 0) + 1);
+
+    const { region, district } = f.properties;
+    let districts = regions.get(region);
+    if (!districts) regions.set(region, (districts = new Map()));
+    districts.set(district, (districts.get(district) ?? 0) + 1);
+
     areaM2 += f.properties.areaM2 ?? 0;
   }
+
+  const byRegion = [...regions.entries()]
+    .map(([region, districts]) => ({
+      region,
+      count: [...districts.values()].reduce((sum, n) => sum + n, 0),
+      districts: [...districts.entries()]
+        .map(([district, count]) => ({ district, count }))
+        .sort((a, b) => b.count - a.count),
+    }))
+    .sort((a, b) => b.count - a.count);
 
   return {
     total: fc.features.length,
     areaHa: Math.round(areaM2 / 10000),
     byCategory,
-    byDistrict: [...districts.entries()]
-      .map(([district, count]) => ({ district, count }))
-      .sort((a, b) => b.count - a.count),
+    byRegion,
+    districtCount: byRegion.reduce((sum, r) => sum + r.districts.length, 0),
   };
 }
 

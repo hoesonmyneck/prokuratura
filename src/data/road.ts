@@ -1,5 +1,6 @@
 import type { Feature, FeatureCollection, LineString, Point, Position } from 'geojson';
 import segmentsJson from './road-segments.json';
+import citiesJson from './cities.json';
 
 /**
  * МОКОВАЯ геометрия трассы.
@@ -60,18 +61,12 @@ export interface CityProps {
 /** С какой стороны от кружка ставится подпись — чтобы плашки не легли на трассу. */
 export type LabelPos = 'left' | 'right' | 'top' | 'bottom';
 
-const CITIES: Array<{ name: string; lngLat: Position } & Omit<CityProps, 'name'>> = [
-  { name: 'Бейнеу', lngLat: [55.2, 45.317], onRoad: true, labelPos: 'top' },
-  { name: 'Бозой', lngLat: [59.05, 45.93], onRoad: true, labelPos: 'top' },
-  { name: 'Улгайсын', lngLat: [60.65, 49.35], onRoad: true, labelPos: 'left' },
-  { name: 'Саксаульский', lngLat: [61.183, 47.183], onRoad: true, major: true, labelPos: 'left' },
-  { name: 'Камыстыбас', lngLat: [61.9, 46.35], onRoad: true, labelPos: 'left' },
-  { name: 'Аксуат', lngLat: [62.6, 45.75], onRoad: true, labelPos: 'top' },
-  { name: 'Жосалы', lngLat: [64.08, 45.49], onRoad: true, labelPos: 'bottom' },
-  { name: 'Кызылорда', lngLat: [65.51, 44.85], onRoad: true, major: true, labelPos: 'right' },
-  { name: 'Актобе', lngLat: [57.167, 50.283], onRoad: true, major: true, labelPos: 'bottom' },
-  { name: 'Аральск', lngLat: [61.66, 46.79], onRoad: false, labelPos: 'right' },
-];
+/**
+ * Вынесены в JSON по той же причине, что и участки трассы: их читает
+ * `scripts/fetch-boundaries.mjs`, который расставляет подписи областей так,
+ * чтобы те не легли на населённые пункты.
+ */
+const CITIES = citiesJson as Array<{ name: string; lngLat: Position } & Omit<CityProps, 'name'>>;
 
 export const cities: FeatureCollection<Point, CityProps> = {
   type: 'FeatureCollection',

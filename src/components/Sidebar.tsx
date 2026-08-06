@@ -1,9 +1,38 @@
 import { roadSegments } from '../data/road';
 import { CADASTRE_CATEGORIES, type CadastreStats } from '../data/cadastre';
+import { regionColor } from '../data/boundaries';
+import { summarize, type RoadProgress } from '../data/progress';
 
 interface SidebarProps {
   stats: CadastreStats | null;
   cadastreError: string | null;
+  progress: RoadProgress;
+  /** Есть ли у этого браузера право менять цифры (см. PROGRESS_WRITE_TOKEN). */
+  progressEditable: boolean;
+  progressError: string | null;
+  onProgressChange: (id: string, km: number) => void;
+}
+
+/** Русское склонение при числительном: 1 район, 2 района, 5 районов. */
+function plural(n: number, one: string, few: string, many: string): string {
+  const mod100 = n % 100;
+  if (mod100 >= 11 && mod100 <= 14) return many;
+  const mod10 = n % 10;
+  if (mod10 === 1) return one;
+  if (mod10 >= 2 && mod10 <= 4) return few;
+  return many;
+}
+
+/**
+ * Доля от общего числа. Без ложной точности: у категорий разброс от 98 % до
+ * долей процента, поэтому мелкие значения не растягиваем до сотых.
+ */
+function share(part: number, total: number): string {
+  if (!total) return '0 %';
+  const pct = (part / total) * 100;
+  if (pct >= 10) return `${Math.round(pct)} %`;
+  if (pct >= 1) return `${pct.toFixed(1)} %`;
+  return '<1 %';
 }
 
 function IconRoute() {
@@ -16,9 +45,22 @@ function IconRoute() {
   );
 }
 
-export default function Sidebar({ stats, cadastreError }: SidebarProps) {
+export default function Sidebar({
+  stats,
+  cadastreError,
+  progress,
+  progressEditable,
+  progressError,
+  onProgressChange,
+}: SidebarProps) {
   const segments = roadSegments.features;
   const totalKm = segments.reduce((sum, f) => sum + f.properties.lengthKm, 0);
+  const build = summarize(progress);
+  // Областей и районов столько, сколько их фактически в полосе: из справочника
+  // часть даёт ноль участков. Пока кадастр не загрузился — они неизвестны, и
+  // на их месте стоит прочерк: убирать ячейки нельзя, шапка бы прыгала.
+  const regionCount = stats?.byRegion.length ?? null;
+  const districtCount = stats?.districtCount ?? null;
 
   return (
     <>
@@ -32,9 +74,33 @@ export default function Sidebar({ stats, cadastreError }: SidebarProps) {
             <span className="identity__title">«Западный регион»</span>
           </span>
         </div>
-        <div className="sidebar__summary">
-          {totalKm.toLocaleString('ru-RU')} км · 3 участка · 8 районов
-        </div>
+        {/* Сетка вместо строки через точки-разделители: четыре независимые
+            величины, а не перечисление. Колонки держат ширину, пока грузится
+            кадастр, поэтому шапка не дёргается при появлении чисел. */}
+        <dl className="facts">
+          <div className="fact">
+            <dd className="fact__value">{totalKm.toLocaleString('ru-RU')}</dd>
+            <dt className="fact__label">км трассы</dt>
+          </div>
+          <div className="fact">
+            <dd className="fact__value">{segments.length}</dd>
+            <dt className="fact__label">
+              {plural(segments.length, 'отрезок', 'отрезка', 'отрезков')}
+            </dt>
+          </div>
+          <div className="fact">
+            <dd className="fact__value">{regionCount ?? '…'}</dd>
+            <dt className="fact__label">
+              {plural(regionCount ?? 0, 'область', 'области', 'областей')}
+            </dt>
+          </div>
+          <div className="fact">
+            <dd className="fact__value">{districtCount ?? '…'}</dd>
+            <dt className="fact__label">
+              {plural(districtCount ?? 0, 'район', 'района', 'районов')}
+            </dt>
+          </div>
+        </dl>
       </header>
 
       <section className="section">
@@ -57,8 +123,8 @@ export default function Sidebar({ stats, cadastreError }: SidebarProps) {
               <span>
                 <span className="segment__name">{f.properties.name}</span>
                 <span className="segment__meta">
-                  {f.properties.lengthKm.toLocaleString('ru-RU')} км · категория{' '}
-                  {f.properties.category}
+                  <span className="segment__km">{f.properties.lengthKm.toLocaleString('ru-RU')}</span>{' '}
+                  км · категория {f.properties.category}
                 </span>
               </span>
             </li>
@@ -67,18 +133,81 @@ export default function Sidebar({ stats, cadastreError }: SidebarProps) {
       </section>
 
       <section className="section">
+        <h2 className="section__title">Ход строительства</h2>
+
+        <div className="stat">
+          <span className="stat__value">{build.doneKm.toLocaleString('ru-RU')}</span>
+          <span className="stat__unit">км построено</span>
+        </div>
+        <div className="stat__sub">
+          {share(build.doneKm, build.totalKm)} от {build.totalKm.toLocaleString('ru-RU')} км по проекту
+        </div>
+
+        <div className="build">
+          {build.segments.map((s) => (
+            <div key={s.id} className="build__item">
+              <label className="build__name" htmlFor={`done-${s.id}`}>
+                {s.name}
+              </label>
+              <div
+                className="build__track"
+                role="progressbar"
+                aria-valuemin={0}
+                aria-valuemax={s.lengthKm}
+                aria-valuenow={s.doneKm}
+                aria-label={`Построено на участке ${s.name}`}
+              >
+                <span
+                  className="build__fill"
+                  style={{ width: `${s.ratio * 100}%`, background: s.color }}
+                />
+              </div>
+              <input
+                id={`done-${s.id}`}
+                className="build__input"
+                type="number"
+                inputMode="numeric"
+                min={0}
+                max={s.lengthKm}
+                step={1}
+                value={s.doneKm}
+                readOnly={!progressEditable}
+                aria-readonly={!progressEditable}
+                onChange={(e) => onProgressChange(s.id, e.target.valueAsNumber)}
+              />
+              <span className="build__of">из {s.lengthKm.toLocaleString('ru-RU')} км</span>
+            </div>
+          ))}
+        </div>
+
+        {progressError && <div className="notice">Не удалось сохранить: {progressError}</div>}
+      </section>
+
+      <section className="section">
         <h2 className="section__title">Кадастровые участки</h2>
 
         {cadastreError && <div className="notice">Не удалось загрузить: {cadastreError}</div>}
 
+        {/* Кадастр — 11,8 МБ, ждать приходится ощутимо. Скелет повторяет форму
+            будущего содержимого, чтобы панель не перестраивалась при загрузке. */}
         {!stats && !cadastreError && (
-          <div className="stat stat--muted">
-            <span className="stat__value">—</span>
-            <span className="stat__unit">загружаем</span>
+          <div className="skeleton" role="status" aria-label="Загружаем кадастровые участки">
+            <span className="skeleton__bar skeleton__bar--stat" />
+            <span className="skeleton__bar skeleton__bar--sub" />
+            {CADASTRE_CATEGORIES.map((c) => (
+              <span key={c.id} className="skeleton__bar skeleton__bar--row" />
+            ))}
           </div>
         )}
 
-        {stats && (
+        {stats?.total === 0 && (
+          <p className="empty">
+            В полосе вдоль трассы нет ни одного участка. Проверьте ширину полосы в
+            <code> scripts/fetch-cadastre.mjs</code>.
+          </p>
+        )}
+
+        {stats && stats.total > 0 && (
           <>
             <div className="stat">
               <span className="stat__value">{stats.total.toLocaleString('ru-RU')}</span>
@@ -90,22 +219,41 @@ export default function Sidebar({ stats, cadastreError }: SidebarProps) {
               {CADASTRE_CATEGORIES.map((c) => (
                 <li key={c.id} className="row">
                   <span className="row__swatch" style={{ background: c.color }} />
-                  <span>{c.title}</span>
+                  <span className="row__label">{c.title}</span>
                   <span className="row__value">
                     {(stats.byCategory[c.id] ?? 0).toLocaleString('ru-RU')}
                   </span>
+                  {/* Доля — главное, что говорят эти числа: 98 % полосы занимают
+                      земли населённых пунктов. По абсолютным значениям это
+                      приходилось считать в уме. */}
+                  <span className="row__share">{share(stats.byCategory[c.id] ?? 0, stats.total)}</span>
                 </li>
               ))}
             </ul>
 
-            <ul className="rows rows--districts">
-              {stats.byDistrict.map((d) => (
-                <li key={d.district} className="row row--plain">
-                  <span>{d.district}</span>
-                  <span className="row__value">{d.count.toLocaleString('ru-RU')}</span>
-                </li>
+            <div className="regions">
+              {stats.byRegion.map((r) => (
+                <section key={r.region} className="region">
+                  <h3 className="region__head">
+                    {/* Тот же цвет, что у заливки и границы на карте, — связывает список с картой. */}
+                    <span className="region__swatch" style={{ background: regionColor(r.region) ?? 'transparent' }} />
+                    <span className="region__name">{r.region}</span>
+                    <span className="row__value">{r.count.toLocaleString('ru-RU')}</span>
+                    <span className="row__share">{share(r.count, stats.total)}</span>
+                  </h3>
+                  <ul className="rows">
+                    {r.districts.map((d) => (
+                      <li key={d.district} className="row row--plain row--nested">
+                        <span className="row__label">{d.district}</span>
+                        <span className="row__value">{d.count.toLocaleString('ru-RU')}</span>
+                        {/* У районов доли нет намеренно: двенадцать процентов
+                            подряд — стена чисел, а не иерархия. */}
+                      </li>
+                    ))}
+                  </ul>
+                </section>
               ))}
-            </ul>
+            </div>
           </>
         )}
       </section>

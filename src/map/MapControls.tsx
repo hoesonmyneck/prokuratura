@@ -7,7 +7,11 @@ export interface MapControlsProps {
   showRoad: boolean;
   showCadastre: boolean;
   showCities: boolean;
-  onToggle: (key: 'showRoad' | 'showCadastre' | 'showCities') => void;
+  showRegions: boolean;
+  showDistricts: boolean;
+  onToggle: (
+    key: 'showRoad' | 'showCadastre' | 'showCities' | 'showRegions' | 'showDistricts',
+  ) => void;
   onZoomIn: () => void;
   onZoomOut: () => void;
   onHome: () => void;
@@ -55,6 +59,8 @@ export default function MapControls({
   showRoad,
   showCadastre,
   showCities,
+  showRegions,
+  showDistricts,
   onToggle,
   onZoomIn,
   onZoomOut,
@@ -130,6 +136,18 @@ export default function MapControls({
           <label className="switch">
             <input type="checkbox" checked={showCities} onChange={() => onToggle('showCities')} />
             <span>Населённые пункты</span>
+          </label>
+          <label className="switch">
+            <input type="checkbox" checked={showRegions} onChange={() => onToggle('showRegions')} />
+            <span>Границы областей</span>
+          </label>
+          <label className="switch">
+            <input
+              type="checkbox"
+              checked={showDistricts}
+              onChange={() => onToggle('showDistricts')}
+            />
+            <span>Границы районов</span>
           </label>
 
           <div className="mapctl__panel-title mapctl__panel-title--spaced">Подложка</div>
