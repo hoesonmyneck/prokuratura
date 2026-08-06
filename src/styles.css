@@ -413,6 +413,16 @@ button {
   font-variant-numeric: tabular-nums;
 }
 
+/* Спокойное пояснение, а не ошибка: отличается от .notice и тоном, и цветом. */
+.hint {
+  margin: 12px 0 0;
+  padding-top: 10px;
+  border-top: 1px solid var(--divider);
+  font-size: 11px;
+  line-height: 1.4;
+  color: var(--text-3);
+}
+
 /* Без прав на запись поле остаётся читаемым, но не притворяется кликабельным. */
 .build__input[readonly] {
   border-color: transparent;

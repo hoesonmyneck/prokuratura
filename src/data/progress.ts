@@ -56,13 +56,22 @@ export interface ProgressState {
   progress: RoadProgress;
   /** Разрешено ли этому браузеру менять цифры. */
   editable: boolean;
+  /** Подключено ли общее хранилище. false — на экране значения из файла. */
+  storage: boolean;
+  /** Если хранилища нет — почему именно. Показывается в панели. */
+  problem?: string;
 }
 
 export async function fetchProgress(signal?: AbortSignal): Promise<ProgressState> {
   const res = await fetch(API, { headers: authHeaders(), signal });
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
   const data = (await res.json()) as ProgressState;
-  return { progress: sanitize(data.progress), editable: Boolean(data.editable) };
+  return {
+    progress: sanitize(data.progress),
+    editable: Boolean(data.editable),
+    storage: Boolean(data.storage),
+    problem: data.problem,
+  };
 }
 
 export async function pushProgress(progress: RoadProgress): Promise<RoadProgress> {

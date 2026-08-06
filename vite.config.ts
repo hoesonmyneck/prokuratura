@@ -67,7 +67,8 @@ function progressDevApi(): Plugin {
 
     if (req.method === 'GET') {
       // В деве прав всегда достаточно: токен проверяется только на проде.
-      send({ progress: read(), editable: true });
+      // storage: true — в деве хранилище есть, это `.progress-dev.json`.
+      send({ progress: read(), editable: true, storage: true });
       return;
     }
 
@@ -81,7 +82,7 @@ function progressDevApi(): Plugin {
           const body = JSON.parse(raw) as { progress?: unknown };
           const progress = sanitize(body?.progress ?? body);
           writeFileSync(STORE, `${JSON.stringify(progress, null, 2)}\n`);
-          send({ progress, editable: true });
+          send({ progress, editable: true, storage: true });
         } catch {
           send({ error: 'Ожидался JSON' }, 400);
         }

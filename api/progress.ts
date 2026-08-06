@@ -34,11 +34,42 @@ const DEFAULTS: Record<string, number> = {
   'kyzylorda-saksaulsk': 0,
 };
 
+/*
+ * Имена переменных зависят от того, каким способом подключено хранилище:
+ * Upstash из Marketplace даёт `UPSTASH_REDIS_REST_*`, интеграция Vercel KV —
+ * `KV_REST_API_*`, а первый вариант Redis-хранилища Vercel — только
+ * `REDIS_URL` / `KV_URL`, и это TCP-адрес, а не REST.
+ */
+const REST_URL_VARS = ['UPSTASH_REDIS_REST_URL', 'KV_REST_API_URL', 'REDIS_REST_URL'] as const;
+const REST_TOKEN_VARS = ['UPSTASH_REDIS_REST_TOKEN', 'KV_REST_API_TOKEN', 'REDIS_REST_TOKEN'] as const;
+const TCP_URL_VARS = ['REDIS_URL', 'KV_URL'] as const;
+
+const firstSet = (names: readonly string[]): string | undefined =>
+  names.map((n) => process.env[n]).find((v) => typeof v === 'string' && v.length > 0);
+
 function redis(): Redis | null {
-  const url = process.env.UPSTASH_REDIS_REST_URL ?? process.env.KV_REST_API_URL;
-  const token = process.env.UPSTASH_REDIS_REST_TOKEN ?? process.env.KV_REST_API_TOKEN;
+  const url = firstSet(REST_URL_VARS);
+  const token = firstSet(REST_TOKEN_VARS);
   if (!url || !token) return null;
   return new Redis({ url, token });
+}
+
+/**
+ * Почему хранилище не поднялось. Возвращает только имена переменных, никогда
+ * значения: подсказка должна помогать настроить, а не утекать токеном.
+ */
+function storageProblem(): string {
+  const present = [...REST_URL_VARS, ...REST_TOKEN_VARS, ...TCP_URL_VARS].filter((n) =>
+    Boolean(process.env[n]),
+  );
+
+  if (!present.length) {
+    return 'Переменные хранилища не заданы. Подключите Redis к проекту (Storage → Connect) и передеплойте: переменные применяются только к новым деплоям.';
+  }
+  if (!firstSet(REST_URL_VARS) || !firstSet(REST_TOKEN_VARS)) {
+    return `Есть только ${present.join(', ')}. Нужен REST-доступ (URL + токен): клиент работает по HTTP, TCP-адрес redis:// на Edge не подходит. В Upstash это «REST API» в настройках базы.`;
+  }
+  return `Переменные найдены (${present.join(', ')}), но подключиться не удалось.`;
 }
 
 /** Приводит любой вход к целым километрам в границах участка. */
@@ -70,16 +101,27 @@ const json = (body: unknown, status = 200) =>
 
 export default async function handler(req: Request): Promise<Response> {
   const db = redis();
-  if (!db) {
-    return json({ error: 'Хранилище не настроено: нет переменных Upstash Redis' }, 503);
-  }
 
   if (req.method === 'GET') {
+    // Без хранилища чтение всё равно осмысленно: отдаём значения по умолчанию
+    // и честно помечаем, что общего состояния нет. Ошибкой это не считаем —
+    // иначе каждый посетитель видел бы красную плашку, пока идёт настройка.
+    if (!db) {
+      return json({
+        progress: sanitize(DEFAULTS),
+        editable: false,
+        storage: false,
+        problem: storageProblem(),
+      });
+    }
+
     const stored = await db.get<Record<string, number>>(KEY);
-    return json({ progress: sanitize(stored ?? DEFAULTS), editable: tokenOk(req) });
+    return json({ progress: sanitize(stored ?? DEFAULTS), editable: tokenOk(req), storage: true });
   }
 
   if (req.method === 'PUT') {
+    // А вот записать без хранилища нельзя, и молчать об этом нельзя тоже.
+    if (!db) return json({ error: storageProblem() }, 503);
     if (!tokenOk(req)) return json({ error: 'Нет прав на изменение' }, 403);
 
     let body: unknown;
@@ -91,7 +133,7 @@ export default async function handler(req: Request): Promise<Response> {
 
     const progress = sanitize((body as { progress?: unknown })?.progress ?? body);
     await db.set(KEY, progress);
-    return json({ progress, editable: true });
+    return json({ progress, editable: true, storage: true });
   }
 
   return json({ error: 'Метод не поддерживается' }, 405);

@@ -36,6 +36,7 @@ export default function App() {
    */
   const [progress, setProgress] = useState<RoadProgress>(fallbackProgress);
   const [editable, setEditable] = useState(false);
+  const [storageNote, setStorageNote] = useState<string | null>(null);
   const [progressError, setProgressError] = useState<string | null>(null);
   /** Свои правки, ещё не подтверждённые сервером: опрос не должен их затирать. */
   const pendingRef = useRef(false);
@@ -45,11 +46,18 @@ export default function App() {
     try {
       const state = await fetchProgress(signal);
       setEditable(state.editable);
+      setStorageNote(
+        state.storage
+          ? null
+          : (state.problem ?? 'Общее хранилище не подключено — показаны значения из файла.'),
+      );
       setProgressError(null);
       if (!pendingRef.current) setProgress(state.progress);
     } catch (e) {
       if ((e as Error).name === 'AbortError') return;
-      setProgressError(e instanceof Error ? e.message : String(e));
+      // Само чтение не удалось — на экране остаются значения из файла.
+      setEditable(false);
+      setProgressError(`не удалось получить данные (${e instanceof Error ? e.message : String(e)})`);
     }
   }, []);
 
@@ -83,7 +91,9 @@ export default function App() {
           setProgress(saved);
           setProgressError(null);
         })
-        .catch((e: unknown) => setProgressError(e instanceof Error ? e.message : String(e)))
+        .catch((e: unknown) =>
+          setProgressError(`не удалось сохранить (${e instanceof Error ? e.message : String(e)})`),
+        )
         .finally(() => {
           pendingRef.current = false;
         });
@@ -110,6 +120,7 @@ export default function App() {
           cadastreError={cadastreError}
           progress={progress}
           progressEditable={editable}
+          progressNote={storageNote}
           progressError={progressError}
           onProgressChange={setSegmentKm}
         />

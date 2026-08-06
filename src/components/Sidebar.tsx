@@ -9,6 +9,8 @@ interface SidebarProps {
   progress: RoadProgress;
   /** Есть ли у этого браузера право менять цифры (см. PROGRESS_WRITE_TOKEN). */
   progressEditable: boolean;
+  /** Пояснение, если общего хранилища нет: что именно не настроено. */
+  progressNote: string | null;
   progressError: string | null;
   onProgressChange: (id: string, km: number) => void;
 }
@@ -50,6 +52,7 @@ export default function Sidebar({
   cadastreError,
   progress,
   progressEditable,
+  progressNote,
   progressError,
   onProgressChange,
 }: SidebarProps) {
@@ -180,7 +183,11 @@ export default function Sidebar({
           ))}
         </div>
 
-        {progressError && <div className="notice">Не удалось сохранить: {progressError}</div>}
+        {/* Ненастроенное хранилище — не ошибка посетителя: цифры на экране верные,
+            просто общие правки пока некуда складывать. Тон соответственный. */}
+        {progressNote && !progressError && <p className="hint">{progressNote}</p>}
+
+        {progressError && <div className="notice">Ход строительства: {progressError}</div>}
       </section>
 
       <section className="section">
