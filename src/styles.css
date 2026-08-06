@@ -215,18 +215,22 @@ button {
   min-width: 0;
 }
 
-.identity__eyebrow {
-  display: block;
-  font-size: 11px;
-  line-height: 1.2;
-  color: var(--text-2);
-}
-
+/* Название системы не обрезаем многоточием — пусть лучше перенесётся:
+   усечённое имя проекта читается как ошибка вёрстки. */
 .identity__title {
   display: block;
   font-size: 15px;
   font-weight: 500;
   line-height: 1.25;
+  text-wrap: balance;
+}
+
+.identity__sub {
+  display: block;
+  margin-top: 3px;
+  font-size: 11px;
+  line-height: 1.25;
+  color: var(--text-2);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

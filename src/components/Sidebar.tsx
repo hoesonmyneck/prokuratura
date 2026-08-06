@@ -72,9 +72,10 @@ export default function Sidebar({
           <span className="identity__icon">
             <IconRoute />
           </span>
+          {/* Название системы — главное, объект мониторинга под ним. */}
           <span className="identity__text">
-            <span className="identity__eyebrow">Реконструкция автодороги</span>
-            <span className="identity__title">«Западный регион»</span>
+            <span className="identity__title">Инновационная система мониторинга</span>
+            <span className="identity__sub">Реконструкция а/д «Западный регион»</span>
           </span>
         </div>
         {/* Сетка вместо строки через точки-разделители: четыре независимые
