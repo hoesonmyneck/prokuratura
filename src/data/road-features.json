@@ -1,0 +1,1531 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "interchange",
+    "title": "Транспортная развязка",
+    "short": "Развязка",
+    "major": true,
+    "station": "КМ 0+904",
+    "lengthM": 0
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     65.712876,
+     44.912566
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "rest",
+    "title": "Площадка отдыха",
+    "short": "Площадка отдыха",
+    "major": true,
+    "station": "КМ 23+815 - 25+590",
+    "lengthM": 1775
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     65.592084,
+     45.093185
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "interchange",
+    "title": "Транспортная развязка",
+    "short": "Развязка",
+    "major": true,
+    "station": "КМ 28+898 - 30+777",
+    "lengthM": 1879
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     65.54235,
+     45.122807
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "stage",
+    "title": "Граница очереди строительства",
+    "short": "Очередь",
+    "major": true,
+    "station": "КМ 44+572",
+    "lengthM": 0
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     65.390519,
+     45.192881
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "rest",
+    "title": "Площадка отдыха",
+    "short": "Площадка отдыха",
+    "major": true,
+    "station": "КМ 50+300 - 52+075",
+    "lengthM": 1775
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     65.328766,
+     45.232636
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "rest",
+    "title": "Площадка отдыха",
+    "short": "Площадка отдыха",
+    "major": true,
+    "station": "КМ 73+205 - 74+980",
+    "lengthM": 1775
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     65.080275,
+     45.33923
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "rest",
+    "title": "Площадка отдыха",
+    "short": "Площадка отдыха",
+    "major": true,
+    "station": "КМ 97+208 - 98+983",
+    "lengthM": 1775
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     64.80419,
+     45.432876
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "stage",
+    "title": "Граница очереди строительства",
+    "short": "Очередь",
+    "major": true,
+    "station": "КМ 99+076",
+    "lengthM": 0
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     64.792892,
+     45.436688
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "rest",
+    "title": "Площадка отдыха",
+    "short": "Площадка отдыха",
+    "major": true,
+    "station": "КМ 123+000 - 124+775",
+    "lengthM": 1775
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     64.506847,
+     45.532651
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "rest",
+    "title": "Площадка отдыха",
+    "short": "Площадка отдыха",
+    "major": true,
+    "station": "КМ 141+955 - 143+730",
+    "lengthM": 1775
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     64.282317,
+     45.594036
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "interchange",
+    "title": "Транспортная развязка",
+    "short": "Развязка",
+    "major": true,
+    "station": "КМ 172+846",
+    "lengthM": 0
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     63.943614,
+     45.591334
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "roadbed",
+    "title": "Переход земляного полотна",
+    "short": "Земполотно",
+    "major": false,
+    "station": "КМ 176+200",
+    "lengthM": 0
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     63.911208,
+     45.610873
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "rest",
+    "title": "Площадка отдыха",
+    "short": "Площадка отдыха",
+    "major": true,
+    "station": "КМ 195+940 - 198+157",
+    "lengthM": 2217
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     63.738119,
+     45.74211
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "rest",
+    "title": "Площадка отдыха",
+    "short": "Площадка отдыха",
+    "major": true,
+    "station": "КМ 220+315 - 222+532",
+    "lengthM": 2217
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     63.441153,
+     45.682277
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "roadbed",
+    "title": "Переход земляного полотна",
+    "short": "Земполотно",
+    "major": false,
+    "station": "КМ 228+320",
+    "lengthM": 0
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     63.356558,
+     45.664028
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "roadbed",
+    "title": "Переход земляного полотна",
+    "short": "Земполотно",
+    "major": false,
+    "station": "КМ 228+920",
+    "lengthM": 0
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     63.349039,
+     45.662889
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "roadbed",
+    "title": "Переход земляного полотна",
+    "short": "Земполотно",
+    "major": false,
+    "station": "КМ 234+660",
+    "lengthM": 0
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     63.276661,
+     45.653365
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "roadbed",
+    "title": "Переход земляного полотна",
+    "short": "Земполотно",
+    "major": false,
+    "station": "КМ 235+380",
+    "lengthM": 0
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     63.267741,
+     45.651691
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "roadbed",
+    "title": "Переход земляного полотна",
+    "short": "Земполотно",
+    "major": false,
+    "station": "КМ 236+320",
+    "lengthM": 0
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     63.255894,
+     45.65011
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "rest",
+    "title": "Площадка отдыха",
+    "short": "Площадка отдыха",
+    "major": true,
+    "station": "КМ 252+326 - 254+543",
+    "lengthM": 2217
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     63.047361,
+     45.69659
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "stage",
+    "title": "Граница очереди строительства",
+    "short": "Очередь",
+    "major": true,
+    "station": "КМ 255+294",
+    "lengthM": 0
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     63.024771,
+     45.702006
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "rest",
+    "title": "Площадка отдыха",
+    "short": "Площадка отдыха",
+    "major": true,
+    "station": "КМ 267+912 - 270+129",
+    "lengthM": 2217
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     62.855187,
+     45.73525
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "rest",
+    "title": "Площадка отдыха",
+    "short": "Площадка отдыха",
+    "major": true,
+    "station": "КМ 302+100 - 304+317",
+    "lengthM": 2217
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     62.453151,
+     45.838081
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "rest",
+    "title": "Площадка отдыха",
+    "short": "Площадка отдыха",
+    "major": true,
+    "station": "КМ 318+116 - 319+891",
+    "lengthM": 1775
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     62.351214,
+     45.949541
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "interchange",
+    "title": "Транспортная развязка",
+    "short": "Развязка",
+    "major": true,
+    "station": "КМ 337+163",
+    "lengthM": 0
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     62.137965,
+     45.984339
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "roadbed",
+    "title": "Переход земляного полотна",
+    "short": "Земполотно",
+    "major": false,
+    "station": "КМ 353+120",
+    "lengthM": 0
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     62.085711,
+     46.113343
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "roadbed",
+    "title": "Переход земляного полотна",
+    "short": "Земполотно",
+    "major": false,
+    "station": "КМ 355+760",
+    "lengthM": 0
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     62.07801,
+     46.136216
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "rest",
+    "title": "Площадка отдыха",
+    "short": "Площадка отдыха",
+    "major": true,
+    "station": "КМ 360+805 - 363+022",
+    "lengthM": 2217
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     62.033434,
+     46.180957
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "rest",
+    "title": "Площадка отдыха",
+    "short": "Площадка отдыха",
+    "major": true,
+    "station": "КМ 379+963 - 382+180",
+    "lengthM": 2217
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     61.931658,
+     46.337347
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "roadbed",
+    "title": "Переход земляного полотна",
+    "short": "Земполотно",
+    "major": false,
+    "station": "КМ 394+960",
+    "lengthM": 0
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     61.889912,
+     46.454909
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "roadbed",
+    "title": "Переход земляного полотна",
+    "short": "Земполотно",
+    "major": false,
+    "station": "КМ 399+840",
+    "lengthM": 0
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     61.897004,
+     46.497283
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "rest",
+    "title": "Площадка отдыха",
+    "short": "Площадка отдыха",
+    "major": true,
+    "station": "КМ 408+971 - 411+188",
+    "lengthM": 2217
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     61.822503,
+     46.569303
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "roadbed",
+    "title": "Переход земляного полотна",
+    "short": "Земполотно",
+    "major": false,
+    "station": "КМ 412+600",
+    "lengthM": 0
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     61.805243,
+     46.588037
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "roadbed",
+    "title": "Переход земляного полотна",
+    "short": "Земполотно",
+    "major": false,
+    "station": "КМ 416+020",
+    "lengthM": 0
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     61.79354,
+     46.615665
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "roadbed",
+    "title": "Переход земляного полотна",
+    "short": "Земполотно",
+    "major": false,
+    "station": "КМ 420+120",
+    "lengthM": 0
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     61.779319,
+     46.651205
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "roadbed",
+    "title": "Переход земляного полотна",
+    "short": "Земполотно",
+    "major": false,
+    "station": "КМ 422+180",
+    "lengthM": 0
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     61.773456,
+     46.669126
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "rest",
+    "title": "Площадка отдыха",
+    "short": "Площадка отдыха",
+    "major": true,
+    "station": "КМ 427+992",
+    "lengthM": 0
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     61.748895,
+     46.718262
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "roadbed",
+    "title": "Переход земляного полотна",
+    "short": "Земполотно",
+    "major": false,
+    "station": "КМ 430+300",
+    "lengthM": 0
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     61.735335,
+     46.736808
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "roadbed",
+    "title": "Переход земляного полотна",
+    "short": "Земполотно",
+    "major": false,
+    "station": "КМ 431+560",
+    "lengthM": 0
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     61.727775,
+     46.746846
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "roadbed",
+    "title": "Переход земляного полотна",
+    "short": "Земполотно",
+    "major": false,
+    "station": "КМ 433+900",
+    "lengthM": 0
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     61.716575,
+     46.766388
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "roadbed",
+    "title": "Переход земляного полотна",
+    "short": "Земполотно",
+    "major": false,
+    "station": "КМ 434+600",
+    "lengthM": 0
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     61.714908,
+     46.772565
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "interchange",
+    "title": "Транспортная развязка",
+    "short": "Развязка",
+    "major": true,
+    "station": "КМ 435+844",
+    "lengthM": 0
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     61.713513,
+     46.783713
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "roadbed",
+    "title": "Переход земляного полотна",
+    "short": "Земполотно",
+    "major": false,
+    "station": "КМ 438+800",
+    "lengthM": 0
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     61.699839,
+     46.806809
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "roadbed",
+    "title": "Переход земляного полотна",
+    "short": "Земполотно",
+    "major": false,
+    "station": "КМ 439+360",
+    "lengthM": 0
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     61.69361,
+     46.809469
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "rest",
+    "title": "Площадка отдыха",
+    "short": "Площадка отдыха",
+    "major": true,
+    "station": "КМ 448+016 - 450+233",
+    "lengthM": 2217
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     61.61484,
+     46.873434
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "roadbed",
+    "title": "Переход земляного полотна",
+    "short": "Земполотно",
+    "major": false,
+    "station": "КМ 451+120",
+    "lengthM": 0
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     61.608256,
+     46.890804
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "roadbed",
+    "title": "Переход земляного полотна",
+    "short": "Земполотно",
+    "major": false,
+    "station": "КМ 451+600",
+    "lengthM": 0
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     61.606318,
+     46.894911
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "roadbed",
+    "title": "Переход земляного полотна",
+    "short": "Земполотно",
+    "major": false,
+    "station": "КМ 452+300",
+    "lengthM": 0
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     61.604051,
+     46.901012
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "roadbed",
+    "title": "Переход земляного полотна",
+    "short": "Земполотно",
+    "major": false,
+    "station": "КМ 453+280",
+    "lengthM": 0
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     61.596866,
+     46.908032
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "roadbed",
+    "title": "Переход земляного полотна",
+    "short": "Земполотно",
+    "major": false,
+    "station": "КМ 455+100",
+    "lengthM": 0
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     61.57653,
+     46.91662
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "roadbed",
+    "title": "Переход земляного полотна",
+    "short": "Земполотно",
+    "major": false,
+    "station": "КМ 455+660",
+    "lengthM": 0
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     61.57003,
+     46.918969
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "service",
+    "title": "АЗС и сервисы",
+    "short": "АЗС",
+    "major": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     63.925574,
+     45.600914
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "crossing",
+    "title": "Скотопрогон или проезд сельхозтехники",
+    "short": "Скотопрогон",
+    "major": false
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     64.275749,
+     45.594724
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "service",
+    "title": "АЗС и сервисы",
+    "short": "АЗС",
+    "major": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     62.109001,
+     46.002594
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "service",
+    "title": "АЗС и сервисы",
+    "short": "АЗС",
+    "major": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     63.380129,
+     45.669115
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "service",
+    "title": "АЗС и сервисы",
+    "short": "АЗС",
+    "major": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     63.622296,
+     45.723688
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "service",
+    "title": "АЗС и сервисы",
+    "short": "АЗС",
+    "major": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     63.296363,
+     45.656255
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "service",
+    "title": "АЗС и сервисы",
+    "short": "АЗС",
+    "major": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     63.192363,
+     45.661699
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "crossing",
+    "title": "Скотопрогон или проезд сельхозтехники",
+    "short": "Скотопрогон",
+    "major": false
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     62.074333,
+     46.144272
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "crossing",
+    "title": "Скотопрогон или проезд сельхозтехники",
+    "short": "Скотопрогон",
+    "major": false
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     62.083656,
+     46.125505
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "crossing",
+    "title": "Скотопрогон или проезд сельхозтехники",
+    "short": "Скотопрогон",
+    "major": false
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     62.201076,
+     45.9893
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "crossing",
+    "title": "Скотопрогон или проезд сельхозтехники",
+    "short": "Скотопрогон",
+    "major": false
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     62.42529,
+     45.841694
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "crossing",
+    "title": "Скотопрогон или проезд сельхозтехники",
+    "short": "Скотопрогон",
+    "major": false
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     63.220624,
+     45.654872
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "crossing",
+    "title": "Скотопрогон или проезд сельхозтехники",
+    "short": "Скотопрогон",
+    "major": false
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     64.214147,
+     45.614456
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "crossing",
+    "title": "Скотопрогон или проезд сельхозтехники",
+    "short": "Скотопрогон",
+    "major": false
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     62.903618,
+     45.726278
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "crossing",
+    "title": "Скотопрогон или проезд сельхозтехники",
+    "short": "Скотопрогон",
+    "major": false
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     64.227883,
+     45.608008
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "service",
+    "title": "АЗС и сервисы",
+    "short": "АЗС",
+    "major": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     61.514252,
+     46.94131
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "service",
+    "title": "АЗС и сервисы",
+    "short": "АЗС",
+    "major": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     61.644772,
+     46.83419
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "service",
+    "title": "АЗС и сервисы",
+    "short": "АЗС",
+    "major": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     61.977467,
+     46.256516
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "service",
+    "title": "АЗС и сервисы",
+    "short": "АЗС",
+    "major": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     62.106044,
+     46.011409
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "crossing",
+    "title": "Скотопрогон или проезд сельхозтехники",
+    "short": "Скотопрогон",
+    "major": false
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     61.508452,
+     46.956926
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "crossing",
+    "title": "Скотопрогон или проезд сельхозтехники",
+    "short": "Скотопрогон",
+    "major": false
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     61.539772,
+     46.931713
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "crossing",
+    "title": "Скотопрогон или проезд сельхозтехники",
+    "short": "Скотопрогон",
+    "major": false
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     61.607303,
+     46.89282
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "crossing",
+    "title": "Скотопрогон или проезд сельхозтехники",
+    "short": "Скотопрогон",
+    "major": false
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     61.614258,
+     46.874995
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "crossing",
+    "title": "Скотопрогон или проезд сельхозтехники",
+    "short": "Скотопрогон",
+    "major": false
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     61.670897,
+     46.820804
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "crossing",
+    "title": "Скотопрогон или проезд сельхозтехники",
+    "short": "Скотопрогон",
+    "major": false
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     61.686172,
+     46.812972
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "crossing",
+    "title": "Скотопрогон или проезд сельхозтехники",
+    "short": "Скотопрогон",
+    "major": false
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     61.726983,
+     46.747898
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "crossing",
+    "title": "Скотопрогон или проезд сельхозтехники",
+    "short": "Скотопрогон",
+    "major": false
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     61.739553,
+     46.73115
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "crossing",
+    "title": "Скотопрогон или проезд сельхозтехники",
+    "short": "Скотопрогон",
+    "major": false
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     61.77795,
+     46.66012
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "crossing",
+    "title": "Скотопрогон или проезд сельхозтехники",
+    "short": "Скотопрогон",
+    "major": false
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     61.804272,
+     46.605568
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "crossing",
+    "title": "Скотопрогон или проезд сельхозтехники",
+    "short": "Скотопрогон",
+    "major": false
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     61.89748,
+     46.50098
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "crossing",
+    "title": "Скотопрогон или проезд сельхозтехники",
+    "short": "Скотопрогон",
+    "major": false
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     61.900293,
+     46.480012
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "crossing",
+    "title": "Скотопрогон или проезд сельхозтехники",
+    "short": "Скотопрогон",
+    "major": false
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     61.901143,
+     46.380779
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "crossing",
+    "title": "Скотопрогон или проезд сельхозтехники",
+    "short": "Скотопрогон",
+    "major": false
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     61.912013,
+     46.36702
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "crossing",
+    "title": "Скотопрогон или проезд сельхозтехники",
+    "short": "Скотопрогон",
+    "major": false
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     61.95497,
+     46.299246
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "crossing",
+    "title": "Скотопрогон или проезд сельхозтехники",
+    "short": "Скотопрогон",
+    "major": false
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     61.964149,
+     46.280338
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "crossing",
+    "title": "Скотопрогон или проезд сельхозтехники",
+    "short": "Скотопрогон",
+    "major": false
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     62.011052,
+     46.207562
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "crossing",
+    "title": "Скотопрогон или проезд сельхозтехники",
+    "short": "Скотопрогон",
+    "major": false
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     62.038761,
+     46.176367
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kind": "crossing",
+    "title": "Скотопрогон или проезд сельхозтехники",
+    "short": "Скотопрогон",
+    "major": false
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     62.483766,
+     45.8366
+    ]
+   }
+  }
+ ]
+}

@@ -2,6 +2,7 @@ import { roadSegments } from '../data/road';
 import { CADASTRE_CATEGORIES, type CadastreStats } from '../data/cadastre';
 import { regionColor } from '../data/boundaries';
 import { summarize, type RoadProgress } from '../data/progress';
+import { FEATURE_KINDS } from '../data/features';
 
 interface SidebarProps {
   stats: CadastreStats | null;
@@ -189,6 +190,19 @@ export default function Sidebar({
         {progressNote && !progressError && <p className="hint">{progressNote}</p>}
 
         {progressError && <div className="notice">Ход строительства: {progressError}</div>}
+      </section>
+
+      <section className="section">
+        <h2 className="section__title">Обозначения проекта</h2>
+
+        <ul className="rows">
+          {FEATURE_KINDS.map((k) => (
+            <li key={k.kind} className="row row--plain">
+              <span className="row__label">{k.title}</span>
+              <span className="row__value">{k.count}</span>
+            </li>
+          ))}
+        </ul>
       </section>
 
       <section className="section">

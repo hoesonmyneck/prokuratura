@@ -25,6 +25,7 @@ export default function App() {
     showCities: true,
     showRegions: true,
     showDistricts: true,
+    showFeatures: true,
   });
   const [cadastre, setCadastre] = useState<CadastreCollection | null>(null);
   const [cadastreError, setCadastreError] = useState<string | null>(null);
@@ -133,6 +134,7 @@ export default function App() {
         showCities={layers.showCities}
         showRegions={layers.showRegions}
         showDistricts={layers.showDistricts}
+        showFeatures={layers.showFeatures}
         onToggle={(key) => setLayers((prev) => ({ ...prev, [key]: !prev[key] }))}
         cadastre={cadastre}
         progress={progress}

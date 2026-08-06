@@ -16,6 +16,11 @@ import {
   type CadastreProps,
 } from '../data/cadastre';
 import { districtBounds, regionBounds } from '../data/boundaries';
+import { roadFeatures, type RoadFeatureProps } from '../data/features';
+import iconRest from '../assets/icon-rest.png';
+import iconInterchange from '../assets/icon-interchange.png';
+import iconService from '../assets/icon-service.png';
+import iconCrossing from '../assets/icon-crossing.png';
 
 export interface MapViewProps {
   basemap: BasemapId;
@@ -25,8 +30,15 @@ export interface MapViewProps {
   showCities: boolean;
   showRegions: boolean;
   showDistricts: boolean;
+  showFeatures: boolean;
   onToggle: (
-    key: 'showRoad' | 'showCadastre' | 'showCities' | 'showRegions' | 'showDistricts',
+    key:
+      | 'showRoad'
+      | 'showCadastre'
+      | 'showCities'
+      | 'showRegions'
+      | 'showDistricts'
+      | 'showFeatures',
   ) => void;
   /** Участки ЕГКН; null — пока грузятся. */
   cadastre: CadastreCollection | null;
@@ -40,9 +52,49 @@ const SOURCE_REGIONS = 'regions';
 const SOURCE_REGION_LABELS = 'region-labels';
 const SOURCE_DISTRICTS = 'districts';
 const SOURCE_DISTRICT_LABELS = 'district-labels';
+const SOURCE_FEATURES = 'road-features';
 
 /** Цвет подписи района — нейтральный тёмный: уровень ниже областного. */
 const DISTRICT_INK = '#3c4043';
+
+/**
+ * Условные знаки вырезаны из легенды самого чертежа (`scripts/extract-icons.py`).
+ * Рисовать свои нельзя: читающий план и читающий карту увидели бы разные знаки.
+ * В легенде есть развязки, площадки отдыха, АЗС и скотопрогоны; перехода
+ * земляного полотна и границы очереди там нет — для них остаётся кружок.
+ */
+const FEATURE_ICONS: Array<[kind: string, image: string, src: string]> = [
+  ['rest', 'feature-rest', iconRest],
+  ['interchange', 'feature-interchange', iconInterchange],
+  ['service', 'feature-service', iconService],
+  ['crossing', 'feature-crossing', iconCrossing],
+];
+
+const WITH_ICON = FEATURE_ICONS.map(([kind]) => kind);
+
+/** Цвет кружка для того, чему условного знака в проекте не нашлось. */
+const FEATURE_INK = '#1f1f1f';
+
+/**
+ * Иконки живут в стиле карты, а смена подложки стиль пересоздаёт — значит,
+ * добавлять их надо каждый раз заново, как и слои. Загрузка асинхронная:
+ * MapLibre сам перерисует символы, когда картинка доедет.
+ */
+function ensureIcons(map: MapLibreMap): void {
+  for (const [, id, src] of FEATURE_ICONS) {
+    if (map.hasImage(id)) continue;
+    const img = new Image();
+    img.onload = () => {
+      // Карту могли успеть закрыть или сменить подложку ещё раз.
+      try {
+        if (!map.hasImage(id)) map.addImage(id, img);
+      } catch {
+        /* стиль уже не тот — следующий styledata добавит заново */
+      }
+    };
+    img.src = src;
+  }
+}
 
 const emptyRoad: GeoJSON.FeatureCollection<GeoJSON.LineString, RoadPartProps> = {
   type: 'FeatureCollection',
@@ -102,6 +154,23 @@ function cadastrePopupHtml(p: CadastreProps): string {
     </div>`;
 }
 
+function featurePopupHtml(p: RoadFeatureProps): string {
+  // Пикетаж есть только у объектов, подписанных им на чертеже. У снятых
+  // с рисунка (АЗС, скотопрогоны) его нет, и выдумывать строку не надо.
+  const rows: Array<[string, string]> = [];
+  if (p.station) rows.push(['Пикетаж', p.station]);
+  const length = Number(p.lengthM) || 0;
+  if (length) rows.push(['Протяжённость', `${length.toLocaleString('ru-RU')} м`]);
+  return `
+    <div class="popup">
+      <div class="popup__badge" style="--badge-color:${FEATURE_INK}">Обозначение проекта</div>
+      <div class="popup__title">${escapeHtml(p.title)}</div>
+      <table class="popup__table">
+        ${rows.map(([k, v]) => `<tr><th>${escapeHtml(k)}</th><td>${escapeHtml(v)}</td></tr>`).join('')}
+      </table>
+    </div>`;
+}
+
 function roadPopupHtml(p: RoadPartProps): string {
   // doneKm приходит из свойств объекта, а они у MapLibre всегда строки-или-числа
   // в зависимости от источника — приводим явно.
@@ -139,6 +208,7 @@ function addProjectLayers(map: MapLibreMap): boolean {
   map.addSource(SOURCE_REGION_LABELS, { type: 'geojson', data: regionLabels });
   map.addSource(SOURCE_DISTRICTS, { type: 'geojson', data: districtBounds });
   map.addSource(SOURCE_DISTRICT_LABELS, { type: 'geojson', data: districtLabels });
+  map.addSource(SOURCE_FEATURES, { type: 'geojson', data: roadFeatures });
   map.addSource(SOURCE_CADASTRE, { type: 'geojson', data: emptyCadastre, generateId: false });
   // Пустая коллекция на старте: настоящую подкладывает эффект по `progress`,
   // так же как кадастр. Иначе смена подложки вернула бы устаревшие данные.
@@ -272,6 +342,78 @@ function addProjectLayers(map: MapLibreMap): boolean {
     paint: { 'line-color': '#000000', 'line-opacity': 0, 'line-width': 20 },
   });
 
+  // Обозначения проекта — поверх трассы: они на ней и стоят. Кружок с белой
+  // обводкой читается на любой подложке, крупные объекты заметнее переходов ЛЭП.
+  // Кружок — только для того, чему знака в легенде нет.
+  map.addLayer({
+    id: 'feature-dot',
+    type: 'circle',
+    source: SOURCE_FEATURES,
+    filter: ['!', ['in', ['get', 'kind'], ['literal', WITH_ICON]]],
+    paint: {
+      'circle-color': FEATURE_INK,
+      'circle-stroke-color': '#ffffff',
+      'circle-stroke-width': 1.6,
+      'circle-radius': [
+        'interpolate',
+        ['linear'],
+        ['zoom'],
+        5, ['case', ['get', 'major'], 3.4, 2.2],
+        10, ['case', ['get', 'major'], 6, 4],
+      ],
+    },
+  });
+
+  // Знаки с чертежа. `icon-allow-overlap` намеренно: объекты стоят на трассе,
+  // и пропадающий знак читался бы как «здесь ничего нет».
+  map.addLayer({
+    id: 'feature-icon',
+    type: 'symbol',
+    source: SOURCE_FEATURES,
+    filter: ['in', ['get', 'kind'], ['literal', WITH_ICON]],
+    layout: {
+      // Собирается из справочника, поэтому тип приходится подсказать вручную —
+      // так же, как цвет категорий земель выше.
+      'icon-image': [
+        'match',
+        ['get', 'kind'],
+        ...FEATURE_ICONS.flatMap(([kind, id]) => [kind, id]),
+        '',
+      ] as never,
+      'icon-size': ['interpolate', ['linear'], ['zoom'], 5, 0.18, 9, 0.3, 14, 0.42],
+      'icon-allow-overlap': true,
+      'icon-ignore-placement': true,
+    },
+  });
+
+  // Крупные объекты подписываются с зума 8, переходы ЛЭП — с 11: их 25 штук,
+  // и на общем плане они превратились бы в частокол. Два слоя, а не фильтр
+  // по зуму внутри одного: `zoom` в filter-выражениях работает с оговорками.
+  const featureLabel = (id: string, major: boolean, minzoom: number): maplibregl.LayerSpecification => ({
+    id,
+    type: 'symbol',
+    source: SOURCE_FEATURES,
+    minzoom,
+    filter: ['==', ['get', 'major'], major],
+    layout: {
+      'text-field': ['get', 'short'],
+      'text-font': ['Noto Sans Regular'],
+      'text-size': ['interpolate', ['linear'], ['zoom'], 8, 10, 12, 12],
+      'text-offset': [0, 1.1],
+      'text-anchor': 'top',
+      'text-allow-overlap': false,
+      'text-padding': 4,
+    },
+    paint: {
+      'text-color': FEATURE_INK,
+      'text-halo-color': '#ffffff',
+      'text-halo-width': 1.6,
+    },
+  });
+
+  map.addLayer(featureLabel('feature-label-major', true, 8));
+  map.addLayer(featureLabel('feature-label-minor', false, 11));
+
   // Названия районов ниже по приоритету: мельче, и появляются только с зума 6 —
   // на общем плане двенадцать подписей рядом с областными превратились бы в кашу.
   // Ниже областных по коду, поэтому при столкновении MapLibre скроет районную.
@@ -327,6 +469,7 @@ export default function MapView({
   showCities,
   showRegions,
   showDistricts,
+  showFeatures,
   onToggle,
   cadastre,
   progress,
@@ -402,6 +545,7 @@ export default function MapView({
     const ensureLayers = () => {
       // Слои пересоздаются после каждой смены подложки — вместе с ними
       // возвращаем и уже загруженный кадастр, иначе источник останется пустым.
+      ensureIcons(map);
       if (!addProjectLayers(map)) return;
       const cad = map.getSource(SOURCE_CADASTRE) as maplibregl.GeoJSONSource | undefined;
       if (cad && cadastreRef.current) cad.setData(cadastreRef.current);
@@ -459,7 +603,19 @@ export default function MapView({
     });
 
     map.on('click', (e) => {
-      const hits = map.queryRenderedFeatures(e.point, { layers: ['road-hit', 'cadastre-fill'] });
+      const hits = map.queryRenderedFeatures(e.point, {
+        layers: ['feature-icon', 'feature-dot', 'road-hit', 'cadastre-fill'],
+      });
+      // Обозначение — самая мелкая цель, поэтому проверяется первым:
+      // иначе клик по нему всегда перехватывала бы широкая полоса дороги.
+      const marker = hits.find((f) => f.layer.id === 'feature-icon' || f.layer.id === 'feature-dot');
+      if (marker) {
+        popup
+          .setLngLat(e.lngLat)
+          .setHTML(featurePopupHtml(marker.properties as RoadFeatureProps))
+          .addTo(map);
+        return;
+      }
       const road = hits.find((f) => f.layer.id === 'road-hit');
       if (road) {
         popup.setLngLat(e.lngLat).setHTML(roadPopupHtml(road.properties as RoadPartProps)).addTo(map);
@@ -514,6 +670,10 @@ export default function MapView({
       set('district-casing', showDistricts);
       set('district-line', showDistricts);
       set('district-label', showDistricts);
+      set('feature-dot', showFeatures);
+      set('feature-icon', showFeatures);
+      set('feature-label-major', showFeatures);
+      set('feature-label-minor', showFeatures);
       markersRef.current.forEach((m) => {
         m.getElement().style.display = showCities ? '' : 'none';
       });
@@ -523,7 +683,7 @@ export default function MapView({
     return () => {
       map.off('styledata', apply);
     };
-  }, [showRoad, showCadastre, showCities, showRegions, showDistricts]);
+  }, [showRoad, showCadastre, showCities, showRegions, showDistricts, showFeatures]);
 
   // Ход строительства меняется прямо в панели — пересобираем геометрию трассы.
   useEffect(() => {
@@ -560,6 +720,7 @@ export default function MapView({
         showCities={showCities}
         showRegions={showRegions}
         showDistricts={showDistricts}
+        showFeatures={showFeatures}
         onToggle={onToggle}
         onZoomIn={() => mapRef.current?.zoomIn()}
         onZoomOut={() => mapRef.current?.zoomOut()}

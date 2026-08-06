@@ -56,13 +56,20 @@ const WFS = 'https://map.gov4c.kz/geoserver/egkn/wfs';
 const PAGE = 2000;
 /** Длина куска трассы, для которого строится отдельный bbox-запрос, км. */
 const CHUNK_KM = 100;
-const KM_PER_DEG_LAT = 110.574;
+/**
+ * Длина градуса, км. 110.574 — это экватор, и на широте трассы (44-50°)
+ * она занижает расстояния почти на процент: полоса «±1 км» выходила уже
+ * заявленной. Здесь значения для этих широт: меридиан 111.13, параллель
+ * 111.32·cos(φ). Точности до 0.05 % для отбора участков более чем достаточно.
+ */
+const KM_PER_DEG_LAT = 111.13;
+const KM_PER_DEG_LNG_EQ = 111.32;
 
 const districts = JSON.parse(readFileSync(resolve(HERE, 'districts.json'), 'utf8'));
 const segments = JSON.parse(readFileSync(resolve(ROOT, 'src/data/road-segments.json'), 'utf8'));
 
 const utm = (srs) => `+proj=utm +zone=${srs - 32600} +datum=WGS84 +units=m +no_defs`;
-const kmPerDegLng = (lat) => KM_PER_DEG_LAT * Math.cos((lat * Math.PI) / 180);
+const kmPerDegLng = (lat) => KM_PER_DEG_LNG_EQ * Math.cos((lat * Math.PI) / 180);
 
 function distanceKm(a, b) {
   const midLat = (a[1] + b[1]) / 2;

@@ -1,0 +1,542 @@
+{
+  "source": "Сокр.план КС-2 с ВУ, листы 1-3, текстовый слой чертежа",
+  "segment": "kyzylorda-saksaulsk",
+  "note": "station — расстояние от начала трассы, м (из подписи «КМ км+м»)",
+  "features": [
+    {
+      "kind": "interchange",
+      "station": 904,
+      "sheets": [
+        "Сокр.план КС-2 с ВУ лист1.pdf"
+      ]
+    },
+    {
+      "kind": "interchange",
+      "station": 28898,
+      "sheets": [
+        "Сокр.план КС-2 с ВУ лист1.pdf"
+      ]
+    },
+    {
+      "kind": "interchange",
+      "station": 28978,
+      "sheets": [
+        "Сокр.план КС-2 с ВУ лист1.pdf"
+      ]
+    },
+    {
+      "kind": "interchange",
+      "station": 29497,
+      "sheets": [
+        "Сокр.план КС-2 с ВУ лист1.pdf"
+      ]
+    },
+    {
+      "kind": "interchange",
+      "station": 29617,
+      "sheets": [
+        "Сокр.план КС-2 с ВУ лист1.pdf"
+      ]
+    },
+    {
+      "kind": "interchange",
+      "station": 30058,
+      "sheets": [
+        "Сокр.план КС-2 с ВУ лист1.pdf"
+      ]
+    },
+    {
+      "kind": "interchange",
+      "station": 30178,
+      "sheets": [
+        "Сокр.план КС-2 с ВУ лист1.pdf"
+      ]
+    },
+    {
+      "kind": "interchange",
+      "station": 30697,
+      "sheets": [
+        "Сокр.план КС-2 с ВУ лист1.pdf"
+      ]
+    },
+    {
+      "kind": "interchange",
+      "station": 30777,
+      "sheets": [
+        "Сокр.план КС-2 с ВУ лист1.pdf"
+      ]
+    },
+    {
+      "kind": "interchange",
+      "station": 172846,
+      "sheets": [
+        "Сокр.план КС-2 с ВУ лист1.pdf",
+        "Сокр.план КС-2 с ВУ лист2.pdf"
+      ]
+    },
+    {
+      "kind": "interchange",
+      "station": 337163,
+      "sheets": [
+        "Сокр.план КС-2 с ВУ лист2.pdf",
+        "Сокр.план КС-2 с ВУ лист3.pdf"
+      ]
+    },
+    {
+      "kind": "interchange",
+      "station": 435844,
+      "sheets": [
+        "Сокр.план КС-2 с ВУ лист3.pdf"
+      ]
+    },
+    {
+      "kind": "rest",
+      "station": 23815,
+      "sheets": [
+        "Сокр.план КС-2 с ВУ лист1.pdf"
+      ]
+    },
+    {
+      "kind": "rest",
+      "station": 25590,
+      "sheets": [
+        "Сокр.план КС-2 с ВУ лист1.pdf"
+      ]
+    },
+    {
+      "kind": "rest",
+      "station": 50300,
+      "sheets": [
+        "Сокр.план КС-2 с ВУ лист1.pdf"
+      ]
+    },
+    {
+      "kind": "rest",
+      "station": 52075,
+      "sheets": [
+        "Сокр.план КС-2 с ВУ лист1.pdf"
+      ]
+    },
+    {
+      "kind": "rest",
+      "station": 73205,
+      "sheets": [
+        "Сокр.план КС-2 с ВУ лист1.pdf"
+      ]
+    },
+    {
+      "kind": "rest",
+      "station": 74980,
+      "sheets": [
+        "Сокр.план КС-2 с ВУ лист1.pdf"
+      ]
+    },
+    {
+      "kind": "rest",
+      "station": 97208,
+      "sheets": [
+        "Сокр.план КС-2 с ВУ лист1.pdf"
+      ]
+    },
+    {
+      "kind": "rest",
+      "station": 98983,
+      "sheets": [
+        "Сокр.план КС-2 с ВУ лист1.pdf"
+      ]
+    },
+    {
+      "kind": "rest",
+      "station": 123000,
+      "sheets": [
+        "Сокр.план КС-2 с ВУ лист1.pdf"
+      ]
+    },
+    {
+      "kind": "rest",
+      "station": 124775,
+      "sheets": [
+        "Сокр.план КС-2 с ВУ лист1.pdf"
+      ]
+    },
+    {
+      "kind": "rest",
+      "station": 141955,
+      "sheets": [
+        "Сокр.план КС-2 с ВУ лист1.pdf",
+        "Сокр.план КС-2 с ВУ лист2.pdf"
+      ]
+    },
+    {
+      "kind": "rest",
+      "station": 143730,
+      "sheets": [
+        "Сокр.план КС-2 с ВУ лист1.pdf",
+        "Сокр.план КС-2 с ВУ лист2.pdf"
+      ]
+    },
+    {
+      "kind": "rest",
+      "station": 195940,
+      "sheets": [
+        "Сокр.план КС-2 с ВУ лист1.pdf",
+        "Сокр.план КС-2 с ВУ лист2.pdf"
+      ]
+    },
+    {
+      "kind": "rest",
+      "station": 198157,
+      "sheets": [
+        "Сокр.план КС-2 с ВУ лист1.pdf",
+        "Сокр.план КС-2 с ВУ лист2.pdf"
+      ]
+    },
+    {
+      "kind": "rest",
+      "station": 220315,
+      "sheets": [
+        "Сокр.план КС-2 с ВУ лист2.pdf"
+      ]
+    },
+    {
+      "kind": "rest",
+      "station": 222532,
+      "sheets": [
+        "Сокр.план КС-2 с ВУ лист2.pdf"
+      ]
+    },
+    {
+      "kind": "rest",
+      "station": 252326,
+      "sheets": [
+        "Сокр.план КС-2 с ВУ лист2.pdf"
+      ]
+    },
+    {
+      "kind": "rest",
+      "station": 254543,
+      "sheets": [
+        "Сокр.план КС-2 с ВУ лист2.pdf"
+      ]
+    },
+    {
+      "kind": "rest",
+      "station": 267912,
+      "sheets": [
+        "Сокр.план КС-2 с ВУ лист2.pdf"
+      ]
+    },
+    {
+      "kind": "rest",
+      "station": 270129,
+      "sheets": [
+        "Сокр.план КС-2 с ВУ лист2.pdf"
+      ]
+    },
+    {
+      "kind": "rest",
+      "station": 302100,
+      "sheets": [
+        "Сокр.план КС-2 с ВУ лист2.pdf",
+        "Сокр.план КС-2 с ВУ лист3.pdf"
+      ]
+    },
+    {
+      "kind": "rest",
+      "station": 304317,
+      "sheets": [
+        "Сокр.план КС-2 с ВУ лист2.pdf",
+        "Сокр.план КС-2 с ВУ лист3.pdf"
+      ]
+    },
+    {
+      "kind": "rest",
+      "station": 318116,
+      "sheets": [
+        "Сокр.план КС-2 с ВУ лист2.pdf",
+        "Сокр.план КС-2 с ВУ лист3.pdf"
+      ]
+    },
+    {
+      "kind": "rest",
+      "station": 319891,
+      "sheets": [
+        "Сокр.план КС-2 с ВУ лист2.pdf",
+        "Сокр.план КС-2 с ВУ лист3.pdf"
+      ]
+    },
+    {
+      "kind": "rest",
+      "station": 360805,
+      "sheets": [
+        "Сокр.план КС-2 с ВУ лист2.pdf",
+        "Сокр.план КС-2 с ВУ лист3.pdf"
+      ]
+    },
+    {
+      "kind": "rest",
+      "station": 363022,
+      "sheets": [
+        "Сокр.план КС-2 с ВУ лист2.pdf",
+        "Сокр.план КС-2 с ВУ лист3.pdf"
+      ]
+    },
+    {
+      "kind": "rest",
+      "station": 379963,
+      "sheets": [
+        "Сокр.план КС-2 с ВУ лист3.pdf"
+      ]
+    },
+    {
+      "kind": "rest",
+      "station": 382180,
+      "sheets": [
+        "Сокр.план КС-2 с ВУ лист3.pdf"
+      ]
+    },
+    {
+      "kind": "rest",
+      "station": 408971,
+      "sheets": [
+        "Сокр.план КС-2 с ВУ лист3.pdf"
+      ]
+    },
+    {
+      "kind": "rest",
+      "station": 411188,
+      "sheets": [
+        "Сокр.план КС-2 с ВУ лист3.pdf"
+      ]
+    },
+    {
+      "kind": "rest",
+      "station": 427992,
+      "sheets": [
+        "Сокр.план КС-2 с ВУ лист3.pdf"
+      ]
+    },
+    {
+      "kind": "rest",
+      "station": 448016,
+      "sheets": [
+        "Сокр.план КС-2 с ВУ лист3.pdf"
+      ]
+    },
+    {
+      "kind": "rest",
+      "station": 450233,
+      "sheets": [
+        "Сокр.план КС-2 с ВУ лист3.pdf"
+      ]
+    },
+    {
+      "kind": "roadbed",
+      "station": 176200,
+      "sheets": [
+        "Сокр.план КС-2 с ВУ лист1.pdf",
+        "Сокр.план КС-2 с ВУ лист2.pdf"
+      ]
+    },
+    {
+      "kind": "roadbed",
+      "station": 228320,
+      "sheets": [
+        "Сокр.план КС-2 с ВУ лист2.pdf"
+      ]
+    },
+    {
+      "kind": "roadbed",
+      "station": 228920,
+      "sheets": [
+        "Сокр.план КС-2 с ВУ лист2.pdf"
+      ]
+    },
+    {
+      "kind": "roadbed",
+      "station": 234660,
+      "sheets": [
+        "Сокр.план КС-2 с ВУ лист2.pdf"
+      ]
+    },
+    {
+      "kind": "roadbed",
+      "station": 235380,
+      "sheets": [
+        "Сокр.план КС-2 с ВУ лист2.pdf"
+      ]
+    },
+    {
+      "kind": "roadbed",
+      "station": 236320,
+      "sheets": [
+        "Сокр.план КС-2 с ВУ лист2.pdf"
+      ]
+    },
+    {
+      "kind": "roadbed",
+      "station": 353120,
+      "sheets": [
+        "Сокр.план КС-2 с ВУ лист2.pdf",
+        "Сокр.план КС-2 с ВУ лист3.pdf"
+      ]
+    },
+    {
+      "kind": "roadbed",
+      "station": 355760,
+      "sheets": [
+        "Сокр.план КС-2 с ВУ лист2.pdf",
+        "Сокр.план КС-2 с ВУ лист3.pdf"
+      ]
+    },
+    {
+      "kind": "roadbed",
+      "station": 394960,
+      "sheets": [
+        "Сокр.план КС-2 с ВУ лист1.pdf",
+        "Сокр.план КС-2 с ВУ лист2.pdf",
+        "Сокр.план КС-2 с ВУ лист3.pdf"
+      ]
+    },
+    {
+      "kind": "roadbed",
+      "station": 399840,
+      "sheets": [
+        "Сокр.план КС-2 с ВУ лист3.pdf"
+      ]
+    },
+    {
+      "kind": "roadbed",
+      "station": 412600,
+      "sheets": [
+        "Сокр.план КС-2 с ВУ лист3.pdf"
+      ]
+    },
+    {
+      "kind": "roadbed",
+      "station": 416020,
+      "sheets": [
+        "Сокр.план КС-2 с ВУ лист3.pdf"
+      ]
+    },
+    {
+      "kind": "roadbed",
+      "station": 420120,
+      "sheets": [
+        "Сокр.план КС-2 с ВУ лист3.pdf"
+      ]
+    },
+    {
+      "kind": "roadbed",
+      "station": 422180,
+      "sheets": [
+        "Сокр.план КС-2 с ВУ лист3.pdf"
+      ]
+    },
+    {
+      "kind": "roadbed",
+      "station": 430300,
+      "sheets": [
+        "Сокр.план КС-2 с ВУ лист3.pdf"
+      ]
+    },
+    {
+      "kind": "roadbed",
+      "station": 431560,
+      "sheets": [
+        "Сокр.план КС-2 с ВУ лист3.pdf"
+      ]
+    },
+    {
+      "kind": "roadbed",
+      "station": 433900,
+      "sheets": [
+        "Сокр.план КС-2 с ВУ лист3.pdf"
+      ]
+    },
+    {
+      "kind": "roadbed",
+      "station": 434600,
+      "sheets": [
+        "Сокр.план КС-2 с ВУ лист3.pdf"
+      ]
+    },
+    {
+      "kind": "roadbed",
+      "station": 438800,
+      "sheets": [
+        "Сокр.план КС-2 с ВУ лист3.pdf"
+      ]
+    },
+    {
+      "kind": "roadbed",
+      "station": 439360,
+      "sheets": [
+        "Сокр.план КС-2 с ВУ лист3.pdf"
+      ]
+    },
+    {
+      "kind": "roadbed",
+      "station": 451120,
+      "sheets": [
+        "Сокр.план КС-2 с ВУ лист3.pdf"
+      ]
+    },
+    {
+      "kind": "roadbed",
+      "station": 451600,
+      "sheets": [
+        "Сокр.план КС-2 с ВУ лист3.pdf"
+      ]
+    },
+    {
+      "kind": "roadbed",
+      "station": 452300,
+      "sheets": [
+        "Сокр.план КС-2 с ВУ лист3.pdf"
+      ]
+    },
+    {
+      "kind": "roadbed",
+      "station": 453280,
+      "sheets": [
+        "Сокр.план КС-2 с ВУ лист3.pdf"
+      ]
+    },
+    {
+      "kind": "roadbed",
+      "station": 455100,
+      "sheets": [
+        "Сокр.план КС-2 с ВУ лист3.pdf"
+      ]
+    },
+    {
+      "kind": "roadbed",
+      "station": 455660,
+      "sheets": [
+        "Сокр.план КС-2 с ВУ лист3.pdf"
+      ]
+    },
+    {
+      "kind": "stage",
+      "station": 44572,
+      "sheets": [
+        "Сокр.план КС-2 с ВУ лист1.pdf"
+      ]
+    },
+    {
+      "kind": "stage",
+      "station": 99076,
+      "sheets": [
+        "Сокр.план КС-2 с ВУ лист1.pdf"
+      ]
+    },
+    {
+      "kind": "stage",
+      "station": 255294,
+      "sheets": [
+        "Сокр.план КС-2 с ВУ лист2.pdf"
+      ]
+    }
+  ]
+}
