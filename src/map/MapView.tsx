@@ -17,6 +17,7 @@ import {
 } from '../data/cadastre';
 import { districtBounds, regionBounds } from '../data/boundaries';
 import { roadFeatures, type RoadFeatureProps } from '../data/features';
+import { quarries, quarryPoints, type QuarryProps } from '../data/quarries';
 import iconRest from '../assets/icon-rest.png';
 import iconInterchange from '../assets/icon-interchange.png';
 import iconService from '../assets/icon-service.png';
@@ -31,6 +32,7 @@ export interface MapViewProps {
   showRegions: boolean;
   showDistricts: boolean;
   showFeatures: boolean;
+  showQuarries: boolean;
   onToggle: (
     key:
       | 'showRoad'
@@ -38,7 +40,8 @@ export interface MapViewProps {
       | 'showCities'
       | 'showRegions'
       | 'showDistricts'
-      | 'showFeatures',
+      | 'showFeatures'
+      | 'showQuarries',
   ) => void;
   /** Участки ЕГКН; null — пока грузятся. */
   cadastre: CadastreCollection | null;
@@ -53,6 +56,8 @@ const SOURCE_REGION_LABELS = 'region-labels';
 const SOURCE_DISTRICTS = 'districts';
 const SOURCE_DISTRICT_LABELS = 'district-labels';
 const SOURCE_FEATURES = 'road-features';
+const SOURCE_QUARRIES = 'quarries';
+const SOURCE_QUARRY_POINTS = 'quarry-points';
 
 /** Цвет подписи района — нейтральный тёмный: уровень ниже областного. */
 const DISTRICT_INK = '#3c4043';
@@ -74,6 +79,13 @@ const WITH_ICON = FEATURE_ICONS.map(([kind]) => kind);
 
 /** Цвет кружка для того, чему условного знака в проекте не нашлось. */
 const FEATURE_INK = '#1f1f1f';
+
+/**
+ * Карьеры. Глубокий оранжевый — единственный крупный незанятый участок
+ * спектра: красный и синий держит трасса, жёлтый, зелёный, фиолетовый
+ * и серый — категории земель, бирюза, пурпур и индиго — области.
+ */
+const QUARRY_COLOR = '#e65100';
 
 /**
  * Иконки живут в стиле карты, а смена подложки стиль пересоздаёт — значит,
@@ -171,6 +183,34 @@ function featurePopupHtml(p: RoadFeatureProps): string {
     </div>`;
 }
 
+function quarryPopupHtml(p: QuarryProps): string {
+  const unit = p.unit ?? '';
+  const reserves = [
+    ['A+B', p.reservesAB],
+    ['A+B+C1', p.reservesABC1],
+    ['C2', p.reservesC2],
+  ].filter(([, v]) => v) as Array<[string, string]>;
+
+  const rows: Array<[string, string]> = [
+    ['Вид сырья', p.kind ?? '—'],
+    ['Площадь', `${Number(p.areaHa).toLocaleString('ru-RU')} га`],
+  ];
+  if (Number(p.plots) > 1) rows.push(['Площадок', String(p.plots)]);
+  for (const [label, value] of reserves) {
+    rows.push([`Запасы ${label}`, `${value} ${unit}`.trim()]);
+  }
+  if (p.protocol) rows.push(['Протокол', p.protocol]);
+
+  return `
+    <div class="popup">
+      <div class="popup__badge" style="--badge-color:${QUARRY_COLOR}">Резервное месторождение</div>
+      <div class="popup__title">${escapeHtml(p.name ?? `№${p.num}`)}</div>
+      <table class="popup__table">
+        ${rows.map(([k, v]) => `<tr><th>${escapeHtml(k)}</th><td>${escapeHtml(v)}</td></tr>`).join('')}
+      </table>
+    </div>`;
+}
+
 function roadPopupHtml(p: RoadPartProps): string {
   // doneKm приходит из свойств объекта, а они у MapLibre всегда строки-или-числа
   // в зависимости от источника — приводим явно.
@@ -209,6 +249,8 @@ function addProjectLayers(map: MapLibreMap): boolean {
   map.addSource(SOURCE_DISTRICTS, { type: 'geojson', data: districtBounds });
   map.addSource(SOURCE_DISTRICT_LABELS, { type: 'geojson', data: districtLabels });
   map.addSource(SOURCE_FEATURES, { type: 'geojson', data: roadFeatures });
+  map.addSource(SOURCE_QUARRIES, { type: 'geojson', data: quarries });
+  map.addSource(SOURCE_QUARRY_POINTS, { type: 'geojson', data: quarryPoints });
   map.addSource(SOURCE_CADASTRE, { type: 'geojson', data: emptyCadastre, generateId: false });
   // Пустая коллекция на старте: настоящую подкладывает эффект по `progress`,
   // так же как кадастр. Иначе смена подложки вернула бы устаревшие данные.
@@ -246,6 +288,79 @@ function addProjectLayers(map: MapLibreMap): boolean {
       'line-color': categoryColor as never,
       'line-width': ['case', ['boolean', ['feature-state', 'hover'], false], 2.4, 0.6],
       'line-opacity': ['interpolate', ['linear'], ['zoom'], 8, 0.2, 12, 0.9],
+    },
+  });
+
+  // Карьеры. Участки мелкие (медиана 17 га), поэтому кроме заливки рисуется
+  // точка: на общем плане полигон вырождается в доли пикселя, и без неё
+  // месторождение просто исчезало бы с карты.
+  map.addLayer({
+    id: 'quarry-fill',
+    type: 'fill',
+    source: SOURCE_QUARRIES,
+    paint: { 'fill-color': QUARRY_COLOR, 'fill-opacity': 0.35 },
+  });
+
+  map.addLayer({
+    id: 'quarry-outline',
+    type: 'line',
+    source: SOURCE_QUARRIES,
+    paint: { 'line-color': QUARRY_COLOR, 'line-width': 1.4 },
+  });
+
+  // Значок карьера: кружок с буквой «К». Голая точка на общем плане ничем
+  // не отличалась от прочих точек на карте — по букве месторождение видно
+  // сразу, не открывая карточку. С приближением полигон говорит сам за себя,
+  // и значок гаснет.
+  map.addLayer({
+    id: 'quarry-dot',
+    type: 'circle',
+    source: SOURCE_QUARRY_POINTS,
+    maxzoom: 12,
+    paint: {
+      'circle-color': QUARRY_COLOR,
+      'circle-stroke-color': '#ffffff',
+      'circle-stroke-width': 1.5,
+      'circle-radius': ['interpolate', ['linear'], ['zoom'], 5, 6, 11, 9],
+    },
+  });
+
+  map.addLayer({
+    id: 'quarry-mark',
+    type: 'symbol',
+    source: SOURCE_QUARRY_POINTS,
+    maxzoom: 12,
+    layout: {
+      'text-field': 'К',
+      'text-font': ['Noto Sans Bold'],
+      'text-size': ['interpolate', ['linear'], ['zoom'], 5, 9, 11, 13],
+      // Буква — часть значка, а не подпись: прятать её при тесноте нельзя,
+      // иначе останется безымянный кружок.
+      'text-allow-overlap': true,
+      'text-ignore-placement': true,
+    },
+    paint: { 'text-color': '#ffffff' },
+  });
+
+  map.addLayer({
+    id: 'quarry-label',
+    type: 'symbol',
+    source: SOURCE_QUARRY_POINTS,
+    minzoom: 9,
+    layout: {
+      'text-field': ['coalesce', ['get', 'name'], ['concat', 'Карьер №', ['get', 'num']]],
+      'text-font': ['Noto Sans Regular'],
+      'text-size': ['interpolate', ['linear'], ['zoom'], 9, 10, 13, 12],
+      'text-offset': [0, 1],
+      'text-anchor': 'top',
+      'text-allow-overlap': false,
+      'text-padding': 4,
+      'text-max-width': 9,
+    },
+    paint: {
+      'text-color': '#7a2e00',
+      'text-halo-color': '#ffffff',
+      'text-halo-width': 1.6,
     },
   });
 
@@ -470,6 +585,7 @@ export default function MapView({
   showRegions,
   showDistricts,
   showFeatures,
+  showQuarries,
   onToggle,
   cadastre,
   progress,
@@ -604,7 +720,7 @@ export default function MapView({
 
     map.on('click', (e) => {
       const hits = map.queryRenderedFeatures(e.point, {
-        layers: ['feature-icon', 'feature-dot', 'road-hit', 'cadastre-fill'],
+        layers: ['feature-icon', 'feature-dot', 'quarry-dot', 'quarry-fill', 'road-hit', 'cadastre-fill'],
       });
       // Обозначение — самая мелкая цель, поэтому проверяется первым:
       // иначе клик по нему всегда перехватывала бы широкая полоса дороги.
@@ -613,6 +729,14 @@ export default function MapView({
         popup
           .setLngLat(e.lngLat)
           .setHTML(featurePopupHtml(marker.properties as RoadFeatureProps))
+          .addTo(map);
+        return;
+      }
+      const quarry = hits.find((f) => f.layer.id === 'quarry-dot' || f.layer.id === 'quarry-fill');
+      if (quarry) {
+        popup
+          .setLngLat(e.lngLat)
+          .setHTML(quarryPopupHtml(quarry.properties as QuarryProps))
           .addTo(map);
         return;
       }
@@ -674,6 +798,8 @@ export default function MapView({
       set('feature-icon', showFeatures);
       set('feature-label-major', showFeatures);
       set('feature-label-minor', showFeatures);
+      for (const id of ['quarry-fill', 'quarry-outline', 'quarry-dot', 'quarry-mark', 'quarry-label'])
+        set(id, showQuarries);
       markersRef.current.forEach((m) => {
         m.getElement().style.display = showCities ? '' : 'none';
       });
@@ -683,7 +809,7 @@ export default function MapView({
     return () => {
       map.off('styledata', apply);
     };
-  }, [showRoad, showCadastre, showCities, showRegions, showDistricts, showFeatures]);
+  }, [showRoad, showCadastre, showCities, showRegions, showDistricts, showFeatures, showQuarries]);
 
   // Ход строительства меняется прямо в панели — пересобираем геометрию трассы.
   useEffect(() => {
@@ -721,6 +847,7 @@ export default function MapView({
         showRegions={showRegions}
         showDistricts={showDistricts}
         showFeatures={showFeatures}
+        showQuarries={showQuarries}
         onToggle={onToggle}
         onZoomIn={() => mapRef.current?.zoomIn()}
         onZoomOut={() => mapRef.current?.zoomOut()}

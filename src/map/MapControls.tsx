@@ -10,6 +10,7 @@ export interface MapControlsProps {
   showRegions: boolean;
   showDistricts: boolean;
   showFeatures: boolean;
+  showQuarries: boolean;
   onToggle: (
     key:
       | 'showRoad'
@@ -17,7 +18,8 @@ export interface MapControlsProps {
       | 'showCities'
       | 'showRegions'
       | 'showDistricts'
-      | 'showFeatures',
+      | 'showFeatures'
+      | 'showQuarries',
   ) => void;
   onZoomIn: () => void;
   onZoomOut: () => void;
@@ -69,6 +71,7 @@ export default function MapControls({
   showRegions,
   showDistricts,
   showFeatures,
+  showQuarries,
   onToggle,
   onZoomIn,
   onZoomOut,
@@ -164,6 +167,14 @@ export default function MapControls({
               onChange={() => onToggle('showFeatures')}
             />
             <span>Обозначения проекта</span>
+          </label>
+          <label className="switch">
+            <input
+              type="checkbox"
+              checked={showQuarries}
+              onChange={() => onToggle('showQuarries')}
+            />
+            <span>Карьеры</span>
           </label>
 
           <div className="mapctl__panel-title mapctl__panel-title--spaced">Подложка</div>

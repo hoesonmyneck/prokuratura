@@ -3,6 +3,7 @@ import { CADASTRE_CATEGORIES, type CadastreStats } from '../data/cadastre';
 import { regionColor } from '../data/boundaries';
 import { summarize, type RoadProgress } from '../data/progress';
 import { FEATURE_KINDS } from '../data/features';
+import { QUARRY_KINDS, QUARRY_TOTAL_HA, quarries } from '../data/quarries';
 
 interface SidebarProps {
   stats: CadastreStats | null;
@@ -200,6 +201,28 @@ export default function Sidebar({
             <li key={k.kind} className="row row--plain">
               <span className="row__label">{k.title}</span>
               <span className="row__value">{k.count}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section className="section">
+        <h2 className="section__title">Карьеры</h2>
+
+        <div className="stat">
+          <span className="stat__value">{quarries.features.length}</span>
+          <span className="stat__unit">месторождений</span>
+        </div>
+        <div className="stat__sub">
+          {QUARRY_TOTAL_HA.toLocaleString('ru-RU')} га суммарной площади
+        </div>
+
+        <ul className="rows">
+          {QUARRY_KINDS.map((k) => (
+            <li key={k.kind} className="row row--plain row--wide">
+              <span className="row__label">{k.kind}</span>
+              <span className="row__value">{k.count}</span>
+              <span className="row__share">{k.areaHa.toLocaleString('ru-RU')} га</span>
             </li>
           ))}
         </ul>
