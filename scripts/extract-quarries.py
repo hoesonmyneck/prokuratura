@@ -27,11 +27,14 @@
 """
 
 import json
-import math
 import re
+import sys
 from pathlib import Path
 
 import openpyxl
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from lib.deposits import build_rings, dms, ring_area_ha  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 SRC = ROOT / "carrier.xlsx"
@@ -83,98 +86,6 @@ def clean(value):
     return text or None
 
 
-def dms(deg, minute, sec):
-    return round(deg + minute / 60 + sec / 3600, 6)
-
-
-# Дальше этого шага вершины считаются разными площадками, км.
-#
-# Порог не выдуман: в данных между этими величинами чистый разрыв. Внутри
-# площадки самый большой шаг — 3.7 км (притрассовые карьеры вытянуты вдоль
-# дороги узкой полосой: два угла на одном конце, два на другом). Между
-# площадками самый маленький разрыв — 5.6 км. Всё, что попадёт в промежуток,
-# печатается отдельно, чтобы решение можно было пересмотреть глазами.
-PLOT_GAP_KM = 4.5
-REVIEW_BAND = (2.0, 8.0)
-# Насколько далеко вершина должна отстоять, чтобы считаться подозрительной, км.
-OUTLIER_KM = 3.0
-# Куда должна встать вершина после правки, чтобы правку принять, км.
-REPAIR_KM = 1.0
-
-
-def distance_km(a, b):
-    lat = math.radians((a[1] + b[1]) / 2)
-    return math.hypot((a[0] - b[0]) * 111.32 * math.cos(lat), (a[1] - b[1]) * 111.13)
-
-
-def cluster(points, label, review):
-    """
-    Разбиение вершин на площадки по ходу перечисления.
-
-    Режем именно последовательность, а не расстояния вообще: площадки в ведомости
-    выписаны одна за другой, и длинная узкая полоса остаётся целой, хотя её концы
-    далеко друг от друга. Дополнительный признак разрыва — сброс номера вершины
-    (у №20 нумерация идёт «1 2 3 4 1 2 3 4»).
-    """
-    plots = []
-    current = []
-    for point in points:
-        if current:
-            step = distance_km(current[-1]["xy"], point["xy"])
-            reset = (
-                point["seq"] is not None
-                and current[-1]["seq"] is not None
-                and point["seq"] <= current[-1]["seq"]
-            )
-            if REVIEW_BAND[0] <= step <= REVIEW_BAND[1]:
-                review.append(f"  ? {label}: шаг {step:.2f} км между вершинами — на грани порога")
-            if step > PLOT_GAP_KM or reset:
-                plots.append(current)
-                current = []
-        current.append(point)
-    if current:
-        plots.append(current)
-    return plots
-
-
-def repair(point, host):
-    """
-    Попытка исправить одну опечатку подстановкой разряда из соседних вершин.
-
-    Разряды — градусы, минуты и секунды долготы и широты. Меняем ровно один
-    на значение, которое встречается у вершин той же площадки, и проверяем,
-    встала ли точка на место. Правка принимается, только если результат
-    однозначен.
-    """
-    centre = (
-        sum(q["xy"][0] for q in host) / len(host),
-        sum(q["xy"][1] for q in host) / len(host),
-    )
-    best = None
-    for slot in range(6):
-        for candidate in {q["raw"][slot] for q in host}:
-            if candidate == point["raw"][slot]:
-                continue
-            raw = list(point["raw"])
-            raw[slot] = candidate
-            xy = (dms(*raw[:3]), dms(*raw[3:]))
-            gap = distance_km(xy, centre)
-            if gap <= REPAIR_KM and (best is None or gap < best[0]):
-                best = (gap, slot, candidate, raw, xy)
-    return best
-
-
-def ring_area_ha(ring):
-    """Площадь кольца, га. Плоское приближение — участки маленькие."""
-    lat = sum(p[1] for p in ring) / len(ring)
-    kx = math.cos(math.radians(lat))
-    total = 0.0
-    for i in range(len(ring)):
-        a, b = ring[i], ring[(i + 1) % len(ring)]
-        total += a[0] * kx * b[1] - b[0] * kx * a[1]
-    return abs(total / 2) * 111.32 * 111.13 * 100
-
-
 def main() -> None:
     if not SRC.exists():
         raise SystemExit(f"Не найден {SRC.name} в корне проекта")
@@ -217,6 +128,8 @@ def main() -> None:
                 "order": len(current["points"]),
                 "seq": number(cell[COL["point"] - 1]),
                 "raw": parts,
+                # В этой ведомости первой идёт долгота.
+                "build": lambda raw: (dms(*raw[:3]), dms(*raw[3:])),
                 "xy": (dms(*parts[:3]), dms(*parts[3:])),
             })
 
@@ -226,52 +139,16 @@ def main() -> None:
     discarded = []
     review = []
     for index, g in enumerate(groups, start=1):
-        plots = cluster(g["points"], f"№{g['num']}", review)
-
-        # Одинокие вершины — кандидаты в опечатки. Пробуем починить об основную
-        # площадку; не вышло — выбрасываем, «полигон» из одной точки не построить.
-        main = max(plots, key=len)
-        lonely = [pl for pl in plots if len(pl) < 3 and pl is not main]
-        for pl in lonely:
-            plots.remove(pl)
-            for point in pl:
-                fix = repair(point, main)
-                if fix:
-                    gap, slot, candidate, raw, xy = fix
-                    field = ("долготы", "долготы", "долготы", "широты", "широты", "широты")[slot]
-                    unit = ("градусы", "минуты", "секунды")[slot % 3]
-                    print(
-                        f"  правка R{point['row']} №{g['num']}: {unit} {field} "
-                        f"{point['raw'][slot]:g} → {candidate:g}, вершина встала в {gap * 1000:.0f} м от площадки"
-                    )
-                    point["raw"] = raw
-                    point["xy"] = xy
-                    main.append(point)
-                    repaired.append(point["row"])
-                else:
-                    print(
-                        f"  ! R{point['row']} №{g['num']}: вершина в стороне от площадки, "
-                        f"исправить однозначно нельзя — отброшена"
-                    )
-                    discarded.append(point["row"])
-        main.sort(key=lambda q: q["order"])
-
-        rings = [[list(q["xy"]) for q in pl] for pl in plots]
+        rings = build_rings(
+            g["points"], f"№{g['num']}", ("долготы", "широты"), review, repaired, discarded, print
+        )
         if len(rings) > 1:
             split += 1
 
-        polygons = []
-        for r in rings:
-            if len(r) < 3:
-                print(f"  ! №{g['num']} «{g['name']}»: кольцо из {len(r)} точек, пропущено")
-                continue
-            closed = r + [r[0]] if r[0] != r[-1] else r
-            polygons.append([closed])
-
-        if not polygons:
+        if not rings:
             continue
 
-        area = round(sum(ring_area_ha(p[0][:-1]) for p in polygons), 1)
+        area = round(sum(ring_area_ha(r[0][:-1]) for r in rings), 1)
         features.append({
             "type": "Feature",
             "id": index,
@@ -286,9 +163,9 @@ def main() -> None:
                 "unit": g["unit"],
                 "protocol": g["protocol"],
                 "areaHa": area,
-                "plots": len(polygons),
+                "plots": len(rings),
             },
-            "geometry": {"type": "MultiPolygon", "coordinates": polygons},
+            "geometry": {"type": "MultiPolygon", "coordinates": rings},
         })
 
     OUT.write_text(

@@ -1,5 +1,6 @@
-import type { FeatureCollection, MultiPolygon, Point, Position } from 'geojson';
+import type { FeatureCollection, MultiPolygon, Point } from 'geojson';
 import quarriesJson from './quarries.json';
+import { plotPoints } from './plot-points';
 
 /**
  * Резервные месторождения (карьеры) Кызылординской области.
@@ -31,48 +32,8 @@ export interface QuarryProps {
 
 export const quarries = quarriesJson as FeatureCollection<MultiPolygon, QuarryProps>;
 
-/**
- * По одной точке на площадку — для значка и подписи.
- *
- * Слой `circle` в MapLibre рисует кружок НА КАЖДОЙ вершине полигона, поэтому
- * на карте вместо одного значка получалась горсть кружков по углам контура.
- * Значку нужен собственный точечный источник.
- *
- * Точка на площадку, а не на месторождение: у №21 три площадки, разнесённые
- * на 20 км, и один значок на всех стоял бы в чистом поле между ними.
- */
-export const quarryPoints: FeatureCollection<Point, QuarryProps> = {
-  type: 'FeatureCollection',
-  features: quarries.features.flatMap((f) =>
-    f.geometry.coordinates.map((polygon) => ({
-      type: 'Feature' as const,
-      properties: f.properties,
-      geometry: { type: 'Point' as const, coordinates: centroid(polygon[0]) },
-    })),
-  ),
-};
-
-/**
- * Центр тяжести кольца. Среднее по вершинам сместилось бы туда, где их гуще;
- * у вытянутых притрассовых полос это заметно.
- */
-function centroid(ring: Position[]): Position {
-  let twiceArea = 0;
-  let x = 0;
-  let y = 0;
-  for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
-    const cross = ring[j][0] * ring[i][1] - ring[i][0] * ring[j][1];
-    twiceArea += cross;
-    x += (ring[j][0] + ring[i][0]) * cross;
-    y += (ring[j][1] + ring[i][1]) * cross;
-  }
-  if (Math.abs(twiceArea) < 1e-12) {
-    // Вырожденное кольцо — среднее по вершинам всё же лучше, чем ничего.
-    const n = ring.length;
-    return [ring.reduce((s, p) => s + p[0], 0) / n, ring.reduce((s, p) => s + p[1], 0) / n];
-  }
-  return [x / (3 * twiceArea), y / (3 * twiceArea)];
-}
+/** По одной точке на площадку — для значка и подписи, см. `plot-points`. */
+export const quarryPoints: FeatureCollection<Point, QuarryProps> = plotPoints(quarries);
 
 export interface QuarryKind {
   kind: string;

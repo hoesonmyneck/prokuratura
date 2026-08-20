@@ -18,6 +18,7 @@ import {
 import { districtBounds, regionBounds } from '../data/boundaries';
 import { roadFeatures, type RoadFeatureProps } from '../data/features';
 import { quarries, quarryPoints, type QuarryProps } from '../data/quarries';
+import { contracts, contractPoints, type ContractProps } from '../data/contracts';
 import iconRest from '../assets/icon-rest.png';
 import iconInterchange from '../assets/icon-interchange.png';
 import iconService from '../assets/icon-service.png';
@@ -33,6 +34,7 @@ export interface MapViewProps {
   showDistricts: boolean;
   showFeatures: boolean;
   showQuarries: boolean;
+  showContracts: boolean;
   onToggle: (
     key:
       | 'showRoad'
@@ -41,7 +43,8 @@ export interface MapViewProps {
       | 'showRegions'
       | 'showDistricts'
       | 'showFeatures'
-      | 'showQuarries',
+      | 'showQuarries'
+      | 'showContracts',
   ) => void;
   /** Участки ЕГКН; null — пока грузятся. */
   cadastre: CadastreCollection | null;
@@ -58,6 +61,8 @@ const SOURCE_DISTRICT_LABELS = 'district-labels';
 const SOURCE_FEATURES = 'road-features';
 const SOURCE_QUARRIES = 'quarries';
 const SOURCE_QUARRY_POINTS = 'quarry-points';
+const SOURCE_CONTRACTS = 'contracts';
+const SOURCE_CONTRACT_POINTS = 'contract-points';
 
 /** Цвет подписи района — нейтральный тёмный: уровень ниже областного. */
 const DISTRICT_INK = '#3c4043';
@@ -86,6 +91,13 @@ const FEATURE_INK = '#1f1f1f';
  * и серый — категории земель, бирюза, пурпур и индиго — области.
  */
 const QUARRY_COLOR = '#e65100';
+
+/**
+ * Контрактные месторождения. Тёмная бирюза — из оставшегося спектра она дальше
+ * всего от оранжевого у карьеров: эти два слоя стоят рядом и читаются вместе.
+ * Значки различаются и буквой: «К» — карьер, «М» — месторождение.
+ */
+const CONTRACT_COLOR = '#00695c';
 
 /**
  * Иконки живут в стиле карты, а смена подложки стиль пересоздаёт — значит,
@@ -211,6 +223,30 @@ function quarryPopupHtml(p: QuarryProps): string {
     </div>`;
 }
 
+function contractPopupHtml(p: ContractProps): string {
+  const rows: Array<[string, string | null]> = [
+    ['Недропользователь', p.user],
+    ['Вид сырья', p.kind],
+    ['Операции', p.operation],
+    ['Площадь', Number(p.areaHa).toLocaleString('ru-RU') + ' га'],
+    ['Участков', Number(p.plots) > 1 ? String(p.plots) : null],
+    ['Район', p.district],
+    ['Контракт', p.licence],
+    ['БИН', p.bin],
+  ];
+  const body = rows
+    .filter(([, v]) => v)
+    .map(([k, v]) => '<tr><th>' + escapeHtml(k) + '</th><td>' + escapeHtml(v as string) + '</td></tr>')
+    .join('');
+  return (
+    '<div class="popup">' +
+    '<div class="popup__badge" style="--badge-color:' + CONTRACT_COLOR + '">Контрактное месторождение</div>' +
+    '<div class="popup__title">' + escapeHtml(p.name ?? ('№' + p.num)) + '</div>' +
+    '<table class="popup__table">' + body + '</table>' +
+    '</div>'
+  );
+}
+
 function roadPopupHtml(p: RoadPartProps): string {
   // doneKm приходит из свойств объекта, а они у MapLibre всегда строки-или-числа
   // в зависимости от источника — приводим явно.
@@ -234,6 +270,17 @@ function roadPopupHtml(p: RoadPartProps): string {
  * поэтому обязана быть безопасной при повторном вызове.
  */
 function addProjectLayers(map: MapLibreMap): boolean {
+  // Защита от повторного добавления: styledata срабатывает при каждой смене
+  // подложки. Источник дороги создаётся последним, поэтому его наличие
+  // означает, что предыдущий проход дошёл до конца.
+  //
+  // ВНИМАНИЕ ПРИ РАЗРАБОТКЕ. Отсюда следует, что набор слоёв замораживается
+  // в момент создания карты, а карта создаётся один раз за загрузку страницы
+  // (useEffect с пустыми зависимостями ниже). Новый слой, дописанный сюда при
+  // работающем dev-сервере, в уже открытой вкладке не появится и не будет
+  // слушаться переключателей: Vite подменит модуль, но живой объект карты
+  // останется прежним. Перезагрузите страницу, прежде чем решить, что слой
+  // сломан, — на это уже был потрачен вечер.
   if (map.getSource(SOURCE_ROAD)) return false;
 
   // Цвет участка — по коду категории земель; всё, что не в справочнике, серым.
@@ -251,6 +298,8 @@ function addProjectLayers(map: MapLibreMap): boolean {
   map.addSource(SOURCE_FEATURES, { type: 'geojson', data: roadFeatures });
   map.addSource(SOURCE_QUARRIES, { type: 'geojson', data: quarries });
   map.addSource(SOURCE_QUARRY_POINTS, { type: 'geojson', data: quarryPoints });
+  map.addSource(SOURCE_CONTRACTS, { type: 'geojson', data: contracts });
+  map.addSource(SOURCE_CONTRACT_POINTS, { type: 'geojson', data: contractPoints });
   map.addSource(SOURCE_CADASTRE, { type: 'geojson', data: emptyCadastre, generateId: false });
   // Пустая коллекция на старте: настоящую подкладывает эффект по `progress`,
   // так же как кадастр. Иначе смена подложки вернула бы устаревшие данные.
@@ -359,6 +408,72 @@ function addProjectLayers(map: MapLibreMap): boolean {
     },
     paint: {
       'text-color': '#7a2e00',
+      'text-halo-color': '#ffffff',
+      'text-halo-width': 1.6,
+    },
+  });
+
+  // Контрактные месторождения — тот же набор слоёв, что у карьеров: заливка,
+  // контур, значок с буквой и подпись.
+  map.addLayer({
+    id: 'contract-fill',
+    type: 'fill',
+    source: SOURCE_CONTRACTS,
+    paint: { 'fill-color': CONTRACT_COLOR, 'fill-opacity': 0.35 },
+  });
+
+  map.addLayer({
+    id: 'contract-outline',
+    type: 'line',
+    source: SOURCE_CONTRACTS,
+    paint: { 'line-color': CONTRACT_COLOR, 'line-width': 1.4 },
+  });
+
+  map.addLayer({
+    id: 'contract-dot',
+    type: 'circle',
+    source: SOURCE_CONTRACT_POINTS,
+    maxzoom: 12,
+    paint: {
+      'circle-color': CONTRACT_COLOR,
+      'circle-stroke-color': '#ffffff',
+      'circle-stroke-width': 1.5,
+      'circle-radius': ['interpolate', ['linear'], ['zoom'], 5, 6, 11, 9],
+    },
+  });
+
+  map.addLayer({
+    id: 'contract-mark',
+    type: 'symbol',
+    source: SOURCE_CONTRACT_POINTS,
+    maxzoom: 12,
+    layout: {
+      'text-field': 'М',
+      'text-font': ['Noto Sans Bold'],
+      'text-size': ['interpolate', ['linear'], ['zoom'], 5, 9, 11, 13],
+      'text-allow-overlap': true,
+      'text-ignore-placement': true,
+    },
+    paint: { 'text-color': '#ffffff' },
+  });
+
+  map.addLayer({
+    id: 'contract-label',
+    type: 'symbol',
+    source: SOURCE_CONTRACT_POINTS,
+    minzoom: 9,
+    layout: {
+      'text-field': ['coalesce', ['get', 'name'], ['concat', 'Участок №', ['get', 'num']]],
+      'text-font': ['Noto Sans Regular'],
+      'text-size': ['interpolate', ['linear'], ['zoom'], 9, 10, 13, 12],
+      'text-offset': [0, 1],
+      'text-anchor': 'top',
+      'text-allow-overlap': false,
+      'text-padding': 4,
+      'text-max-width': 9,
+    },
+    paint: {
+      'text-color': '#00332c',
       'text-halo-color': '#ffffff',
       'text-halo-width': 1.6,
     },
@@ -586,6 +701,7 @@ export default function MapView({
   showDistricts,
   showFeatures,
   showQuarries,
+  showContracts,
   onToggle,
   cadastre,
   progress,
@@ -720,7 +836,16 @@ export default function MapView({
 
     map.on('click', (e) => {
       const hits = map.queryRenderedFeatures(e.point, {
-        layers: ['feature-icon', 'feature-dot', 'quarry-dot', 'quarry-fill', 'road-hit', 'cadastre-fill'],
+        layers: [
+          'feature-icon',
+          'feature-dot',
+          'quarry-dot',
+          'contract-dot',
+          'quarry-fill',
+          'contract-fill',
+          'road-hit',
+          'cadastre-fill',
+        ],
       });
       // Обозначение — самая мелкая цель, поэтому проверяется первым:
       // иначе клик по нему всегда перехватывала бы широкая полоса дороги.
@@ -729,6 +854,16 @@ export default function MapView({
         popup
           .setLngLat(e.lngLat)
           .setHTML(featurePopupHtml(marker.properties as RoadFeatureProps))
+          .addTo(map);
+        return;
+      }
+      const contract = hits.find(
+        (f) => f.layer.id === 'contract-dot' || f.layer.id === 'contract-fill',
+      );
+      if (contract) {
+        popup
+          .setLngLat(e.lngLat)
+          .setHTML(contractPopupHtml(contract.properties as ContractProps))
           .addTo(map);
         return;
       }
@@ -782,24 +917,23 @@ export default function MapView({
       const set = (id: string, visible: boolean) => {
         if (map.getLayer(id)) map.setLayoutProperty(id, 'visibility', visible ? 'visible' : 'none');
       };
-      set('road-casing', showRoad);
-      set('road-pending', showRoad);
-      set('road-done', showRoad);
-      set('road-hit', showRoad);
-      set('cadastre-fill', showCadastre);
-      set('cadastre-outline', showCadastre);
-      set('region-fill', showRegions);
-      set('region-line', showRegions);
-      set('region-label', showRegions);
-      set('district-casing', showDistricts);
-      set('district-line', showDistricts);
-      set('district-label', showDistricts);
-      set('feature-dot', showFeatures);
-      set('feature-icon', showFeatures);
-      set('feature-label-major', showFeatures);
-      set('feature-label-minor', showFeatures);
-      for (const id of ['quarry-fill', 'quarry-outline', 'quarry-dot', 'quarry-mark', 'quarry-label'])
-        set(id, showQuarries);
+      // Слои гасятся по префиксу идентификатора, а не по списку имён.
+      // Списки приходилось держать в двух местах — рядом с созданием слоя
+      // и здесь, — и любой забытый идентификатор оборачивался слоем,
+      // который не выключается. Префикс же виден прямо в id при создании.
+      const group = (prefix: string, visible: boolean) => {
+        for (const layer of map.getStyle().layers) {
+          if (layer.id.startsWith(prefix)) set(layer.id, visible);
+        }
+      };
+
+      group('road-', showRoad);
+      group('cadastre-', showCadastre);
+      group('region-', showRegions);
+      group('district-', showDistricts);
+      group('feature-', showFeatures);
+      group('quarry-', showQuarries);
+      group('contract-', showContracts);
       markersRef.current.forEach((m) => {
         m.getElement().style.display = showCities ? '' : 'none';
       });
@@ -809,7 +943,7 @@ export default function MapView({
     return () => {
       map.off('styledata', apply);
     };
-  }, [showRoad, showCadastre, showCities, showRegions, showDistricts, showFeatures, showQuarries]);
+  }, [showRoad, showCadastre, showCities, showRegions, showDistricts, showFeatures, showQuarries, showContracts]);
 
   // Ход строительства меняется прямо в панели — пересобираем геометрию трассы.
   useEffect(() => {
@@ -848,6 +982,7 @@ export default function MapView({
         showDistricts={showDistricts}
         showFeatures={showFeatures}
         showQuarries={showQuarries}
+        showContracts={showContracts}
         onToggle={onToggle}
         onZoomIn={() => mapRef.current?.zoomIn()}
         onZoomOut={() => mapRef.current?.zoomOut()}

@@ -11,6 +11,7 @@ export interface MapControlsProps {
   showDistricts: boolean;
   showFeatures: boolean;
   showQuarries: boolean;
+  showContracts: boolean;
   onToggle: (
     key:
       | 'showRoad'
@@ -19,7 +20,8 @@ export interface MapControlsProps {
       | 'showRegions'
       | 'showDistricts'
       | 'showFeatures'
-      | 'showQuarries',
+      | 'showQuarries'
+      | 'showContracts',
   ) => void;
   onZoomIn: () => void;
   onZoomOut: () => void;
@@ -72,6 +74,7 @@ export default function MapControls({
   showDistricts,
   showFeatures,
   showQuarries,
+  showContracts,
   onToggle,
   onZoomIn,
   onZoomOut,
@@ -175,6 +178,14 @@ export default function MapControls({
               onChange={() => onToggle('showQuarries')}
             />
             <span>Карьеры</span>
+          </label>
+          <label className="switch">
+            <input
+              type="checkbox"
+              checked={showContracts}
+              onChange={() => onToggle('showContracts')}
+            />
+            <span>Контрактные месторождения</span>
           </label>
 
           <div className="mapctl__panel-title mapctl__panel-title--spaced">Подложка</div>
