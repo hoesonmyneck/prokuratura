@@ -64,6 +64,30 @@ const SOURCE_QUARRY_POINTS = 'quarry-points';
 const SOURCE_CONTRACTS = 'contracts';
 const SOURCE_CONTRACT_POINTS = 'contract-points';
 
+/**
+ * Источники проекта — по ним слой отличается от слоя подложки.
+ *
+ * Пока все подложки были растровыми, в стиле лежал ровно один чужой слой —
+ * `basemap`. Светлая подложка теперь векторная и приносит с собой полсотни
+ * своих слоёв, а гасятся слои по префиксу идентификатора (см. ниже). Совпадения
+ * сейчас нет — у OpenFreeMap слои названы через подчёркивание, `road_pier`,
+ * а у нас через дефис, `road-line`, — но держаться за это различие нельзя:
+ * переименование на той стороне выключало бы дороги подложки вместе с трассой.
+ */
+const PROJECT_SOURCES = new Set<string>([
+  SOURCE_ROAD,
+  SOURCE_CADASTRE,
+  SOURCE_REGIONS,
+  SOURCE_REGION_LABELS,
+  SOURCE_DISTRICTS,
+  SOURCE_DISTRICT_LABELS,
+  SOURCE_FEATURES,
+  SOURCE_QUARRIES,
+  SOURCE_QUARRY_POINTS,
+  SOURCE_CONTRACTS,
+  SOURCE_CONTRACT_POINTS,
+]);
+
 /** Цвет подписи района — нейтральный тёмный: уровень ниже областного. */
 const DISTRICT_INK = '#3c4043';
 
@@ -752,9 +776,9 @@ export default function MapView({
     // Зум, «домой» и слои — свои кнопки в MapControls, штатный NavigationControl не нужен.
     map.addControl(new maplibregl.ScaleControl({ maxWidth: 140, unit: 'metric' }), 'bottom-left');
 
-    // Атрибуция подложек обязательна по лицензиям OSM / CARTO / Esri, но по
-    // умолчанию MapLibre разворачивает её в строку текста. Схлопываем в «i»:
-    // текст остаётся доступен по нажатию, лицензия соблюдена.
+    // Атрибуция подложек обязательна по лицензиям OSM / OpenFreeMap / Esri,
+    // но по умолчанию MapLibre разворачивает её в строку текста. Схлопываем
+    // в «i»: текст остаётся доступен по нажатию, лицензия соблюдена.
     const collapseAttribution = () => {
       map
         .getContainer()
@@ -923,6 +947,8 @@ export default function MapView({
       // который не выключается. Префикс же виден прямо в id при создании.
       const group = (prefix: string, visible: boolean) => {
         for (const layer of map.getStyle().layers) {
+          // Слои подложки мимо: префикс разбирает только наши.
+          if (!('source' in layer) || !PROJECT_SOURCES.has(String(layer.source))) continue;
           if (layer.id.startsWith(prefix)) set(layer.id, visible);
         }
       };
