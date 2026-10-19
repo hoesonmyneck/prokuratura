@@ -1,1 +1,2581 @@
-{"type": "FeatureCollection", "features": [{"type": "Feature", "id": 1, "properties": {"num": "1", "name": "участки притрассовых карьеров №№1,2,3 к юго-востоку от г.Кызылорда, вдоль автомобильной дороги Самара-Шымкент на отрезке 1807-1837, уч-к №2", "kind": "супеси", "kindNorm": "супесь", "reservesAB": null, "reservesABC1": "840", "reservesC2": null, "unit": "тыс.м3", "protocol": "ЮК МКЗ №1671 10.11.2011", "areaHa": 37.6, "plots": 1}, "geometry": {"type": "MultiPolygon", "coordinates": [[[[65.611667, 44.788889], [65.615833, 44.785278], [65.608889, 44.781111], [65.604722, 44.785], [65.611667, 44.788889]]]]}}, {"type": "Feature", "id": 2, "properties": {"num": "2", "name": "участки притрассовых карьеров №№1,2,3 к юго-востоку от г.Кызылорда, вдоль автомобильной дороги Самара-Шымкент на отрезке 1807-1837, уч-к №3", "kind": "супеси", "kindNorm": "супесь", "reservesAB": null, "reservesABC1": "1338", "reservesC2": null, "unit": null, "protocol": null, "areaHa": 28.4, "plots": 1}, "geometry": {"type": "MultiPolygon", "coordinates": [[[[65.693056, 44.809444], [65.702778, 44.8075], [65.701389, 44.804444], [65.691667, 44.806389], [65.693056, 44.809444]]]]}}, {"type": "Feature", "id": 3, "properties": {"num": "3", "name": "участки притрассовых карьеров №№1-9 вдоль автомагистрали Самара-Шымкент. №1", "kind": "супеси", "kindNorm": "супесь", "reservesAB": null, "reservesABC1": "720", "reservesC2": null, "unit": "тыс.м3", "protocol": "ЮК МКЗ №1656 27.09.2011", "areaHa": 21.0, "plots": 1}, "geometry": {"type": "MultiPolygon", "coordinates": [[[[67.463333, 43.800556], [67.464167, 43.801111], [67.483611, 43.7825], [67.482778, 43.782222], [67.463333, 43.800556]]]]}}, {"type": "Feature", "id": 4, "properties": {"num": "4", "name": "участки притрассовых карьеров №№1-9 вдоль автомагистрали Самара-Шымкент. №2", "kind": "супеси", "kindNorm": "супесь", "reservesAB": null, "reservesABC1": "147", "reservesC2": null, "unit": null, "protocol": null, "areaHa": 5.9, "plots": 1}, "geometry": {"type": "MultiPolygon", "coordinates": [[[[67.497778, 43.761667], [67.496944, 43.761111], [67.501667, 43.756389], [67.5025, 43.756944], [67.497778, 43.761667]]]]}}, {"type": "Feature", "id": 5, "properties": {"num": "5", "name": "участки притрассовых карьеров №№1-9 вдоль автомагистрали Самара-Шымкент. №3", "kind": "супеси", "kindNorm": "супесь", "reservesAB": null, "reservesABC1": "79", "reservesC2": null, "unit": null, "protocol": null, "areaHa": 3.0, "plots": 1}, "geometry": {"type": "MultiPolygon", "coordinates": [[[[67.543056, 43.718333], [67.542222, 43.718056], [67.544444, 43.715278], [67.545556, 43.715556], [67.543056, 43.718333]]]]}}, {"type": "Feature", "id": 6, "properties": {"num": "6", "name": "участки притрассовых карьеров №№1-9 вдоль автомагистрали Самара-Шымкент. №4", "kind": "супеси", "kindNorm": "супесь", "reservesAB": null, "reservesABC1": "346", "reservesC2": null, "unit": null, "protocol": null, "areaHa": 8.8, "plots": 1}, "geometry": {"type": "MultiPolygon", "coordinates": [[[[67.573889, 43.690278], [67.573333, 43.690278], [67.593056, 43.673056], [67.593333, 43.673333], [67.573889, 43.690278]]]]}}, {"type": "Feature", "id": 7, "properties": {"num": "7", "name": "участки притрассовых карьеров №№1-9 вдоль автомагистрали Самара-Шымкент. №5", "kind": "супеси", "kindNorm": "супесь", "reservesAB": null, "reservesABC1": "572", "reservesC2": null, "unit": null, "protocol": null, "areaHa": 20.1, "plots": 1}, "geometry": {"type": "MultiPolygon", "coordinates": [[[[67.636111, 43.634722], [67.635556, 43.634444], [67.663611, 43.608056], [67.664167, 43.608333], [67.636111, 43.634722]]]]}}, {"type": "Feature", "id": 8, "properties": {"num": "8", "name": "участки притрассовых карьеров №№1-9 вдоль автомагистрали Самара-Шымкент. №6", "kind": "супеси", "kindNorm": "супесь", "reservesAB": null, "reservesABC1": "110", "reservesC2": null, "unit": null, "protocol": null, "areaHa": 4.1, "plots": 1}, "geometry": {"type": "MultiPolygon", "coordinates": [[[[67.691944, 43.585833], [67.691389, 43.585556], [67.698611, 43.580833], [67.699167, 43.581111], [67.691944, 43.585833]]]]}}, {"type": "Feature", "id": 9, "properties": {"num": "9", "name": "участки притрассовых карьеров №№1-9 вдоль автомагистрали Самара-Шымкент. №7", "kind": "супеси", "kindNorm": "супесь", "reservesAB": null, "reservesABC1": "116", "reservesC2": null, "unit": null, "protocol": null, "areaHa": 5.0, "plots": 1}, "geometry": {"type": "MultiPolygon", "coordinates": [[[[67.705556, 43.581667], [67.705278, 43.581389], [67.713056, 43.575833], [67.713611, 43.576389], [67.705556, 43.581667]]]]}}, {"type": "Feature", "id": 10, "properties": {"num": "10", "name": "участки притрассовых карьеров №№1-9 вдоль автомагистрали Самара-Шымкент. №8", "kind": "супеси", "kindNorm": "супесь", "reservesAB": null, "reservesABC1": "141", "reservesC2": null, "unit": null, "protocol": null, "areaHa": 5.0, "plots": 1}, "geometry": {"type": "MultiPolygon", "coordinates": [[[[67.730833, 43.560556], [67.730278, 43.560278], [67.738611, 43.554444], [67.739167, 43.554722], [67.730833, 43.560556]]]]}}, {"type": "Feature", "id": 11, "properties": {"num": "11", "name": "участки притрассовых карьеров №№1-9 вдоль автомагистрали Самара-Шымкент. №9", "kind": "супеси", "kindNorm": "супесь", "reservesAB": null, "reservesABC1": "356", "reservesC2": null, "unit": null, "protocol": null, "areaHa": 10.0, "plots": 1}, "geometry": {"type": "MultiPolygon", "coordinates": [[[[67.446944, 43.812222], [67.443889, 43.810556], [67.441389, 43.813056], [67.444722, 43.814444], [67.446944, 43.812222]]]]}}, {"type": "Feature", "id": 12, "properties": {"num": "12", "name": "участки притрассовых карьеров, вдоль автомагистрали Самара-Шымкент, карьер №6 на 1453 км", "kind": "песок пылеватый", "kindNorm": "песок пылеватый", "reservesAB": null, "reservesABC1": "211", "reservesC2": null, "unit": "тыс.м3", "protocol": "ЮК МКЗ №1636 08.09.2011", "areaHa": 4.4, "plots": 1}, "geometry": {"type": "MultiPolygon", "coordinates": [[[[62.098136, 46.068408], [62.095842, 46.068261], [62.096183, 46.066092], [62.09845, 46.066086], [62.098136, 46.068408]]]]}}, {"type": "Feature", "id": 13, "properties": {"num": "13", "name": "участки притрассовых карьеров, вдоль автомагистрали Самара-Шымкент, карьер №7 на 1464 км", "kind": "песок пылеватый", "kindNorm": "песок пылеватый", "reservesAB": null, "reservesABC1": "106", "reservesC2": null, "unit": null, "protocol": null, "areaHa": 2.3, "plots": 1}, "geometry": {"type": "MultiPolygon", "coordinates": [[[[62.132556, 45.964833], [62.130639, 45.964667], [62.130861, 45.963333], [62.132778, 45.963472], [62.132556, 45.964833]]]]}}, {"type": "Feature", "id": 14, "properties": {"num": "14", "name": "участки притрассовых карьеров, вдоль автомагистрали Самара-Шымкент, карьер №8 на 1475 км", "kind": "песок пылеватый", "kindNorm": "песок пылеватый", "reservesAB": null, "reservesABC1": "106", "reservesC2": null, "unit": null, "protocol": null, "areaHa": 2.3, "plots": 1}, "geometry": {"type": "MultiPolygon", "coordinates": [[[[62.16425, 45.870778], [62.165167, 45.871972], [62.166861, 45.871333], [62.165972, 45.870139], [62.16425, 45.870778]]]]}}, {"type": "Feature", "id": 15, "properties": {"num": "15", "name": "участки притрассовых карьеров, вдоль автомагистрали Самара-Шымкент, карьер №9 на 1483 км", "kind": "песок пылеватый", "kindNorm": "песок пылеватый", "reservesAB": null, "reservesABC1": "54", "reservesC2": null, "unit": null, "protocol": null, "areaHa": 2.2, "plots": 1}, "geometry": {"type": "MultiPolygon", "coordinates": [[[[62.260344, 45.851681], [62.260581, 45.850342], [62.258664, 45.850169], [62.258428, 45.851508], [62.260344, 45.851681]]]]}}, {"type": "Feature", "id": 16, "properties": {"num": "16", "name": "Участки притрассовых карьеров №10, вдоль автомагистрали Самара-Шымкент", "kind": "супесь", "kindNorm": "супесь", "reservesAB": null, "reservesABC1": "51", "reservesC2": null, "unit": null, "protocol": "ЮК МКЗ №1646 20.09.2011", "areaHa": 22.0, "plots": 1}, "geometry": {"type": "MultiPolygon", "coordinates": [[[[66.143056, 44.56], [66.145, 44.56], [66.146944, 44.561111], [66.163611, 44.559722], [66.144722, 44.558611], [66.143056, 44.56]]]]}}, {"type": "Feature", "id": 17, "properties": {"num": "17", "name": "Участки притрассовых карьеров №11, вдоль автомагистрали Самара-Шымкент", "kind": "суглинок", "kindNorm": "суглинок", "reservesAB": null, "reservesABC1": "168", "reservesC2": null, "unit": null, "protocol": null, "areaHa": 6.5, "plots": 1}, "geometry": {"type": "MultiPolygon", "coordinates": [[[[65.936667, 44.683056], [65.939167, 44.685], [65.941389, 44.683889], [65.939722, 44.681944], [65.936667, 44.683056]]]]}}, {"type": "Feature", "id": 18, "properties": {"num": "18", "name": "Участки притрассовых карьеров №12, вдоль автомагистрали Самара-Шымкент", "kind": "супесь", "kindNorm": "супесь", "reservesAB": null, "reservesABC1": "255", "reservesC2": null, "unit": null, "protocol": null, "areaHa": 8.0, "plots": 1}, "geometry": {"type": "MultiPolygon", "coordinates": [[[[66.04, 44.651944], [66.043333, 44.653889], [66.045556, 44.652778], [66.043056, 44.650556], [66.04, 44.651944]]]]}}, {"type": "Feature", "id": 19, "properties": {"num": "19", "name": "Участки притрассовых карьеров №13, вдоль автомагистрали Самара-Шымкент", "kind": "супесь", "kindNorm": "супесь", "reservesAB": null, "reservesABC1": "720", "reservesC2": null, "unit": null, "protocol": null, "areaHa": 26.0, "plots": 1}, "geometry": {"type": "MultiPolygon", "coordinates": [[[[66.116111, 44.59], [66.12, 44.596111], [66.123056, 44.5925], [66.118889, 44.587222], [66.116111, 44.59]]]]}}, {"type": "Feature", "id": 20, "properties": {"num": "20", "name": "участки притрассовых карьеров №№1786 к северо-западу от г.Кызылорда, вдоль автомобильной дороги Самара-Шымкент на 1786 км", "kind": "супесь", "kindNorm": "супесь", "reservesAB": null, "reservesABC1": "482", "reservesC2": null, "unit": "тыс.м3", "protocol": "ЮК МКЗ №1645 08.09.2011", "areaHa": 30.0, "plots": 2}, "geometry": {"type": "MultiPolygon", "coordinates": [[[[65.264444, 44.883889], [65.262222, 44.881389], [65.256389, 44.881111], [65.258889, 44.883611], [65.264444, 44.883889]]], [[[65.188333, 44.884722], [65.185556, 44.881389], [65.183056, 44.880556], [65.179167, 44.884167], [65.188333, 44.884722]]]]}}, {"type": "Feature", "id": 21, "properties": {"num": "21", "name": "Участки притрассовых карьеров №№6,10,11 расположены в Сырдарьинском районе и в черте г.Кызылорда Кызылординской области к югу, юго-востоку, юго-западу от г.Кызылорда вдоль автомобильной дороги Самара-Шымкент на отрезке 1807-1837км.", "kind": "пгс", "kindNorm": "ПГС", "reservesAB": null, "reservesABC1": "2267", "reservesC2": null, "unit": "тыс.м3", "protocol": "2013г №1871 ЮК МКЗ", "areaHa": 61.4, "plots": 3}, "geometry": {"type": "MultiPolygon", "coordinates": [[[[65.702778, 44.8075], [65.712778, 44.808333], [65.709722, 44.803333], [65.701389, 44.804444], [65.702778, 44.8075]]], [[[65.440833, 44.798333], [65.448611, 44.796944], [65.447778, 44.795], [65.446667, 44.795278], [65.445833, 44.793611], [65.439444, 44.795278], [65.440833, 44.798333]]], [[[65.525, 44.765833], [65.526944, 44.764722], [65.524444, 44.762778], [65.5225, 44.764167], [65.525, 44.765833]]]]}}, {"type": "Feature", "id": 22, "properties": {"num": "22", "name": "Акшабулак", "kind": "суглинок", "kindNorm": "суглинок", "reservesAB": null, "reservesABC1": "83", "reservesC2": null, "unit": "тыс.м3", "protocol": "№1860 от 2013г", "areaHa": 11.1, "plots": 1}, "geometry": {"type": "MultiPolygon", "coordinates": [[[[65.536667, 46.078889], [65.538333, 46.080278], [65.535278, 46.081944], [65.534167, 46.083056], [65.5325, 46.083333], [65.531389, 46.081944], [65.536667, 46.078889]]]]}}, {"type": "Feature", "id": 23, "properties": {"num": "23", "name": "Участок на 60км а/д Кызылорда-Жезказган", "kind": "суглинок", "kindNorm": "суглинок", "reservesAB": null, "reservesABC1": "114", "reservesC2": null, "unit": "тыс.м3", "protocol": "2013г №1920", "areaHa": 4.3, "plots": 1}, "geometry": {"type": "MultiPolygon", "coordinates": [[[[65.946667, 44.986389], [65.945556, 44.984722], [65.943889, 44.985278], [65.945, 44.988056], [65.946667, 44.986389]]]]}}, {"type": "Feature", "id": 24, "properties": {"num": "24", "name": "Участок на 130км а/д Кызылорда-Жезказган", "kind": "пгс", "kindNorm": "ПГС", "reservesAB": null, "reservesABC1": "343", "reservesC2": null, "unit": "тыс.м3", "protocol": "2013г №1921", "areaHa": 11.8, "plots": 1}, "geometry": {"type": "MultiPolygon", "coordinates": [[[[66.840833, 45.675278], [66.833056, 45.674167], [66.833333, 45.676389], [66.838889, 45.676944], [66.840833, 45.675278]]]]}}, {"type": "Feature", "id": 25, "properties": {"num": "25", "name": "Ордакент", "kind": "суглинки", "kindNorm": "суглинок", "reservesAB": "586", "reservesABC1": "586", "reservesC2": null, "unit": "тыс.м3", "protocol": "2008 г. № 1091, ТКЗ", "areaHa": 18.4, "plots": 1}, "geometry": {"type": "MultiPolygon", "coordinates": [[[[67.237222, 43.94], [67.241667, 43.941111], [67.244722, 43.937222], [67.240278, 43.936111], [67.237222, 43.94]]]]}}, {"type": "Feature", "id": 26, "properties": {"num": "26", "name": "Тастак-1", "kind": "суглинки", "kindNorm": "суглинок", "reservesAB": null, "reservesABC1": "551", "reservesC2": null, "unit": "тыс.м3", "protocol": "2015г №2122 ЮК МКЗ", "areaHa": 93.8, "plots": 1}, "geometry": {"type": "MultiPolygon", "coordinates": [[[[67.165, 44.075], [67.177778, 44.075], [67.183611, 44.066944], [67.170833, 44.066667], [67.165, 44.075]]]]}}, {"type": "Feature", "id": 27, "properties": {"num": "27", "name": "Тартогайское-II", "kind": "суглинки", "kindNorm": "суглинок", "reservesAB": null, "reservesABC1": "535", "reservesC2": null, "unit": "тыс.м3", "protocol": "2008 г. № 1138, ТКЗ", "areaHa": 19.3, "plots": 1}, "geometry": {"type": "MultiPolygon", "coordinates": [[[[66.2725, 44.456667], [66.275, 44.457222], [66.277778, 44.458611], [66.279722, 44.456944], [66.279167, 44.454167], [66.276111, 44.453333], [66.2725, 44.456667]]]]}}, {"type": "Feature", "id": 28, "properties": {"num": "28", "name": "Казалинское-2", "kind": "суглинки", "kindNorm": "суглинок", "reservesAB": "115", "reservesABC1": "532", "reservesC2": null, "unit": "тыс.м3", "protocol": "1987 г. № 558, ТКЗ", "areaHa": 23.8, "plots": 1}, "geometry": {"type": "MultiPolygon", "coordinates": [[[[62.116861, 45.854278], [62.117111, 45.853417], [62.117083, 45.852667], [62.117833, 45.850389], [62.11775, 45.848528], [62.118139, 45.846583], [62.118306, 45.844444], [62.119028, 45.843028], [62.116278, 45.844056], [62.115917, 45.845694], [62.115528, 45.847667], [62.114278, 45.849194], [62.115583, 45.850417], [62.11525, 45.851361], [62.112972, 45.851667], [62.112667, 45.852028], [62.114472, 45.852806], [62.114833, 45.853528], [62.116861, 45.854278]]]]}}, {"type": "Feature", "id": 29, "properties": {"num": "29", "name": "Кумсай", "kind": "суглинки", "kindNorm": "суглинок", "reservesAB": "100", "reservesABC1": "173", "reservesC2": null, "unit": "тыс.м3", "protocol": "2010 г. № 1500, ЮКО ГКЗ", "areaHa": 12.2, "plots": 1}, "geometry": {"type": "MultiPolygon", "coordinates": [[[[61.161944, 47.096111], [61.165833, 47.0975], [61.169167, 47.093611], [61.163889, 47.094167], [61.161944, 47.096111]]]]}}, {"type": "Feature", "id": 30, "properties": {"num": "30", "name": "Жалагашское-2", "kind": "суглинки", "kindNorm": "суглинок", "reservesAB": "108", "reservesABC1": "510", "reservesC2": null, "unit": "тыс.м3", "protocol": "1987 г. № 549, ТКЗ", "areaHa": 7.0, "plots": 1}, "geometry": {"type": "MultiPolygon", "coordinates": [[[[64.657778, 45.089167], [64.658056, 45.091111], [64.660833, 45.090833], [64.66, 45.086944], [64.657778, 45.089167]]]]}}, {"type": "Feature", "id": 31, "properties": {"num": "31", "name": "Кировское", "kind": "суглинки", "kindNorm": "суглинок", "reservesAB": "112", "reservesABC1": "397", "reservesC2": null, "unit": "тыс.м3", "protocol": "1992 г. № 637, ТКЗ", "areaHa": 126.7, "plots": 1}, "geometry": {"type": "MultiPolygon", "coordinates": [[[[65.486806, 44.766472], [65.488722, 44.753139], [65.494306, 44.767528], [65.495333, 44.770306], [65.494583, 44.77225], [65.491861, 44.78125], [65.490722, 44.780306], [65.488389, 44.780972], [65.4875, 44.782028], [65.486806, 44.766472]]]]}}, {"type": "Feature", "id": 32, "properties": {"num": "32", "name": "Яны-Курганское (Жанакорганское)", "kind": "суглинки", "kindNorm": "суглинок", "reservesAB": "232", "reservesABC1": "1076.7", "reservesC2": null, "unit": "тыс.м3", "protocol": "1968 г. № 177, ТКЗ", "areaHa": 48.3, "plots": 1}, "geometry": {"type": "MultiPolygon", "coordinates": [[[[67.280556, 43.833333], [67.276944, 43.834444], [67.271944, 43.836667], [67.270556, 43.839722], [67.277778, 43.841667], [67.278889, 43.838889], [67.281944, 43.835556], [67.283333, 43.833056], [67.281667, 43.833611], [67.280556, 43.833333]]]]}}, {"type": "Feature", "id": 33, "properties": {"num": "33", "name": "Первомайское (Сулутобе)", "kind": "суглинки", "kindNorm": "суглинок", "reservesAB": "190", "reservesABC1": "501", "reservesC2": "299", "unit": "тыс.м3", "protocol": "1968 г. №176, ТКЗ", "areaHa": 47.2, "plots": 1}, "geometry": {"type": "MultiPolygon", "coordinates": [[[[66.081667, 44.659722], [66.081667, 44.647222], [66.07, 44.649722], [66.071111, 44.651389], [66.073333, 44.650556], [66.0775, 44.652778], [66.081667, 44.659722]]]]}}, {"type": "Feature", "id": 34, "properties": {"num": "34", "name": "Кармакчинское-2", "kind": "суглинки", "kindNorm": "суглинок", "reservesAB": "124", "reservesABC1": "340", "reservesC2": "108", "unit": "тыс.м3", "protocol": "1971 г. № 270, ТКЗ", "areaHa": 11.8, "plots": 1}, "geometry": {"type": "MultiPolygon", "coordinates": [[[[64.04, 45.478333], [64.038889, 45.48], [64.038889, 45.481389], [64.040556, 45.482222], [64.043889, 45.481111], [64.044167, 45.479444], [64.041111, 45.478889], [64.04, 45.478333]]]]}}, {"type": "Feature", "id": 35, "properties": {"num": "35", "name": "Кзыл-Ординское-4", "kind": "суглинки", "kindNorm": "суглинок", "reservesAB": "721", "reservesABC1": "1792", "reservesC2": "544", "unit": "тыс.м3", "protocol": "1963 г. № 89, ТКЗ", "areaHa": 34.4, "plots": 1}, "geometry": {"type": "MultiPolygon", "coordinates": [[[[65.783028, 44.779], [65.784583, 44.777694], [65.786917, 44.776667], [65.787778, 44.774667], [65.783722, 44.772111], [65.782389, 44.771528], [65.781389, 44.772056], [65.780333, 44.773556], [65.779472, 44.774222], [65.7785, 44.774722], [65.779444, 44.776556], [65.783028, 44.779]]]]}}, {"type": "Feature", "id": 36, "properties": {"num": "36", "name": "Ирколь", "kind": "ПГС", "kindNorm": "ПГС", "reservesAB": null, "reservesABC1": "80", "reservesC2": null, "unit": "тыс.м3", "protocol": "2010 г. №1508 ЮКО ГКЗ", "areaHa": 2.0, "plots": 1}, "geometry": {"type": "MultiPolygon", "coordinates": [[[[63.995556, 45.376111], [63.995556, 45.375556], [63.992778, 45.376111], [63.993056, 45.377222], [63.995556, 45.376111]]]]}}, {"type": "Feature", "id": 37, "properties": {"num": "37", "name": "Жанплес уч.", "kind": "ПГС", "kindNorm": "ПГС", "reservesAB": null, "reservesABC1": "18061", "reservesC2": null, "unit": "тыс. т", "protocol": "1994 г. №664 ТКЗ", "areaHa": 18.9, "plots": 1}, "geometry": {"type": "MultiPolygon", "coordinates": [[[[61.667472, 46.270294], [61.666167, 46.270342], [61.665231, 46.272231], [61.664981, 46.273767], [61.666694, 46.274433], [61.667583, 46.275028], [61.668889, 46.275889], [61.670344, 46.272875], [61.671611, 46.273694], [61.67175, 46.271961], [61.667472, 46.270294]]]]}}, {"type": "Feature", "id": 38, "properties": {"num": "38", "name": "Карьер №1", "kind": "строительный песок", "kindNorm": "строительный песок", "reservesAB": null, "reservesABC1": "112", "reservesC2": null, "unit": null, "protocol": "2011 г №1622", "areaHa": 3.8, "plots": 1}, "geometry": {"type": "MultiPolygon", "coordinates": [[[[62.381111, 45.861944], [62.383611, 45.861944], [62.383889, 45.863611], [62.381111, 45.863611], [62.381111, 45.861944]]]]}}, {"type": "Feature", "id": 39, "properties": {"num": "38", "name": "Тас-Бугетское", "kind": "строительный песок", "kindNorm": "строительный песок", "reservesAB": "2955", "reservesABC1": "13561", "reservesC2": null, "unit": "тыс.м3", "protocol": "1982 г. № 440 ТКЗ", "areaHa": 16.1, "plots": 1}, "geometry": {"type": "MultiPolygon", "coordinates": [[[[65.555278, 44.821389], [65.555278, 44.821944], [65.569444, 44.815278], [65.566667, 44.814444], [65.555278, 44.821389]]]]}}, {"type": "Feature", "id": 40, "properties": {"num": "39", "name": "уч.Южный", "kind": "строительный песок", "kindNorm": "строительный песок", "reservesAB": "2955", "reservesABC1": "12701", "reservesC2": null, "unit": null, "protocol": null, "areaHa": 58.1, "plots": 1}, "geometry": {"type": "MultiPolygon", "coordinates": [[[[65.554444, 44.823056], [65.550472, 44.8255], [65.544556, 44.829667], [65.551417, 44.830028], [65.557861, 44.830028], [65.563889, 44.827778], [65.556667, 44.825556], [65.554444, 44.823056]]]]}}, {"type": "Feature", "id": 41, "properties": {"num": "40", "name": "уч.Восточный", "kind": "строительный песок", "kindNorm": "строительный песок", "reservesAB": null, "reservesABC1": "860", "reservesC2": null, "unit": null, "protocol": null, "areaHa": 30.7, "plots": 1}, "geometry": {"type": "MultiPolygon", "coordinates": [[[[65.563889, 44.827778], [65.565556, 44.824722], [65.562778, 44.8225], [65.554444, 44.823056], [65.556667, 44.825556], [65.563889, 44.827778]]]]}}, {"type": "Feature", "id": 42, "properties": {"num": "41", "name": "уч.Северный северная часть", "kind": "строительный песок", "kindNorm": "строительный песок", "reservesAB": null, "reservesABC1": null, "reservesC2": null, "unit": null, "protocol": null, "areaHa": 11.9, "plots": 1}, "geometry": {"type": "MultiPolygon", "coordinates": [[[[65.5625, 44.831944], [65.563333, 44.830556], [65.563889, 44.829722], [65.55, 44.831111], [65.551944, 44.831111], [65.5625, 44.831944]]]]}}, {"type": "Feature", "id": 43, "properties": {"num": "42", "name": "уч.Северный центральная часть", "kind": "строительный песок", "kindNorm": "строительный песок", "reservesAB": null, "reservesABC1": null, "reservesC2": null, "unit": null, "protocol": null, "areaHa": 15.0, "plots": 1}, "geometry": {"type": "MultiPolygon", "coordinates": [[[[65.553889, 44.821944], [65.558333, 44.825], [65.561111, 44.822778], [65.558333, 44.821667], [65.561111, 44.821667], [65.561667, 44.82], [65.561111, 44.820278], [65.553889, 44.821944]]]]}}, {"type": "Feature", "id": 44, "properties": {"num": "43", "name": "Жосалинское", "kind": "строительный песок", "kindNorm": "строительный песок", "reservesAB": "2136", "reservesABC1": "5055", "reservesC2": "1314", "unit": "тыс. м3", "protocol": "1962 г. №69 ТКЗ", "areaHa": 37.9, "plots": 1}, "geometry": {"type": "MultiPolygon", "coordinates": [[[[64.117444, 45.604342], [64.123361, 45.597361], [64.119, 45.598056], [64.115639, 45.596583], [64.111889, 45.6014], [64.117444, 45.604342]]]]}}, {"type": "Feature", "id": 45, "properties": {"num": "44", "name": "Байхожа-3", "kind": "мергель", "kindNorm": "мергель", "reservesAB": null, "reservesABC1": "10644.4", "reservesC2": "21875.8", "unit": "тыс.т", "protocol": "2007 г. № 1053, ТКЗ", "areaHa": 293.2, "plots": 1}, "geometry": {"type": "MultiPolygon", "coordinates": [[[[62.946111, 45.696111], [62.945833, 45.715278], [62.950278, 45.715278], [62.950278, 45.713889], [62.955833, 45.711389], [62.955833, 45.709722], [62.959722, 45.706111], [62.960556, 45.702778], [62.965833, 45.700833], [62.965556, 45.693611], [62.975278, 45.686389], [62.946111, 45.696111]]]]}}, {"type": "Feature", "id": 46, "properties": {"num": "45", "name": "Майлыозек", "kind": "суглинки", "kindNorm": "суглинок", "reservesAB": null, "reservesABC1": null, "reservesC2": null, "unit": null, "protocol": null, "areaHa": 6.3, "plots": 1}, "geometry": {"type": "MultiPolygon", "coordinates": [[[[63.769384, 44.962081], [63.770652, 44.962156], [63.771576, 44.960129], [63.772922, 44.958442], [63.773373, 44.956675], [63.771493, 44.958245], [63.769933, 44.960051], [63.769384, 44.962081]]]]}}, {"type": "Feature", "id": 47, "properties": {"num": "46", "name": "Акжар", "kind": "суглинки", "kindNorm": "суглинок", "reservesAB": null, "reservesABC1": null, "reservesC2": null, "unit": null, "protocol": null, "areaHa": 17.1, "plots": 1}, "geometry": {"type": "MultiPolygon", "coordinates": [[[[64.079547, 45.088256], [64.082504, 45.08905], [64.085071, 45.089701], [64.088694, 45.090275], [64.09233, 45.090841], [64.089187, 45.088392], [64.086245, 45.087796], [64.082925, 45.087093], [64.079547, 45.088256]]]]}}, {"type": "Feature", "id": 48, "properties": {"num": "47", "name": "Тюмень-арыкское", "kind": "суглинки", "kindNorm": "суглинок", "reservesAB": null, "reservesABC1": null, "reservesC2": null, "unit": null, "protocol": null, "areaHa": 10.6, "plots": 1}, "geometry": {"type": "MultiPolygon", "coordinates": [[[[66.777417, 44.114537], [66.780322, 44.112376], [66.775365, 44.111255], [66.773594, 44.112554], [66.774419, 44.113164], [66.775393, 44.11383], [66.777417, 44.114537]]]]}}]}
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "id": 1,
+   "properties": {
+    "num": "1",
+    "name": "Резервное месторождение №1",
+    "kind": "супеси",
+    "kindNorm": "супесь",
+    "reservesAB": null,
+    "reservesABC1": "918",
+    "reservesC2": null,
+    "unit": "тыс.м3",
+    "protocol": "МКЗ №1246 20.09.2013",
+    "areaHa": 32.9,
+    "plots": 1
+   },
+   "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        65.678855,
+        44.790196
+       ],
+       [
+        65.682754,
+        44.786817
+       ],
+       [
+        65.676255,
+        44.782916
+       ],
+       [
+        65.672354,
+        44.786556
+       ],
+       [
+        65.678855,
+        44.790196
+       ]
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 2,
+   "properties": {
+    "num": "2",
+    "name": "Резервное месторождение №2",
+    "kind": "супеси",
+    "kindNorm": "супесь",
+    "reservesAB": null,
+    "reservesABC1": "1217",
+    "reservesC2": null,
+    "unit": null,
+    "protocol": null,
+    "areaHa": 27.9,
+    "plots": 1
+   },
+   "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        65.763547,
+        44.713622
+       ],
+       [
+        65.773188,
+        44.711694
+       ],
+       [
+        65.771811,
+        44.708664
+       ],
+       [
+        65.76217,
+        44.710592
+       ],
+       [
+        65.763547,
+        44.713622
+       ]
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 3,
+   "properties": {
+    "num": "3",
+    "name": "Резервное месторождение №3",
+    "kind": "супеси",
+    "kindNorm": "супесь",
+    "reservesAB": null,
+    "reservesABC1": "634",
+    "reservesC2": null,
+    "unit": "тыс.м3",
+    "protocol": "МКЗ №1381 23.01.2010",
+    "areaHa": 20.4,
+    "plots": 1
+   },
+   "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        67.524209,
+        43.884612
+       ],
+       [
+        67.525031,
+        43.885159
+       ],
+       [
+        67.544182,
+        43.866828
+       ],
+       [
+        67.543362,
+        43.866554
+       ],
+       [
+        67.524209,
+        43.884612
+       ]
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 4,
+   "properties": {
+    "num": "4",
+    "name": "Резервное месторождение №4",
+    "kind": "супеси",
+    "kindNorm": "супесь",
+    "reservesAB": null,
+    "reservesABC1": "150",
+    "reservesC2": null,
+    "unit": null,
+    "protocol": null,
+    "areaHa": 5.6,
+    "plots": 1
+   },
+   "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        67.508226,
+        43.849989
+       ],
+       [
+        67.507411,
+        43.849446
+       ],
+       [
+        67.512025,
+        43.844833
+       ],
+       [
+        67.512839,
+        43.845375
+       ],
+       [
+        67.508226,
+        43.849989
+       ]
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 5,
+   "properties": {
+    "num": "5",
+    "name": "Резервное месторождение №5",
+    "kind": "супеси",
+    "kindNorm": "супесь",
+    "reservesAB": null,
+    "reservesABC1": "81",
+    "reservesC2": null,
+    "unit": null,
+    "protocol": null,
+    "areaHa": 2.5,
+    "plots": 1
+   },
+   "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        67.594317,
+        43.79521
+       ],
+       [
+        67.593562,
+        43.794959
+       ],
+       [
+        67.595575,
+        43.792442
+       ],
+       [
+        67.596582,
+        43.792694
+       ],
+       [
+        67.594317,
+        43.79521
+       ]
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 6,
+   "properties": {
+    "num": "6",
+    "name": "Резервное месторождение №6",
+    "kind": "супеси",
+    "kindNorm": "супесь",
+    "reservesAB": null,
+    "reservesABC1": "363",
+    "reservesC2": null,
+    "unit": null,
+    "protocol": null,
+    "areaHa": 8.6,
+    "plots": 1
+   },
+   "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        67.49242,
+        43.716915
+       ],
+       [
+        67.491871,
+        43.716915
+       ],
+       [
+        67.511332,
+        43.699922
+       ],
+       [
+        67.511605,
+        43.700195
+       ],
+       [
+        67.49242,
+        43.716915
+       ]
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 7,
+   "properties": {
+    "num": "7",
+    "name": "Резервное месторождение №7",
+    "kind": "супеси",
+    "kindNorm": "супесь",
+    "reservesAB": null,
+    "reservesABC1": "653",
+    "reservesC2": null,
+    "unit": null,
+    "protocol": null,
+    "areaHa": 19.4,
+    "plots": 1
+   },
+   "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        67.721186,
+        43.686265
+       ],
+       [
+        67.720642,
+        43.685992
+       ],
+       [
+        67.748174,
+        43.660096
+       ],
+       [
+        67.74872,
+        43.660367
+       ],
+       [
+        67.721186,
+        43.686265
+       ]
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 8,
+   "properties": {
+    "num": "8",
+    "name": "Резервное месторождение №8",
+    "kind": "супеси",
+    "kindNorm": "супесь",
+    "reservesAB": null,
+    "reservesABC1": "101",
+    "reservesC2": null,
+    "unit": null,
+    "protocol": null,
+    "areaHa": 4.4,
+    "plots": 1
+   },
+   "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        67.587842,
+        43.517409
+       ],
+       [
+        67.587267,
+        43.517123
+       ],
+       [
+        67.594742,
+        43.512234
+       ],
+       [
+        67.595317,
+        43.512522
+       ],
+       [
+        67.587842,
+        43.517409
+       ]
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 9,
+   "properties": {
+    "num": "9",
+    "name": "Резервное месторождение №9",
+    "kind": "супеси",
+    "kindNorm": "супесь",
+    "reservesAB": null,
+    "reservesABC1": "117",
+    "reservesC2": null,
+    "unit": null,
+    "protocol": null,
+    "areaHa": 4.4,
+    "plots": 1
+   },
+   "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        67.806175,
+        43.538581
+       ],
+       [
+        67.805915,
+        43.53832
+       ],
+       [
+        67.813199,
+        43.533117
+       ],
+       [
+        67.813718,
+        43.533638
+       ],
+       [
+        67.806175,
+        43.538581
+       ]
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 10,
+   "properties": {
+    "num": "10",
+    "name": "Резервное месторождение №10",
+    "kind": "супеси",
+    "kindNorm": "супесь",
+    "reservesAB": null,
+    "reservesABC1": "142",
+    "reservesC2": null,
+    "unit": null,
+    "protocol": null,
+    "areaHa": 5.5,
+    "plots": 1
+   },
+   "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        67.667608,
+        43.576378
+       ],
+       [
+        67.667026,
+        43.576086
+       ],
+       [
+        67.675764,
+        43.569969
+       ],
+       [
+        67.676347,
+        43.57026
+       ],
+       [
+        67.667608,
+        43.576378
+       ]
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 11,
+   "properties": {
+    "num": "11",
+    "name": "Резервное месторождение №11",
+    "kind": "супеси",
+    "kindNorm": "супесь",
+    "reservesAB": null,
+    "reservesABC1": "376",
+    "reservesC2": null,
+    "unit": null,
+    "protocol": null,
+    "areaHa": 10.7,
+    "plots": 1
+   },
+   "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        67.282192,
+        43.8428
+       ],
+       [
+        67.279029,
+        43.841075
+       ],
+       [
+        67.276441,
+        43.843664
+       ],
+       [
+        67.279892,
+        43.845101
+       ],
+       [
+        67.282192,
+        43.8428
+       ]
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 12,
+   "properties": {
+    "num": "12",
+    "name": "Резервное месторождение №12",
+    "kind": "песок пылеватый",
+    "kindNorm": "песок пылеватый",
+    "reservesAB": null,
+    "reservesABC1": "226",
+    "reservesC2": null,
+    "unit": "тыс.м3",
+    "protocol": "МКЗ №1750 20.03.2016",
+    "areaHa": 5.1,
+    "plots": 1
+   },
+   "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        62.100517,
+        46.134856
+       ],
+       [
+        62.098044,
+        46.134698
+       ],
+       [
+        62.098412,
+        46.132361
+       ],
+       [
+        62.100855,
+        46.132354
+       ],
+       [
+        62.100517,
+        46.134856
+       ]
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 13,
+   "properties": {
+    "num": "13",
+    "name": "Резервное месторождение №13",
+    "kind": "песок пылеватый",
+    "kindNorm": "песок пылеватый",
+    "reservesAB": null,
+    "reservesABC1": "97",
+    "reservesC2": null,
+    "unit": null,
+    "protocol": null,
+    "areaHa": 2.2,
+    "plots": 1
+   },
+   "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        62.291874,
+        45.910808
+       ],
+       [
+        62.290016,
+        45.910647
+       ],
+       [
+        62.290231,
+        45.909354
+       ],
+       [
+        62.292089,
+        45.909489
+       ],
+       [
+        62.291874,
+        45.910808
+       ]
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 14,
+   "properties": {
+    "num": "14",
+    "name": "Резервное месторождение №14",
+    "kind": "песок пылеватый",
+    "kindNorm": "песок пылеватый",
+    "reservesAB": null,
+    "reservesABC1": "107",
+    "reservesC2": null,
+    "unit": null,
+    "protocol": null,
+    "areaHa": 2.2,
+    "plots": 1
+   },
+   "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        62.144482,
+        45.919667
+       ],
+       [
+        62.145375,
+        45.920829
+       ],
+       [
+        62.147024,
+        45.920207
+       ],
+       [
+        62.146159,
+        45.919045
+       ],
+       [
+        62.144482,
+        45.919667
+       ]
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 15,
+   "properties": {
+    "num": "15",
+    "name": "Резервное месторождение №15",
+    "kind": "песок пылеватый",
+    "kindNorm": "песок пылеватый",
+    "reservesAB": null,
+    "reservesABC1": "47",
+    "reservesC2": null,
+    "unit": null,
+    "protocol": null,
+    "areaHa": 2.5,
+    "plots": 1
+   },
+   "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        62.333421,
+        45.798875
+       ],
+       [
+        62.333675,
+        45.797443
+       ],
+       [
+        62.331624,
+        45.797258
+       ],
+       [
+        62.331371,
+        45.79869
+       ],
+       [
+        62.333421,
+        45.798875
+       ]
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 16,
+   "properties": {
+    "num": "16",
+    "name": "Резервное месторождение №16",
+    "kind": "супесь",
+    "kindNorm": "супесь",
+    "reservesAB": null,
+    "reservesABC1": "49",
+    "reservesC2": null,
+    "unit": null,
+    "protocol": "МКЗ №1068 05.05.2013",
+    "areaHa": 25.9,
+    "plots": 1
+   },
+   "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        66.08684,
+        44.588344
+       ],
+       [
+        66.088949,
+        44.588344
+       ],
+       [
+        66.091057,
+        44.589549
+       ],
+       [
+        66.109136,
+        44.588043
+       ],
+       [
+        66.088647,
+        44.586838
+       ],
+       [
+        66.08684,
+        44.588344
+       ]
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 17,
+   "properties": {
+    "num": "17",
+    "name": "Резервное месторождение №17",
+    "kind": "суглинок",
+    "kindNorm": "суглинок",
+    "reservesAB": null,
+    "reservesABC1": "178",
+    "reservesC2": null,
+    "unit": null,
+    "protocol": null,
+    "areaHa": 7.7,
+    "plots": 1
+   },
+   "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        65.940075,
+        44.599851
+       ],
+       [
+        65.942789,
+        44.601961
+       ],
+       [
+        65.945202,
+        44.600755
+       ],
+       [
+        65.943392,
+        44.598643
+       ],
+       [
+        65.940075,
+        44.599851
+       ]
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 18,
+   "properties": {
+    "num": "18",
+    "name": "Резервное месторождение №18",
+    "kind": "супесь",
+    "kindNorm": "супесь",
+    "reservesAB": null,
+    "reservesABC1": "231",
+    "reservesC2": null,
+    "unit": null,
+    "protocol": null,
+    "areaHa": 7.9,
+    "plots": 1
+   },
+   "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        65.97905,
+        44.672058
+       ],
+       [
+        65.982358,
+        44.673988
+       ],
+       [
+        65.984564,
+        44.672885
+       ],
+       [
+        65.982083,
+        44.67068
+       ],
+       [
+        65.97905,
+        44.672058
+       ]
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 19,
+   "properties": {
+    "num": "19",
+    "name": "Резервное месторождение №19",
+    "kind": "супесь",
+    "kindNorm": "супесь",
+    "reservesAB": null,
+    "reservesABC1": "659",
+    "reservesC2": null,
+    "unit": null,
+    "protocol": null,
+    "areaHa": 21.8,
+    "plots": 1
+   },
+   "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        66.289007,
+        44.595093
+       ],
+       [
+        66.292566,
+        44.600687
+       ],
+       [
+        66.295364,
+        44.597382
+       ],
+       [
+        66.291549,
+        44.592551
+       ],
+       [
+        66.289007,
+        44.595093
+       ]
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 20,
+   "properties": {
+    "num": "20",
+    "name": "Резервное месторождение №20",
+    "kind": "супесь",
+    "kindNorm": "супесь",
+    "reservesAB": null,
+    "reservesABC1": "465",
+    "reservesC2": null,
+    "unit": "тыс.м3",
+    "protocol": "МКЗ №1874 09.06.2011",
+    "areaHa": 27.6,
+    "plots": 2
+   },
+   "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        65.079685,
+        44.876804
+       ],
+       [
+        65.077552,
+        44.874405
+       ],
+       [
+        65.071954,
+        44.874138
+       ],
+       [
+        65.074354,
+        44.876538
+       ],
+       [
+        65.079685,
+        44.876804
+       ]
+      ]
+     ],
+     [
+      [
+       [
+        65.00664,
+        44.877604
+       ],
+       [
+        65.003975,
+        44.874405
+       ],
+       [
+        65.001575,
+        44.873606
+       ],
+       [
+        64.997843,
+        44.877071
+       ],
+       [
+        65.00664,
+        44.877604
+       ]
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 21,
+   "properties": {
+    "num": "21",
+    "name": "Резервное месторождение №21",
+    "kind": "пгс",
+    "kindNorm": "ПГС",
+    "reservesAB": null,
+    "reservesABC1": "2217",
+    "reservesC2": null,
+    "unit": "тыс.м3",
+    "protocol": "МКЗ №1291 18.11.2005",
+    "areaHa": 52.9,
+    "plots": 3
+   },
+   "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        65.767675,
+        44.842544
+       ],
+       [
+        65.776956,
+        44.843317
+       ],
+       [
+        65.77412,
+        44.838677
+       ],
+       [
+        65.766386,
+        44.839708
+       ],
+       [
+        65.767675,
+        44.842544
+       ]
+      ]
+     ],
+     [
+      [
+       [
+        65.524555,
+        44.834036
+       ],
+       [
+        65.531774,
+        44.832747
+       ],
+       [
+        65.531001,
+        44.830943
+       ],
+       [
+        65.52997,
+        44.831201
+       ],
+       [
+        65.529196,
+        44.829653
+       ],
+       [
+        65.523266,
+        44.831201
+       ],
+       [
+        65.524555,
+        44.834036
+       ]
+      ]
+     ],
+     [
+      [
+       [
+        65.602673,
+        44.803872
+       ],
+       [
+        65.604478,
+        44.802841
+       ],
+       [
+        65.602157,
+        44.801036
+       ],
+       [
+        65.600353,
+        44.802325
+       ],
+       [
+        65.602673,
+        44.803872
+       ]
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 22,
+   "properties": {
+    "num": "22",
+    "name": "Резервное месторождение №22",
+    "kind": "суглинок",
+    "kindNorm": "суглинок",
+    "reservesAB": null,
+    "reservesABC1": "84",
+    "reservesC2": null,
+    "unit": "тыс.м3",
+    "protocol": "МКЗ №1344 19.05.2011",
+    "areaHa": 9.7,
+    "plots": 1
+   },
+   "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        65.678383,
+        46.097585
+       ],
+       [
+        65.679937,
+        46.09888
+       ],
+       [
+        65.677088,
+        46.100435
+       ],
+       [
+        65.676051,
+        46.101472
+       ],
+       [
+        65.674496,
+        46.10173
+       ],
+       [
+        65.67346,
+        46.100435
+       ],
+       [
+        65.678383,
+        46.097585
+       ]
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 23,
+   "properties": {
+    "num": "23",
+    "name": "Резервное месторождение №23",
+    "kind": "суглинок",
+    "kindNorm": "суглинок",
+    "reservesAB": null,
+    "reservesABC1": "117",
+    "reservesC2": null,
+    "unit": "тыс.м3",
+    "protocol": "МКЗ №1248 19.09.2008",
+    "areaHa": 4.9,
+    "plots": 1
+   },
+   "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        65.957931,
+        45.078351
+       ],
+       [
+        65.956742,
+        45.076566
+       ],
+       [
+        65.954956,
+        45.077161
+       ],
+       [
+        65.956146,
+        45.080137
+       ],
+       [
+        65.957931,
+        45.078351
+       ]
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 24,
+   "properties": {
+    "num": "24",
+    "name": "Резервное месторождение №24",
+    "kind": "пгс",
+    "kindNorm": "ПГС",
+    "reservesAB": null,
+    "reservesABC1": "389",
+    "reservesC2": null,
+    "unit": "тыс.м3",
+    "protocol": "МКЗ №1854 26.02.2015",
+    "areaHa": 12.2,
+    "plots": 1
+   },
+   "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        66.694944,
+        45.7486
+       ],
+       [
+        66.687053,
+        45.747473
+       ],
+       [
+        66.687334,
+        45.749728
+       ],
+       [
+        66.692972,
+        45.750291
+       ],
+       [
+        66.694944,
+        45.7486
+       ]
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 25,
+   "properties": {
+    "num": "25",
+    "name": "Резервное месторождение №25",
+    "kind": "суглинки",
+    "kindNorm": "суглинок",
+    "reservesAB": "533",
+    "reservesABC1": "533",
+    "reservesC2": null,
+    "unit": "тыс.м3",
+    "protocol": "МКЗ №1332 15.02.2014",
+    "areaHa": 16.2,
+    "plots": 1
+   },
+   "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        67.131724,
+        43.999389
+       ],
+       [
+        67.135894,
+        44.000431
+       ],
+       [
+        67.13876,
+        43.996783
+       ],
+       [
+        67.134591,
+        43.995741
+       ],
+       [
+        67.131724,
+        43.999389
+       ]
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 26,
+   "properties": {
+    "num": "26",
+    "name": "Резервное месторождение №26",
+    "kind": "суглинки",
+    "kindNorm": "суглинок",
+    "reservesAB": null,
+    "reservesABC1": "613",
+    "reservesC2": null,
+    "unit": "тыс.м3",
+    "protocol": "МКЗ №1119 22.05.2010",
+    "areaHa": 85.1,
+    "plots": 1
+   },
+   "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        67.153312,
+        44.004815
+       ],
+       [
+        67.165486,
+        44.004815
+       ],
+       [
+        67.171043,
+        43.99714
+       ],
+       [
+        67.15887,
+        43.996876
+       ],
+       [
+        67.153312,
+        44.004815
+       ]
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 27,
+   "properties": {
+    "num": "27",
+    "name": "Резервное месторождение №27",
+    "kind": "суглинки",
+    "kindNorm": "суглинок",
+    "reservesAB": null,
+    "reservesABC1": "467",
+    "reservesC2": null,
+    "unit": "тыс.м3",
+    "protocol": "МКЗ №1446 12.07.2012",
+    "areaHa": 16.1,
+    "plots": 1
+   },
+   "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        66.131712,
+        44.535541
+       ],
+       [
+        66.133994,
+        44.536048
+       ],
+       [
+        66.136529,
+        44.537315
+       ],
+       [
+        66.138303,
+        44.535794
+       ],
+       [
+        66.137796,
+        44.53326
+       ],
+       [
+        66.135008,
+        44.532498
+       ],
+       [
+        66.131712,
+        44.535541
+       ]
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 28,
+   "properties": {
+    "num": "28",
+    "name": "Резервное месторождение №28",
+    "kind": "суглинки",
+    "kindNorm": "суглинок",
+    "reservesAB": "103",
+    "reservesABC1": "476",
+    "reservesC2": null,
+    "unit": "тыс.м3",
+    "protocol": "МКЗ №1130 28.03.2005",
+    "areaHa": 27.5,
+    "plots": 1
+   },
+   "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        61.961924,
+        45.864834
+       ],
+       [
+        61.962193,
+        45.863909
+       ],
+       [
+        61.962163,
+        45.863104
+       ],
+       [
+        61.962969,
+        45.860657
+       ],
+       [
+        61.962879,
+        45.858658
+       ],
+       [
+        61.963297,
+        45.856568
+       ],
+       [
+        61.963477,
+        45.85427
+       ],
+       [
+        61.964252,
+        45.852749
+       ],
+       [
+        61.961298,
+        45.853854
+       ],
+       [
+        61.96091,
+        45.855613
+       ],
+       [
+        61.960493,
+        45.857733
+       ],
+       [
+        61.95915,
+        45.859373
+       ],
+       [
+        61.960552,
+        45.860687
+       ],
+       [
+        61.960194,
+        45.861701
+       ],
+       [
+        61.957747,
+        45.86203
+       ],
+       [
+        61.957419,
+        45.862417
+       ],
+       [
+        61.959358,
+        45.863253
+       ],
+       [
+        61.959746,
+        45.864029
+       ],
+       [
+        61.961924,
+        45.864834
+       ]
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 29,
+   "properties": {
+    "num": "29",
+    "name": "Резервное месторождение №29",
+    "kind": "суглинки",
+    "kindNorm": "суглинок",
+    "reservesAB": "89",
+    "reservesABC1": "155",
+    "reservesC2": null,
+    "unit": "тыс.м3",
+    "protocol": "МКЗ №1771 03.09.2018",
+    "areaHa": 9.9,
+    "plots": 1
+   },
+   "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        61.069886,
+        47.090775
+       ],
+       [
+        61.073392,
+        47.092027
+       ],
+       [
+        61.076398,
+        47.088521
+       ],
+       [
+        61.071639,
+        47.089022
+       ],
+       [
+        61.069886,
+        47.090775
+       ]
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 30,
+   "properties": {
+    "num": "30",
+    "name": "Резервное месторождение №30",
+    "kind": "суглинки",
+    "kindNorm": "суглинок",
+    "reservesAB": "103",
+    "reservesABC1": "484",
+    "reservesC2": null,
+    "unit": "тыс.м3",
+    "protocol": "МКЗ №1750 19.11.2019",
+    "areaHa": 7.6,
+    "plots": 1
+   },
+   "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        64.74245,
+        45.018317
+       ],
+       [
+        64.742741,
+        45.020346
+       ],
+       [
+        64.74564,
+        45.020056
+       ],
+       [
+        64.74477,
+        45.015996
+       ],
+       [
+        64.74245,
+        45.018317
+       ]
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 31,
+   "properties": {
+    "num": "31",
+    "name": "Резервное месторождение №31",
+    "kind": "суглинки",
+    "kindNorm": "суглинок",
+    "reservesAB": "123",
+    "reservesABC1": "436",
+    "reservesC2": null,
+    "unit": "тыс.м3",
+    "protocol": "МКЗ №1433 14.01.2014",
+    "areaHa": 130.5,
+    "plots": 1
+   },
+   "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        65.587026,
+        44.812788
+       ],
+       [
+        65.58897,
+        44.799255
+       ],
+       [
+        65.594638,
+        44.81386
+       ],
+       [
+        65.59568,
+        44.816679
+       ],
+       [
+        65.594919,
+        44.818653
+       ],
+       [
+        65.592156,
+        44.827788
+       ],
+       [
+        65.591,
+        44.826829
+       ],
+       [
+        65.588632,
+        44.827505
+       ],
+       [
+        65.58773,
+        44.828577
+       ],
+       [
+        65.587026,
+        44.812788
+       ]
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 32,
+   "properties": {
+    "num": "32",
+    "name": "Резервное месторождение №32",
+    "kind": "суглинки",
+    "kindNorm": "суглинок",
+    "reservesAB": "200",
+    "reservesABC1": "927",
+    "reservesC2": null,
+    "unit": "тыс.м3",
+    "protocol": "МКЗ №1443 27.09.2006",
+    "areaHa": 57.5,
+    "plots": 1
+   },
+   "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        67.423748,
+        43.815634
+       ],
+       [
+        67.419806,
+        43.816846
+       ],
+       [
+        67.414351,
+        43.819272
+       ],
+       [
+        67.412836,
+        43.822605
+       ],
+       [
+        67.420716,
+        43.824728
+       ],
+       [
+        67.421929,
+        43.821696
+       ],
+       [
+        67.425262,
+        43.81806
+       ],
+       [
+        67.426778,
+        43.815332
+       ],
+       [
+        67.42496,
+        43.815937
+       ],
+       [
+        67.423748,
+        43.815634
+       ]
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 33,
+   "properties": {
+    "num": "33",
+    "name": "Резервное месторождение №33",
+    "kind": "суглинки",
+    "kindNorm": "суглинок",
+    "reservesAB": "217",
+    "reservesABC1": "573",
+    "reservesC2": "342",
+    "unit": "тыс.м3",
+    "protocol": "МКЗ №1724 15.09.2017",
+    "areaHa": 52.3,
+    "plots": 1
+   },
+   "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        66.128022,
+        44.585136
+       ],
+       [
+        66.128022,
+        44.571978
+       ],
+       [
+        66.115741,
+        44.57461
+       ],
+       [
+        66.116911,
+        44.576365
+       ],
+       [
+        66.11925,
+        44.575488
+       ],
+       [
+        66.123636,
+        44.577827
+       ],
+       [
+        66.128022,
+        44.585136
+       ]
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 34,
+   "properties": {
+    "num": "34",
+    "name": "Резервное месторождение №34",
+    "kind": "суглинки",
+    "kindNorm": "суглинок",
+    "reservesAB": "107",
+    "reservesABC1": "294",
+    "reservesC2": "93",
+    "unit": "тыс.м3",
+    "protocol": "МКЗ №1629 03.03.2010",
+    "areaHa": 11.1,
+    "plots": 1
+   },
+   "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        64.159165,
+        45.503265
+       ],
+       [
+        64.158088,
+        45.504882
+       ],
+       [
+        64.158088,
+        45.50623
+       ],
+       [
+        64.159705,
+        45.507038
+       ],
+       [
+        64.162938,
+        45.50596
+       ],
+       [
+        64.163208,
+        45.504343
+       ],
+       [
+        64.160243,
+        45.503805
+       ],
+       [
+        64.159165,
+        45.503265
+       ]
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 35,
+   "properties": {
+    "num": "35",
+    "name": "Резервное месторождение №35",
+    "kind": "суглинки",
+    "kindNorm": "суглинок",
+    "reservesAB": "683",
+    "reservesABC1": "1697",
+    "reservesC2": "515",
+    "unit": "тыс.м3",
+    "protocol": "МКЗ №1337 26.07.2012",
+    "areaHa": 38.1,
+    "plots": 1
+   },
+   "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        65.746084,
+        44.858197
+       ],
+       [
+        65.74772,
+        44.856823
+       ],
+       [
+        65.750176,
+        44.855742
+       ],
+       [
+        65.751082,
+        44.853637
+       ],
+       [
+        65.746814,
+        44.850948
+       ],
+       [
+        65.745411,
+        44.850334
+       ],
+       [
+        65.744359,
+        44.85089
+       ],
+       [
+        65.743248,
+        44.852468
+       ],
+       [
+        65.742342,
+        44.853169
+       ],
+       [
+        65.741319,
+        44.853695
+       ],
+       [
+        65.742312,
+        44.855625
+       ],
+       [
+        65.746084,
+        44.858197
+       ]
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 36,
+   "properties": {
+    "num": "36",
+    "name": "Резервное месторождение №36",
+    "kind": "ПГС",
+    "kindNorm": "ПГС",
+    "reservesAB": null,
+    "reservesABC1": "84",
+    "reservesC2": null,
+    "unit": "тыс.м3",
+    "protocol": "МКЗ №1722 17.07.2005",
+    "areaHa": 1.9,
+    "plots": 1
+   },
+   "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        64.12388,
+        45.438657
+       ],
+       [
+        64.12388,
+        45.438109
+       ],
+       [
+        64.12114,
+        45.438657
+       ],
+       [
+        64.121415,
+        45.439752
+       ],
+       [
+        64.12388,
+        45.438657
+       ]
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 37,
+   "properties": {
+    "num": "37",
+    "name": "Резервное месторождение №37",
+    "kind": "ПГС",
+    "kindNorm": "ПГС",
+    "reservesAB": null,
+    "reservesABC1": "16352",
+    "reservesC2": null,
+    "unit": "тыс. т",
+    "protocol": "МКЗ №1389 14.02.2007",
+    "areaHa": 19.1,
+    "plots": 1
+   },
+   "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        61.731374,
+        46.143465
+       ],
+       [
+        61.730061,
+        46.143514
+       ],
+       [
+        61.72912,
+        46.145413
+       ],
+       [
+        61.728869,
+        46.146958
+       ],
+       [
+        61.730591,
+        46.147628
+       ],
+       [
+        61.731485,
+        46.148226
+       ],
+       [
+        61.732799,
+        46.149092
+       ],
+       [
+        61.734262,
+        46.146061
+       ],
+       [
+        61.735536,
+        46.146885
+       ],
+       [
+        61.735676,
+        46.145142
+       ],
+       [
+        61.731374,
+        46.143465
+       ]
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 38,
+   "properties": {
+    "num": "38",
+    "name": "Резервное месторождение №38",
+    "kind": "строительный песок",
+    "kindNorm": "строительный песок",
+    "reservesAB": null,
+    "reservesABC1": "108",
+    "reservesC2": null,
+    "unit": null,
+    "protocol": "МКЗ №1358 21.09.2013",
+    "areaHa": 3.4,
+    "plots": 1
+   },
+   "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        62.322104,
+        45.933089
+       ],
+       [
+        62.32446,
+        45.933089
+       ],
+       [
+        62.324722,
+        45.934661
+       ],
+       [
+        62.322104,
+        45.934661
+       ],
+       [
+        62.322104,
+        45.933089
+       ]
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 39,
+   "properties": {
+    "num": "38",
+    "name": "Резервное месторождение №39",
+    "kind": "строительный песок",
+    "kindNorm": "строительный песок",
+    "reservesAB": "3193",
+    "reservesABC1": "14654",
+    "reservesC2": null,
+    "unit": "тыс.м3",
+    "protocol": "МКЗ №1236 19.08.2008",
+    "areaHa": 16.7,
+    "plots": 1
+   },
+   "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        65.627555,
+        44.728952
+       ],
+       [
+        65.627555,
+        44.729517
+       ],
+       [
+        65.641989,
+        44.722725
+       ],
+       [
+        65.639159,
+        44.721875
+       ],
+       [
+        65.627555,
+        44.728952
+       ]
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 40,
+   "properties": {
+    "num": "39",
+    "name": "Резервное месторождение №40",
+    "kind": "строительный песок",
+    "kindNorm": "строительный песок",
+    "reservesAB": "3367",
+    "reservesABC1": "14471",
+    "reservesC2": null,
+    "unit": null,
+    "protocol": null,
+    "areaHa": 55.4,
+    "plots": 1
+   },
+   "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        65.540598,
+        44.73907
+       ],
+       [
+        65.536718,
+        44.741457
+       ],
+       [
+        65.530939,
+        44.745528
+       ],
+       [
+        65.537641,
+        44.74588
+       ],
+       [
+        65.543936,
+        44.74588
+       ],
+       [
+        65.549825,
+        44.743682
+       ],
+       [
+        65.54277,
+        44.741512
+       ],
+       [
+        65.540598,
+        44.73907
+       ]
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 41,
+   "properties": {
+    "num": "40",
+    "name": "Резервное месторождение №41",
+    "kind": "строительный песок",
+    "kindNorm": "строительный песок",
+    "reservesAB": null,
+    "reservesABC1": "887",
+    "reservesC2": null,
+    "unit": null,
+    "protocol": null,
+    "areaHa": 26.3,
+    "plots": 1
+   },
+   "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        65.628879,
+        44.924716
+       ],
+       [
+        65.630421,
+        44.92189
+       ],
+       [
+        65.627852,
+        44.919836
+       ],
+       [
+        65.620145,
+        44.92035
+       ],
+       [
+        65.622201,
+        44.922662
+       ],
+       [
+        65.628879,
+        44.924716
+       ]
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 42,
+   "properties": {
+    "num": "41",
+    "name": "Резервное месторождение №42",
+    "kind": "строительный песок",
+    "kindNorm": "строительный песок",
+    "reservesAB": null,
+    "reservesABC1": null,
+    "reservesC2": null,
+    "unit": null,
+    "protocol": null,
+    "areaHa": 10.8,
+    "plots": 1
+   },
+   "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        65.496852,
+        44.786949
+       ],
+       [
+        65.497645,
+        44.785627
+       ],
+       [
+        65.498175,
+        44.784833
+       ],
+       [
+        65.484944,
+        44.786156
+       ],
+       [
+        65.486796,
+        44.786156
+       ],
+       [
+        65.496852,
+        44.786949
+       ]
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 43,
+   "properties": {
+    "num": "42",
+    "name": "Резервное месторождение №43",
+    "kind": "строительный песок",
+    "kindNorm": "строительный песок",
+    "reservesAB": null,
+    "reservesABC1": null,
+    "reservesC2": null,
+    "unit": null,
+    "protocol": null,
+    "areaHa": 14.4,
+    "plots": 1
+   },
+   "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        65.500232,
+        44.697494
+       ],
+       [
+        65.504583,
+        44.700485
+       ],
+       [
+        65.507302,
+        44.69831
+       ],
+       [
+        65.504583,
+        44.697223
+       ],
+       [
+        65.507302,
+        44.697223
+       ],
+       [
+        65.507846,
+        44.695591
+       ],
+       [
+        65.507302,
+        44.695863
+       ],
+       [
+        65.500232,
+        44.697494
+       ]
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 44,
+   "properties": {
+    "num": "43",
+    "name": "Резервное месторождение №44",
+    "kind": "строительный песок",
+    "kindNorm": "строительный песок",
+    "reservesAB": "2054",
+    "reservesABC1": "4860",
+    "reservesC2": "1263",
+    "unit": "тыс. м3",
+    "protocol": "МКЗ №1585 25.10.2012",
+    "areaHa": 31.3,
+    "plots": 1
+   },
+   "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        64.079383,
+        45.660889
+       ],
+       [
+        64.084764,
+        45.65454
+       ],
+       [
+        64.080798,
+        45.655172
+       ],
+       [
+        64.077741,
+        45.653832
+       ],
+       [
+        64.074331,
+        45.658213
+       ],
+       [
+        64.079383,
+        45.660889
+       ]
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 45,
+   "properties": {
+    "num": "44",
+    "name": "Резервное месторождение №45",
+    "kind": "мергель",
+    "kindNorm": "мергель",
+    "reservesAB": null,
+    "reservesABC1": "10117",
+    "reservesC2": "20792",
+    "unit": "тыс.т",
+    "protocol": "МКЗ №1527 11.01.2011",
+    "areaHa": 344.8,
+    "plots": 1
+   },
+   "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        63.072874,
+        45.631117
+       ],
+       [
+        63.072573,
+        45.651902
+       ],
+       [
+        63.077393,
+        45.651902
+       ],
+       [
+        63.077393,
+        45.650396
+       ],
+       [
+        63.083417,
+        45.647685
+       ],
+       [
+        63.083417,
+        45.645877
+       ],
+       [
+        63.087634,
+        45.641961
+       ],
+       [
+        63.088539,
+        45.638347
+       ],
+       [
+        63.094261,
+        45.636238
+       ],
+       [
+        63.093961,
+        45.628406
+       ],
+       [
+        63.104503,
+        45.620574
+       ],
+       [
+        63.072874,
+        45.631117
+       ]
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 46,
+   "properties": {
+    "num": "45",
+    "name": "Резервное месторождение №46",
+    "kind": "суглинки",
+    "kindNorm": "суглинок",
+    "reservesAB": null,
+    "reservesABC1": null,
+    "reservesC2": null,
+    "unit": null,
+    "protocol": null,
+    "areaHa": 7.5,
+    "plots": 1
+   },
+   "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        63.880309,
+        45.014112
+       ],
+       [
+        63.881693,
+        45.014194
+       ],
+       [
+        63.882701,
+        45.011981
+       ],
+       [
+        63.88417,
+        45.01014
+       ],
+       [
+        63.884663,
+        45.008212
+       ],
+       [
+        63.882611,
+        45.009925
+       ],
+       [
+        63.880908,
+        45.011896
+       ],
+       [
+        63.880309,
+        45.014112
+       ]
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 47,
+   "properties": {
+    "num": "46",
+    "name": "Резервное месторождение №47",
+    "kind": "суглинки",
+    "kindNorm": "суглинок",
+    "reservesAB": null,
+    "reservesABC1": null,
+    "reservesC2": null,
+    "unit": null,
+    "protocol": null,
+    "areaHa": 20.6,
+    "plots": 1
+   },
+   "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        64.228345,
+        45.042473
+       ],
+       [
+        64.231592,
+        45.043345
+       ],
+       [
+        64.234411,
+        45.044059
+       ],
+       [
+        64.23839,
+        45.04469
+       ],
+       [
+        64.242382,
+        45.045311
+       ],
+       [
+        64.238931,
+        45.042622
+       ],
+       [
+        64.2357,
+        45.041967
+       ],
+       [
+        64.232054,
+        45.041195
+       ],
+       [
+        64.228345,
+        45.042473
+       ]
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 48,
+   "properties": {
+    "num": "47",
+    "name": "Резервное месторождение №48",
+    "kind": "суглинки",
+    "kindNorm": "суглинок",
+    "reservesAB": null,
+    "reservesABC1": null,
+    "reservesC2": null,
+    "unit": null,
+    "protocol": null,
+    "areaHa": 12.3,
+    "plots": 1
+   },
+   "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        66.601176,
+        44.118125
+       ],
+       [
+        66.604311,
+        44.115793
+       ],
+       [
+        66.598962,
+        44.114584
+       ],
+       [
+        66.597051,
+        44.115985
+       ],
+       [
+        66.597941,
+        44.116644
+       ],
+       [
+        66.598992,
+        44.117362
+       ],
+       [
+        66.601176,
+        44.118125
+       ]
+      ]
+     ]
+    ]
+   }
+  }
+ ]
+}

@@ -1,14 +1,16 @@
 {
   "state": "mock",
   "generated": "2026-10-19",
-  "why": "Публичный показ: ось по ведомости и пикетаж объектов — проектная документация.",
+  "why": "Публичный показ: проектная документация по трассе и ведомости недропользования.",
   "mocked": [
     "src/data/road-segments.json — плечо kyzylorda-saksaulsk",
-    "src/data/road-features.json — все обозначения"
+    "src/data/road-features.json — все обозначения",
+    "src/data/contracts.json — недропользователи, БИН, контракты, контуры",
+    "src/data/quarries.json — названия, запасы, протоколы, контуры"
   ],
   "intact": [
-    "public/cadastre.geojson, src/data/{regions,districts,quarries,contracts}.json — открытые данные",
+    "public/cadastre.geojson, src/data/{regions,districts,cities}.json — открытые данные ЕГКН",
     "src/data/road-segments.json — два схематичных плеча, они и так нарисованы на глаз"
   ],
-  "restore": "node scripts/mock-road.mjs --restore"
+  "restore": "node scripts/mock-data.mjs --restore"
 }

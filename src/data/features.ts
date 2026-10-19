@@ -15,7 +15,7 @@ import featuresJson from './road-features.json';
  *
  * В публичной сборке и положения, и подписи пикетажа моковые: настоящие —
  * проектная документация. Сдвигом и возвратом занимается
- * `scripts/mock-road.mjs`, текущее состояние — в `data-state.json`.
+ * `scripts/mock-data.mjs`, текущее состояние — в `data-state.json`.
  */
 
 export interface RoadFeatureProps {
