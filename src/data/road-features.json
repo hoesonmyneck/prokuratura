@@ -8,7 +8,7 @@
     "title": "Транспортная развязка",
     "short": "Развязка",
     "major": true,
-    "station": "КМ 3+600",
+    "station": "КМ 4+000",
     "lengthM": 0
    },
    "geometry": {
@@ -26,8 +26,8 @@
     "title": "Площадка отдыха",
     "short": "Площадка отдыха",
     "major": true,
-    "station": "КМ 20+900 - 22+700",
-    "lengthM": 1800
+    "station": "КМ 23+500 - 25+500",
+    "lengthM": 2000
    },
    "geometry": {
     "type": "Point",
@@ -44,8 +44,8 @@
     "title": "Транспортная развязка",
     "short": "Развязка",
     "major": true,
-    "station": "КМ 30+600 - 32+500",
-    "lengthM": 1900
+    "station": "КМ 34+400 - 36+600",
+    "lengthM": 2200
    },
    "geometry": {
     "type": "Point",
@@ -62,7 +62,7 @@
     "title": "Граница очереди строительства",
     "short": "Очередь",
     "major": true,
-    "station": "КМ 44+800",
+    "station": "КМ 50+400",
     "lengthM": 0
    },
    "geometry": {
@@ -80,8 +80,8 @@
     "title": "Площадка отдыха",
     "short": "Площадка отдыха",
     "major": true,
-    "station": "КМ 50+500 - 52+300",
-    "lengthM": 1800
+    "station": "КМ 56+900 - 58+900",
+    "lengthM": 2000
    },
    "geometry": {
     "type": "Point",
@@ -98,8 +98,8 @@
     "title": "Площадка отдыха",
     "short": "Площадка отдыха",
     "major": true,
-    "station": "КМ 71+200 - 73+000",
-    "lengthM": 1800
+    "station": "КМ 80+200 - 82+200",
+    "lengthM": 2000
    },
    "geometry": {
     "type": "Point",
@@ -116,8 +116,8 @@
     "title": "Площадка отдыха",
     "short": "Площадка отдыха",
     "major": true,
-    "station": "КМ 97+000 - 98+700",
-    "lengthM": 1700
+    "station": "КМ 109+100 - 111+100",
+    "lengthM": 2000
    },
    "geometry": {
     "type": "Point",
@@ -134,7 +134,7 @@
     "title": "Граница очереди строительства",
     "short": "Очередь",
     "major": true,
-    "station": "КМ 101+600",
+    "station": "КМ 114+300",
     "lengthM": 0
    },
    "geometry": {
@@ -152,8 +152,8 @@
     "title": "Площадка отдыха",
     "short": "Площадка отдыха",
     "major": true,
-    "station": "КМ 123+500 - 125+300",
-    "lengthM": 1800
+    "station": "КМ 139+000 - 141+000",
+    "lengthM": 2000
    },
    "geometry": {
     "type": "Point",
@@ -170,8 +170,8 @@
     "title": "Площадка отдыха",
     "short": "Площадка отдыха",
     "major": true,
-    "station": "КМ 141+600 - 143+400",
-    "lengthM": 1800
+    "station": "КМ 159+400 - 161+400",
+    "lengthM": 2000
    },
    "geometry": {
     "type": "Point",
@@ -188,7 +188,7 @@
     "title": "Транспортная развязка",
     "short": "Развязка",
     "major": true,
-    "station": "КМ 171+800",
+    "station": "КМ 193+300",
     "lengthM": 0
    },
    "geometry": {
@@ -206,7 +206,7 @@
     "title": "Переход земляного полотна",
     "short": "Земполотно",
     "major": false,
-    "station": "КМ 177+000",
+    "station": "КМ 199+200",
     "lengthM": 0
    },
    "geometry": {
@@ -224,8 +224,8 @@
     "title": "Площадка отдыха",
     "short": "Площадка отдыха",
     "major": true,
-    "station": "КМ 197+600 - 199+800",
-    "lengthM": 2200
+    "station": "КМ 222+400 - 224+900",
+    "lengthM": 2500
    },
    "geometry": {
     "type": "Point",
@@ -242,8 +242,8 @@
     "title": "Площадка отдыха",
     "short": "Площадка отдыха",
     "major": true,
-    "station": "КМ 221+800 - 224+000",
-    "lengthM": 2200
+    "station": "КМ 249+600 - 252+100",
+    "lengthM": 2500
    },
    "geometry": {
     "type": "Point",
@@ -260,7 +260,7 @@
     "title": "Переход земляного полотна",
     "short": "Земполотно",
     "major": false,
-    "station": "КМ 230+100",
+    "station": "КМ 259+000",
     "lengthM": 0
    },
    "geometry": {
@@ -278,7 +278,7 @@
     "title": "Переход земляного полотна",
     "short": "Земполотно",
     "major": false,
-    "station": "КМ 228+300",
+    "station": "КМ 257+000",
     "lengthM": 0
    },
    "geometry": {
@@ -296,7 +296,7 @@
     "title": "Переход земляного полотна",
     "short": "Земполотно",
     "major": false,
-    "station": "КМ 235+400",
+    "station": "КМ 265+000",
     "lengthM": 0
    },
    "geometry": {
@@ -314,7 +314,7 @@
     "title": "Переход земляного полотна",
     "short": "Земполотно",
     "major": false,
-    "station": "КМ 234+600",
+    "station": "КМ 264+100",
     "lengthM": 0
    },
    "geometry": {
@@ -332,7 +332,7 @@
     "title": "Переход земляного полотна",
     "short": "Земполотно",
     "major": false,
-    "station": "КМ 234+400",
+    "station": "КМ 263+800",
     "lengthM": 0
    },
    "geometry": {
@@ -350,8 +350,8 @@
     "title": "Площадка отдыха",
     "short": "Площадка отдыха",
     "major": true,
-    "station": "КМ 252+900 - 255+100",
-    "lengthM": 2200
+    "station": "КМ 284+700 - 287+200",
+    "lengthM": 2500
    },
    "geometry": {
     "type": "Point",
@@ -368,7 +368,7 @@
     "title": "Граница очереди строительства",
     "short": "Очередь",
     "major": true,
-    "station": "КМ 254+300",
+    "station": "КМ 286+200",
     "lengthM": 0
    },
    "geometry": {
@@ -386,8 +386,8 @@
     "title": "Площадка отдыха",
     "short": "Площадка отдыха",
     "major": true,
-    "station": "КМ 268+400 - 270+600",
-    "lengthM": 2200
+    "station": "КМ 302+100 - 304+600",
+    "lengthM": 2500
    },
    "geometry": {
     "type": "Point",
@@ -404,8 +404,8 @@
     "title": "Площадка отдыха",
     "short": "Площадка отдыха",
     "major": true,
-    "station": "КМ 301+300 - 303+500",
-    "lengthM": 2200
+    "station": "КМ 339+100 - 341+600",
+    "lengthM": 2500
    },
    "geometry": {
     "type": "Point",
@@ -422,8 +422,8 @@
     "title": "Площадка отдыха",
     "short": "Площадка отдыха",
     "major": true,
-    "station": "КМ 318+200 - 320+000",
-    "lengthM": 1800
+    "station": "КМ 358+200 - 360+200",
+    "lengthM": 2000
    },
    "geometry": {
     "type": "Point",
@@ -440,7 +440,7 @@
     "title": "Транспортная развязка",
     "short": "Развязка",
     "major": true,
-    "station": "КМ 336+600",
+    "station": "КМ 378+900",
     "lengthM": 0
    },
    "geometry": {
@@ -458,7 +458,7 @@
     "title": "Переход земляного полотна",
     "short": "Земполотно",
     "major": false,
-    "station": "КМ 354+000",
+    "station": "КМ 398+500",
     "lengthM": 0
    },
    "geometry": {
@@ -476,7 +476,7 @@
     "title": "Переход земляного полотна",
     "short": "Земполотно",
     "major": false,
-    "station": "КМ 355+400",
+    "station": "КМ 400+100",
     "lengthM": 0
    },
    "geometry": {
@@ -494,8 +494,8 @@
     "title": "Площадка отдыха",
     "short": "Площадка отдыха",
     "major": true,
-    "station": "КМ 360+300 - 362+500",
-    "lengthM": 2200
+    "station": "КМ 405+500 - 408+000",
+    "lengthM": 2500
    },
    "geometry": {
     "type": "Point",
@@ -512,8 +512,8 @@
     "title": "Площадка отдыха",
     "short": "Площадка отдыха",
     "major": true,
-    "station": "КМ 377+500 - 379+700",
-    "lengthM": 2200
+    "station": "КМ 424+900 - 427+400",
+    "lengthM": 2500
    },
    "geometry": {
     "type": "Point",
@@ -530,7 +530,7 @@
     "title": "Переход земляного полотна",
     "short": "Земполотно",
     "major": false,
-    "station": "КМ 397+000",
+    "station": "КМ 446+900",
     "lengthM": 0
    },
    "geometry": {
@@ -548,7 +548,7 @@
     "title": "Переход земляного полотна",
     "short": "Земполотно",
     "major": false,
-    "station": "КМ 401+800",
+    "station": "КМ 452+200",
     "lengthM": 0
    },
    "geometry": {
@@ -566,8 +566,8 @@
     "title": "Площадка отдыха",
     "short": "Площадка отдыха",
     "major": true,
-    "station": "КМ 408+700 - 411+000",
-    "lengthM": 2300
+    "station": "КМ 460+000 - 462+500",
+    "lengthM": 2500
    },
    "geometry": {
     "type": "Point",
@@ -584,7 +584,7 @@
     "title": "Переход земляного полотна",
     "short": "Земполотно",
     "major": false,
-    "station": "КМ 411+600",
+    "station": "КМ 463+200",
     "lengthM": 0
    },
    "geometry": {
@@ -602,7 +602,7 @@
     "title": "Переход земляного полотна",
     "short": "Земполотно",
     "major": false,
-    "station": "КМ 416+000",
+    "station": "КМ 468+200",
     "lengthM": 0
    },
    "geometry": {
@@ -620,7 +620,7 @@
     "title": "Переход земляного полотна",
     "short": "Земполотно",
     "major": false,
-    "station": "КМ 419+100",
+    "station": "КМ 471+800",
     "lengthM": 0
    },
    "geometry": {
@@ -638,7 +638,7 @@
     "title": "Переход земляного полотна",
     "short": "Земполотно",
     "major": false,
-    "station": "КМ 424+900",
+    "station": "КМ 478+300",
     "lengthM": 0
    },
    "geometry": {
@@ -656,7 +656,7 @@
     "title": "Площадка отдыха",
     "short": "Площадка отдыха",
     "major": true,
-    "station": "КМ 429+900",
+    "station": "КМ 483+900",
     "lengthM": 0
    },
    "geometry": {
@@ -674,7 +674,7 @@
     "title": "Переход земляного полотна",
     "short": "Земполотно",
     "major": false,
-    "station": "КМ 427+500",
+    "station": "КМ 481+100",
     "lengthM": 0
    },
    "geometry": {
@@ -692,7 +692,7 @@
     "title": "Переход земляного полотна",
     "short": "Земполотно",
     "major": false,
-    "station": "КМ 432+600",
+    "station": "КМ 486+900",
     "lengthM": 0
    },
    "geometry": {
@@ -710,7 +710,7 @@
     "title": "Переход земляного полотна",
     "short": "Земполотно",
     "major": false,
-    "station": "КМ 434+000",
+    "station": "КМ 488+500",
     "lengthM": 0
    },
    "geometry": {
@@ -728,7 +728,7 @@
     "title": "Переход земляного полотна",
     "short": "Земполотно",
     "major": false,
-    "station": "КМ 432+000",
+    "station": "КМ 486+200",
     "lengthM": 0
    },
    "geometry": {
@@ -746,7 +746,7 @@
     "title": "Транспортная развязка",
     "short": "Развязка",
     "major": true,
-    "station": "КМ 433+500",
+    "station": "КМ 487+900",
     "lengthM": 0
    },
    "geometry": {
@@ -764,7 +764,7 @@
     "title": "Переход земляного полотна",
     "short": "Земполотно",
     "major": false,
-    "station": "КМ 439+000",
+    "station": "КМ 494+100",
     "lengthM": 0
    },
    "geometry": {
@@ -782,7 +782,7 @@
     "title": "Переход земляного полотна",
     "short": "Земполотно",
     "major": false,
-    "station": "КМ 437+700",
+    "station": "КМ 492+600",
     "lengthM": 0
    },
    "geometry": {
@@ -800,8 +800,8 @@
     "title": "Площадка отдыха",
     "short": "Площадка отдыха",
     "major": true,
-    "station": "КМ 449+800 - 452+000",
-    "lengthM": 2200
+    "station": "КМ 506+200 - 508+700",
+    "lengthM": 2500
    },
    "geometry": {
     "type": "Point",
@@ -818,7 +818,7 @@
     "title": "Переход земляного полотна",
     "short": "Земполотно",
     "major": false,
-    "station": "КМ 453+000",
+    "station": "КМ 509+900",
     "lengthM": 0
    },
    "geometry": {
@@ -836,7 +836,7 @@
     "title": "Переход земляного полотна",
     "short": "Земполотно",
     "major": false,
-    "station": "КМ 453+200",
+    "station": "КМ 510+100",
     "lengthM": 0
    },
    "geometry": {
@@ -854,7 +854,7 @@
     "title": "Переход земляного полотна",
     "short": "Земполотно",
     "major": false,
-    "station": "КМ 449+800",
+    "station": "КМ 506+200",
     "lengthM": 0
    },
    "geometry": {
@@ -872,7 +872,7 @@
     "title": "Переход земляного полотна",
     "short": "Земполотно",
     "major": false,
-    "station": "КМ 454+400",
+    "station": "КМ 511+500",
     "lengthM": 0
    },
    "geometry": {
@@ -890,7 +890,7 @@
     "title": "Переход земляного полотна",
     "short": "Земполотно",
     "major": false,
-    "station": "КМ 452+700",
+    "station": "КМ 509+600",
     "lengthM": 0
    },
    "geometry": {
@@ -908,7 +908,7 @@
     "title": "Переход земляного полотна",
     "short": "Земполотно",
     "major": false,
-    "station": "КМ 457+200",
+    "station": "КМ 514+600",
     "lengthM": 0
    },
    "geometry": {

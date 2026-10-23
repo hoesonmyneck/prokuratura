@@ -1,6 +1,8 @@
 import type { IncomingMessage, ServerResponse } from 'node:http';
 import { Redis as UpstashRedis } from '@upstash/redis';
 import { createClient } from 'redis';
+import segmentsJson from '../src/data/road-segments.json';
+import defaultsJson from '../src/data/road-progress.json';
 
 /**
  * Ход строительства — общее состояние для всех, кто открыл карту.
@@ -23,18 +25,21 @@ import { createClient } from 'redis';
 
 const KEY = 'road-progress';
 
-/** Участки и паспортная длина — тот же справочник, что и на клиенте. */
-const SEGMENTS: Record<string, number> = {
-  'beyneu-saksaulsk': 800,
-  'ulgaisyn-saksaulsk': 312,
-  'kyzylorda-saksaulsk': 462,
-};
+/**
+ * Участки, паспортная длина и значения по умолчанию берутся из тех же файлов,
+ * что и на клиенте.
+ *
+ * Раньше оба справочника были продублированы здесь числами, и это оказалось
+ * ловушкой: при подмене данных на моковые (`scripts/mock-data.mjs`) JSON
+ * менялся, а копия в функции оставалась с настоящими цифрами — и продолжала
+ * ими же обрезать присланные километры. Один источник на клиент и на функцию
+ * такого расхождения не допускает.
+ */
+const SEGMENTS: Record<string, number> = Object.fromEntries(
+  (segmentsJson as Array<{ id: string; lengthKm: number }>).map((s) => [s.id, s.lengthKm]),
+);
 
-const DEFAULTS: Record<string, number> = {
-  'beyneu-saksaulsk': 30,
-  'ulgaisyn-saksaulsk': 0,
-  'kyzylorda-saksaulsk': 0,
-};
+const DEFAULTS: Record<string, number> = defaultsJson as Record<string, number>;
 
 /*
  * Имена переменных зависят от того, каким способом подключено хранилище:

@@ -29,7 +29,7 @@
  */
 
 import { spawnSync } from 'node:child_process';
-import { readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -40,7 +40,20 @@ const SEGMENTS_FILE = resolve(ROOT, 'src/data/road-segments.json');
 const FEATURES_FILE = resolve(ROOT, 'src/data/road-features.json');
 const CONTRACTS_FILE = resolve(ROOT, 'src/data/contracts.json');
 const QUARRIES_FILE = resolve(ROOT, 'src/data/quarries.json');
+const PROGRESS_FILE = resolve(ROOT, 'src/data/road-progress.json');
 const STATE_FILE = resolve(ROOT, 'src/data/data-state.json');
+
+/**
+ * Куда прячутся настоящие паспортные данные на время показа.
+ *
+ * Ось и месторождения пересобираются из ведомостей, а названия плеч,
+ * протяжённость, техническая категория и ход строительства не берутся ниоткуда:
+ * они правятся руками прямо в JSON. Восстанавливать их не из чего, поэтому
+ * перед подменой они складываются сюда. Папка `private/` в `.gitignore`:
+ * класть настоящие цифры обратно в репозиторий, который от них и прячут,
+ * смысла нет.
+ */
+const PASSPORT_FILE = resolve(ROOT, 'private/passport.json');
 
 /** Плечо с настоящей геодезией — единственное, что подменяем. */
 const REAL = 'kyzylorda-saksaulsk';
@@ -88,6 +101,12 @@ const DEPOSIT_SCALE = [0.9, 1.1];
 
 /** Во сколько раз меняются запасы в ведомости карьеров. */
 const RESERVE_SCALE = [0.85, 1.15];
+
+/** Насколько уезжает паспортная протяжённость плеча. Округляем до десятков км. */
+const LENGTH_SCALE = [0.88, 1.14];
+
+/** Какую долю плеча показываем построенной. */
+const DONE_SHARE = [0.05, 0.16];
 
 const KM_PER_DEG_LAT = 111.13;
 const KM_PER_DEG_LNG_EQ = 111.32;
@@ -252,7 +271,7 @@ function parseStation(text) {
   return { from: Math.round(found[0]), to: Math.round(found[found.length - 1]) };
 }
 
-function mockRoad() {
+function mockRoad(passport) {
   const segments = JSON.parse(readFileSync(SEGMENTS_FILE, 'utf8'));
   const segment = segments.find((s) => s.id === REAL);
   if (!segment) throw new Error(`Не найдено плечо ${REAL}`);
@@ -274,6 +293,13 @@ function mockRoad() {
 
   /** Паспортная длина плеча, м: от неё отсчитывается пикетаж в подписях. */
   const TOTAL_M = segment.lengthKm * 1000;
+
+  /**
+   * Подписи пикетажа пересчитываются под моковую протяжённость плеча: иначе
+   * на участке «420 км» висели бы объекты на «КМ 455». Положение на линии
+   * от этого не зависит — оно по-прежнему считается от настоящей длины.
+   */
+  const stationScale = passport.mocked.find((s) => s.id === REAL).lengthKm / segment.lengthKm;
 
   const realRun = runningKm(realPath);
   const mockRun = runningKm(mockPath);
@@ -317,8 +343,8 @@ function mockRoad() {
       const span = parseStation(props.station);
       const half = (span.to - span.from) / 2;
       const mid = clamp((span.from + span.to) / 2 + shiftM, half, TOTAL_M - half);
-      const from = Math.round((mid - half) / STATION_STEP) * STATION_STEP;
-      const to = Math.round((mid + half) / STATION_STEP) * STATION_STEP;
+      const from = Math.round(((mid - half) * stationScale) / STATION_STEP) * STATION_STEP;
+      const to = Math.round(((mid + half) * stationScale) / STATION_STEP) * STATION_STEP;
       props.station = from === to ? `КМ ${km(from)}` : `КМ ${km(from)} - ${km(to)}`;
       props.lengthM = to - from;
       fraction = mid / TOTAL_M;
@@ -339,10 +365,63 @@ function mockRoad() {
   segment.path = mockPath;
   featureCollection.features = mockFeatures;
 
+  for (const s of segments) {
+    const m = passport.mocked.find((x) => x.id === s.id);
+    Object.assign(s, { name: m.name, lengthKm: m.lengthKm, category: m.category });
+  }
+
   return [
     [SEGMENTS_FILE, `${JSON.stringify(segments, null, 2)}\n`],
     [FEATURES_FILE, `${JSON.stringify(featureCollection, null, 1)}\n`],
   ];
+}
+
+// ── Паспорт трассы и ход строительства ──────────────────────────────────────
+
+/*
+ * Названия плеч не выдумываются похожими на настоящие: «Бейнеу — Саксаульск»
+ * заменить на другую пару городов нельзя, потому что сами города на карте
+ * остаются настоящими — подпись разошлась бы с тем, что видно. Поэтому плечи
+ * просто нумеруются, как и месторождения.
+ */
+function mockPassport(segments, progress, random) {
+  const real = {
+    segments: segments.map(({ id, name, lengthKm, category }) => ({
+      id,
+      name,
+      lengthKm,
+      category,
+    })),
+    progress: { ...progress },
+  };
+
+  // Категорий всего две, поэтому перестановка по кругу оставила бы одно из двух
+  // плеч с II при своей. Переворачиваем у каждого: ни одно не сохраняет настоящую.
+  const mocked = segments.map((s, i) => ({
+    ...s,
+    name: `«Участок №${i + 1}»`,
+    lengthKm: Math.round((s.lengthKm * between(random, LENGTH_SCALE)) / 10) * 10,
+    category: s.category === 'I-б' ? 'II' : 'I-б',
+  }));
+
+  const mockedProgress = {};
+  for (const s of mocked) {
+    mockedProgress[s.id] = Math.round((s.lengthKm * between(random, DONE_SHARE)) / 5) * 5;
+  }
+
+  console.log('\nПаспорт трассы:');
+  for (let i = 0; i < mocked.length; i++) {
+    console.log(
+      `  ${real.segments[i].name} ${real.segments[i].lengthKm} км, ${real.segments[i].category}` +
+        `  →  ${mocked[i].name} ${mocked[i].lengthKm} км, ${mocked[i].category}`,
+    );
+  }
+  console.log('Ход строительства:');
+  for (const s of mocked) {
+    console.log(`  ${s.id.padEnd(22)} ${real.progress[s.id]} → ${mockedProgress[s.id]} км`);
+  }
+
+  return { real, mocked, mockedProgress };
 }
 
 // ── Карьеры и контрактные месторождения ─────────────────────────────────────
@@ -455,6 +534,24 @@ function scaleReserve(value, factor) {
   return String(Math.max(1, Math.round(n * factor)));
 }
 
+/**
+ * Переставляет значения полей между записями.
+ *
+ * Вид сырья не выдумывается, а перемешивается: так сводка в панели — сколько
+ * записей суглинка, сколько песка — остаётся прежней, а связка «какое сырьё
+ * в каком районе» рвётся. `kind` и `kindNorm` едут парой: в ведомости это одно
+ * значение, записанное двумя способами, и разорвать их — получить «песок»
+ * в попапе и «соль» в сводке у одной и той же точки.
+ */
+function permute(features, keys, random) {
+  const values = features.map((f) => keys.map((k) => f.properties[k]));
+  for (let i = values.length - 1; i > 0; i--) {
+    const j = Math.floor(random() * (i + 1));
+    [values[i], values[j]] = [values[j], values[i]];
+  }
+  features.forEach((f, i) => keys.forEach((k, n) => (f.properties[k] = values[i][n])));
+}
+
 function mockDeposits() {
   const random = rng(20261019);
   const out = [];
@@ -468,6 +565,7 @@ function mockDeposits() {
     moved.push(away);
 
     const form = LEGAL_FORM.exec(p.user ?? '')?.[1] ?? 'ТОО';
+    p.num = String(i + 1);
     p.name = `Месторождение №${i + 1}`;
     p.user = `${form} «Недропользователь-${String(i + 1).padStart(2, '0')}»`;
     p.licence = mockLicence(random, p.licence);
@@ -487,6 +585,7 @@ function mockDeposits() {
     moved.push(away);
 
     const factor = between(random, RESERVE_SCALE);
+    p.num = String(i + 1);
     p.name = `Резервное месторождение №${i + 1}`;
     p.reservesAB = scaleReserve(p.reservesAB, factor);
     p.reservesABC1 = scaleReserve(p.reservesABC1, factor);
@@ -495,6 +594,11 @@ function mockDeposits() {
     p.areaHa = round1(p.areaHa * scale * scale);
     return { ...f, properties: p, geometry };
   });
+
+  const shuffle = rng(20261024);
+  permute(contracts.features, ['kind', 'kindNorm'], shuffle);
+  permute(contracts.features, ['operation'], shuffle);
+  permute(quarries.features, ['kind', 'kindNorm'], shuffle);
 
   moved.sort((a, b) => a - b);
   console.log(`\nКонтрактные месторождения: ${contracts.features.length}`);
@@ -506,7 +610,7 @@ function mockDeposits() {
     `  контуры сдвинуты на ${moved[0].toFixed(1)}-${moved[moved.length - 1].toFixed(1)} км` +
       `, медиана ${moved[moved.length >> 1].toFixed(1)} км`,
   );
-  console.log('  сохранены: вид сырья, район, операции, число объектов');
+  console.log('  вид сырья и операции перемешаны между записями, номера записей по порядку');
 
   out.push([CONTRACTS_FILE, `${JSON.stringify(contracts, null, 1)}\n`]);
   out.push([QUARRIES_FILE, `${JSON.stringify(quarries, null, 1)}\n`]);
@@ -555,8 +659,36 @@ function restore() {
     }
   }
 
+  // Паспорт — последним: `build-axis.mjs` переписывает файл плеч целиком,
+  // сохраняя в нём то, что застал, то есть моковые названия и длины.
+  if (!restorePassport()) {
+    console.error(
+      `\nНе найден ${PASSPORT_FILE}.\n` +
+        'Ось, обозначения и месторождения восстановлены, а названия плеч, протяжённость,\n' +
+        'категории и ход строительства остались моковыми: их настоящие значения\n' +
+        'хранятся только в этом файле, в репозиторий он не попадает. Верните его\n' +
+        'из резервной копии и запустите восстановление ещё раз.',
+    );
+    process.exit(1);
+  }
+
   writeState('real');
   console.log('\nНастоящие данные восстановлены.');
+}
+
+function restorePassport() {
+  if (!existsSync(PASSPORT_FILE)) return false;
+  const saved = JSON.parse(readFileSync(PASSPORT_FILE, 'utf8'));
+  const segments = JSON.parse(readFileSync(SEGMENTS_FILE, 'utf8'));
+  for (const s of segments) {
+    const r = saved.segments.find((x) => x.id === s.id);
+    if (r) Object.assign(s, { name: r.name, lengthKm: r.lengthKm, category: r.category });
+  }
+  writeFileSync(SEGMENTS_FILE, `${JSON.stringify(segments, null, 2)}\n`);
+  // Файл прогресса правится руками, поэтому хранится как есть, до байта.
+  writeFileSync(PROGRESS_FILE, saved.progressText);
+  console.log(`\n── паспорт трассы и ход строительства из ${PASSPORT_FILE}`);
+  return true;
 }
 
 // ── Отметка о состоянии ─────────────────────────────────────────────────────
@@ -584,16 +716,17 @@ function writeState(value) {
           generated: today,
           why: 'Публичный показ: проектная документация по трассе и ведомости недропользования.',
           mocked: [
-            `src/data/road-segments.json — плечо ${REAL}`,
+            `src/data/road-segments.json — ось плеча ${REAL}; названия, протяжённость и категории всех плеч`,
+            'src/data/road-progress.json — ход строительства',
             'src/data/road-features.json — все обозначения',
-            'src/data/contracts.json — недропользователи, БИН, контракты, контуры',
-            'src/data/quarries.json — названия, запасы, протоколы, контуры',
+            'src/data/contracts.json — недропользователи, БИН, контракты, контуры; вид сырья и операции перемешаны',
+            'src/data/quarries.json — названия, запасы, протоколы, контуры; вид сырья перемешан',
           ],
           intact: [
             'public/cadastre.geojson, src/data/{regions,districts,cities}.json — открытые данные ЕГКН',
-            'src/data/road-segments.json — два схематичных плеча, они и так нарисованы на глаз',
+            'src/data/road-segments.json — геометрия двух схематичных плеч, она и так нарисована на глаз',
           ],
-          restore: 'node scripts/mock-data.mjs --restore',
+          restore: 'node scripts/mock-data.mjs --restore (нужен private/passport.json)',
         }
       : {
           state: 'real',
@@ -619,12 +752,40 @@ if (readState() === 'mock') {
   process.exit(0);
 }
 
-const written = [...mockRoad(), ...mockDeposits()];
+const progressText = readFileSync(PROGRESS_FILE, 'utf8');
+const passport = mockPassport(
+  JSON.parse(readFileSync(SEGMENTS_FILE, 'utf8')),
+  JSON.parse(progressText),
+  rng(20261023),
+);
+
+const written = [
+  ...mockRoad(passport),
+  [PROGRESS_FILE, `${JSON.stringify(passport.mockedProgress, null, 2)}\n`],
+  ...mockDeposits(),
+];
 
 if (process.argv.includes('--dry')) {
   console.log('\n--dry: ничего не записано.');
   process.exit(0);
 }
+
+// Настоящий паспорт — до того, как что-либо перезаписано: упади запись
+// дальше, восстановить будет из чего.
+mkdirSync(dirname(PASSPORT_FILE), { recursive: true });
+writeFileSync(
+  PASSPORT_FILE,
+  `${JSON.stringify(
+    {
+      note: 'Настоящие паспортные данные трассы. Не коммитить. Читает node scripts/mock-data.mjs --restore',
+      saved: new Date().toISOString().slice(0, 10),
+      segments: passport.real.segments,
+      progressText,
+    },
+    null,
+    2,
+  )}\n`,
+);
 
 for (const [file, body] of written) writeFileSync(file, body);
 writeState('mock');
@@ -632,4 +793,5 @@ writeState('mock');
 console.log(`\nЗаписано:`);
 for (const [file] of written) console.log(`  ${file}`);
 console.log(`  ${STATE_FILE}`);
+console.log(`  ${PASSPORT_FILE}  ← настоящие паспортные данные, вне git`);
 console.log('\nВернуть настоящие: node scripts/mock-data.mjs --restore');

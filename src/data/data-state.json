@@ -1,16 +1,17 @@
 {
   "state": "mock",
-  "generated": "2026-10-19",
+  "generated": "2026-10-23",
   "why": "Публичный показ: проектная документация по трассе и ведомости недропользования.",
   "mocked": [
-    "src/data/road-segments.json — плечо kyzylorda-saksaulsk",
+    "src/data/road-segments.json — ось плеча kyzylorda-saksaulsk; названия, протяжённость и категории всех плеч",
+    "src/data/road-progress.json — ход строительства",
     "src/data/road-features.json — все обозначения",
-    "src/data/contracts.json — недропользователи, БИН, контракты, контуры",
-    "src/data/quarries.json — названия, запасы, протоколы, контуры"
+    "src/data/contracts.json — недропользователи, БИН, контракты, контуры; вид сырья и операции перемешаны",
+    "src/data/quarries.json — названия, запасы, протоколы, контуры; вид сырья перемешан"
   ],
   "intact": [
     "public/cadastre.geojson, src/data/{regions,districts,cities}.json — открытые данные ЕГКН",
-    "src/data/road-segments.json — два схематичных плеча, они и так нарисованы на глаз"
+    "src/data/road-segments.json — геометрия двух схематичных плеч, она и так нарисована на глаз"
   ],
-  "restore": "node scripts/mock-data.mjs --restore"
+  "restore": "node scripts/mock-data.mjs --restore (нужен private/passport.json)"
 }

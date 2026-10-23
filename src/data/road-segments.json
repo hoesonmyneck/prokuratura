@@ -1,9 +1,9 @@
 [
   {
     "id": "beyneu-saksaulsk",
-    "name": "«Бейнеу — Саксаульск»",
-    "lengthKm": 800,
-    "category": "II",
+    "name": "«Участок №1»",
+    "lengthKm": 730,
+    "category": "I-б",
     "path": [
       [
         55.2,
@@ -69,9 +69,9 @@
   },
   {
     "id": "ulgaisyn-saksaulsk",
-    "name": "«Улгайсын — Саксаульск»",
-    "lengthKm": 312,
-    "category": "II",
+    "name": "«Участок №2»",
+    "lengthKm": 340,
+    "category": "I-б",
     "path": [
       [
         60.65,
@@ -125,9 +125,9 @@
   },
   {
     "id": "kyzylorda-saksaulsk",
-    "name": "«Кызылорда — Саксаульск»",
-    "lengthKm": 462,
-    "category": "I-б",
+    "name": "«Участок №3»",
+    "lengthKm": 520,
+    "category": "II",
     "path": [
       [
         65.717539,
